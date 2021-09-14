@@ -221,7 +221,7 @@ main.showcase {
     max-width: $max-width;
     //width: 70%;
     margin: 0 auto;
-    width: 80%;
+    width: 90%;
     
     @include showTime(.5s);
 
@@ -963,39 +963,72 @@ main.creator {
 }
 
 .bg-balls {
-  position: absolute;
+  position: fixed;
   width: 100vw;
   max-width: $max-width;
-  height: 100vh;
+  max-height: 100vh;
   justify-content: space-between;
   margin: 0 auto;
   //display: none;
   overflow: visible;
   @include showTime(3s);
+}
+  
+
+  .ball   {
+    position: absolute;
+    border-radius: 50%;
+  }
+  
+  .s3, .s4  {
+    right: -5vw;
+    bottom: -10vw;
+    width: 68vw;
+    height: 68vw;
+    min-width: 500px;
+    min-height: 500px;
+    background-color: black;
+    //border: 3px solid #1d1d1d;
+    border-radius: 50%;
+    box-shadow: 50px 50px 10vh #ffffff2e inset, 20px 20px 10vh #fff4;
+    -webkit-transition: transform 1.5s ease-out;
+    -moz-transition: transform 1.5s ease-out;
+    transition: transform 1.5s ease-out;
+    transform: translateZ(3px);
+  }
+
+  .s4 {
+    left: 30vw;
+    bottom: -50vw;
+    width: 70vw;
+    height: 70vw;
+    transform: translateZ(4px);
+  }
+
 
   .orbits{
     position: absolute;
-    top: 7%;
     right: 0;
     left: 0;
-    margin: auto;
-    margin-right: 15%;
+    margin-left: 60%;
+    margin-top: 100px;
     width: 300px;
     height: 300px;
     border-radius: 50%;
+    z-index: 100;
   }
   .orbit, .core, .core2, .core3 {
     //position: absolute;
-    border: 0px solid #444;
+    border: 3px solid rgba(255, 255, 255, 0.244);
     border-radius: 100%;
     margin: 3%;
     transform-style: preserve-3d;
     width: 94%;
     height: 94%;
-    transform: translate(-5%);
+    transform: translate(-10%);
   }
   .orbit {
-    box-shadow: 0px 0px 5px #fffA, inset 0px 0px 3px #fffA;
+    //box-shadow: inset 0px 0px 5px #fffA;
   }
   .core, .core2, .core3 {
     width: 40%;
@@ -1020,100 +1053,12 @@ main.creator {
     animation: anim2 10s linear infinite;
   }
   @keyframes anim {
-    000% { transform: translateY(-5%) rotateY(000deg)}
-    080% { transform: translateY(7%)  rotateY(180deg)}
-    100% { transform: translateY(-5%) rotateY(180deg)}
+    000% { transform: translateY(-10%) rotateY(000deg)}
+    080% { transform: translateY(3%)  rotateY(180deg)}
+    100% { transform: translateY(-10%) rotateY(180deg)}
   }
   
   @keyframes anim2 {
     000% { transform: rotateX(000deg) }
     100% { transform: rotateX(360deg) }
-  }
-}
-  
-
-  .ball   {
-    position: absolute;
-    border-radius: 50%;
-  }
-
-  .s1 {
-    width: 30vw;
-    height: 30vw;
-    left: 50%;
-    top: 0%;
-    opacity: 1;
-    background-image: linear-gradient(to right, #eb6505 0%, #86ceb6 19%, #a3e3e3 42%, #b49fda 79%, #7ac5d8 100%);
-    background-image: linear-gradient(to right, #9d9293 0%, #86ceb6 19%, #1903b0 42%, #ff2525 79%, #09c415 100%);
-    background-size: 400px;
-    transform: translateZ(2px);
-    //filter:  blur(50px);
-    -webkit-transition: transform 3.5s ease-out, background-image 5s ease-in-out, opacity .5s ease-in;
-    -moz-transition: transform 3.5s ease-out, background-image 5s ease-in-out, opacity .5s ease-in;
-    transition: transform 3.5s ease-out, background-image 5s ease-in-out, opacity .5s ease-in;
-    // opacity: 0;
-    // &.showing {
-    //   opacity: 1;
-    // }
-  }
-
-
-  .s1.crypto {
-    //filter:  blur(0px);
-    background-image: linear-gradient(to right, #0010ff 0%, #2607ff 10%, #00ff04 42%, #3800ff 79%, #b50bbb 100%);
-  }
-
-  .s2 {
-    width: 40vw;
-    height: 40vw;
-    right: -10vw;
-    top: -6vw;
-    background-image: radial-gradient(#cfe2e1f3  0%, #98afaeb0  12%,#9bc5c310 55%, #9bc5c301 58%, #9bc5c300 60%);
-    filter:  blur(50px);
-
-    transform: translateZ(1px);
-    //background-image: url("../images/ball-2.png");
-  }
-  .s3, .s4, .s5  {
-    right: -5vw;
-    bottom: -10vw;
-    width: 68vw;
-    height: 68vw;
-    min-width: 500px;
-    min-height: 500px;
-    border: 3px solid #1d1d1d;
-    border-radius: 50%;
-
-    @include breakpoint(medium) {
-      -webkit-transition: transform 1.5s ease-out;
-      -moz-transition: transform 1.5s ease-out;
-      transition: transform 1.5s ease-out;
-      transform: translateZ(3px);
-    }
-  }
-
-  .s4 {
-    left: 30vw;
-    bottom: -50vw;
-    width: 70vw;
-    height: 70vw;
-    transform: translateZ(4px);
-    border: 3px solid #1d1d1d;
-  }
-
-  .s5 {
-    left: -5vw;
-    bottom: -20vw;
-    width: 70vw;
-    height: 70vw;
-    transform: translateZ(1px);
-    border: 3px solid #1d1d1d;
-  }
-
-  .s6 {
-    right:3%;
-    //margin-left: 40%;
-    margin-top: 1%;
-    width: 200px;
-    height: 200px;
   }

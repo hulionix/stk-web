@@ -73,7 +73,7 @@ $( function() {
     window.addEventListener('scroll', throttle(windowScroll, 200));  
     function windowScroll() {
         let scroll = window.scrollY;
-        scrollTranslateXYZ(s3, -400, -50, 5000, 3, scroll);
+        scrollTranslateXYZ(s3, -200, 500, 5000, 3, scroll);
         scrollTranslateXYZ(s4, 30, -300, 5000, 4, scroll);
         // text
         scrollOpacity(title, 0.2, 100, scroll);
@@ -96,7 +96,7 @@ $( function() {
         showTime('.bg-balls', 1500);
         showTime('.end', 3000);
         setTimeout(function () { showFilter(filter); }, 100);
-        $("html, body").animate({ scrollTop: 0 }, 100, function() {
+        $("html, body").animate({ scrollTop: 0 }, 500, function() {
           windowScroll();
         });
     }
@@ -229,7 +229,7 @@ $( function() {
         let filter = $( this ).attr('data-filter');
         history.replaceState(null, null, '#' + filter);
         setActiveFilterButton(filter);
-        $("html, body").animate({ scrollTop: 0 }, 600, function() {
+        $("html, body").animate({ scrollTop: 0 }, 500, function() {
           windowScroll();
         });
         showFilter(filter);
