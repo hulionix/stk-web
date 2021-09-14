@@ -1,0 +1,16 @@
+---
+layout: default
+title: STACKOZA
+style: main
+---
+<main class="home">
+    <video class="home-video" playsinline muted autoplay loop>
+        <source src="/assets/videos/LG.mp4" type="video/mp4">
+        <!--source src="/LG.webm" type="video/webm"-->
+    </video>
+    <a href="/artworks" class="artworks-button">artworks</a>
+</main>
+<footer class="padded-footer">
+    {% include AudioFooter.html %}
+    <script src="/assets/js/stackoza.js?v={{ site.jsv }}"></script>
+</footer>

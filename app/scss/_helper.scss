@@ -1,0 +1,148 @@
+
+@mixin image-2x($break-point, $image, $width, $height) {
+  @include breakpoint($break-point) {
+    background-image: url($image);
+    background-repeat: no-repeat;
+    background-size: $width $height;
+  }
+}
+
+@mixin breakpoint($point) {
+  @if $point == large {
+    @media (min-width: 64.375em) { @content; }
+  }
+
+  @if $point == showcase-filters {
+    @media (min-width: 1190px) { @content; }
+  }
+
+  @else if $point == large-retina {
+    @media  (min-width: 64.375em) and (min--moz-device-pixel-ratio: 2.0),
+            (min-width: 64.375em) and (-o-min-device-pixel-ratio: 4.0/2),
+            (min-width: 64.375em) and (-webkit-min-device-pixel-ratio: 2.0),
+            (min-width: 64.375em) and (min-device-pixel-ratio: 2.0),
+            (min-width: 64.375em) and (min-resolution: 2.0dppx) { @content; }
+  }
+
+  @else if $point == medium {
+    @media (min-width: 46em) { @content; }
+  }
+
+  @else if $point == medium-retina {
+    @media  (min-width: 46em) and (min--moz-device-pixel-ratio: 2.0),
+            (min-width: 46em) and (-o-min-device-pixel-ratio: 4.0/2),
+            (min-width: 46em) and (-webkit-min-device-pixel-ratio: 2.0),
+            (min-width: 46em) and (min-device-pixel-ratio: 2.0),
+            (min-width: 46em) and (min-resolution: 2.0dppx) { @content; }
+  }
+
+  @else if $point == small {
+    @media  (min-width: 37.5em) { @content; }
+  }
+
+  @else if $point == iphone8 {
+    @media  (min-width: 21em) { @content; }
+  }
+
+  @else if $point == small-retina {
+    @media  (min-width: 37.5em) and (min--moz-device-pixel-ratio: 2.0),
+            (min-width: 37.5em) and (-o-min-device-pixel-ratio: 4.0/2),
+            (min-width: 37.5em) and (-webkit-min-device-pixel-ratio: 2.0),
+            (min-width: 37.5em) and (min-device-pixel-ratio: 2.0),
+            (min-width: 37.5em) and (min-resolution: 2.0dppx) { @content; }
+  }
+
+  @else if $point == retina {
+      @media (min--moz-device-pixel-ratio: 2.0),
+             (-o-min-device-pixel-ratio: 4.0/2),
+             (-webkit-min-device-pixel-ratio: 2.0),
+             (min-device-pixel-ratio: 2.0),
+             (min-resolution: 2.0dppx) { @content; }
+  }
+
+  @else if $point == max-width {
+      @media (min-width: $max-width) { @content; }
+  }
+}
+
+@mixin masonry-grid($cols, $gap) {
+    -moz-column-count: $cols;
+    -moz-column-gap: $gap;
+    -webkit-column-count: $cols;
+    -webkit-column-gap: $gap;
+    column-count: $cols;
+    column-gap: $gap;
+    width: 100%;
+}
+
+@mixin masonary-col() {
+    display: inline-block;
+    width: 100%;
+}
+
+@mixin link-hover-transition() {
+    -webkit-transition : border-color 300ms ease-in-out;
+       -moz-transition : border-color 300ms ease-in-out;
+            transition : border-color 300ms ease-in-out;
+
+    &:hover {
+        border-color: transparent;
+    }
+}
+
+@mixin showTime($time) {
+  opacity: 0;
+
+  -webkit-transition: opacity ($time) ease-in-out;
+  -moz-transition: opacity ($time) ease-in-out;
+  transition: opacity ($time) ease-in-out;
+
+  &.showing {
+  opacity: 1;
+  
+  }
+}
+
+@mixin showTimeY($time, $yPos) {
+  opacity: 0;
+  transform: translateY($yPos);
+
+  -webkit-transition: opacity ($time) ease-in, transform $time ease-out;
+  -moz-transition: opacity ($time) ease-in, transform $time ease-out;
+  transition: opacity ($time) ease-in, transform $time ease-out;
+
+  &.showing {
+  opacity: 1;
+  transform: translateY(0);
+  }
+}
+
+.spinner {
+  -webkit-animation: spin 11s linear infinite;
+  -moz-animation: spin 11s linear infinite;
+  animation: spin 11s linear infinite;
+}
+
+@keyframes spin {
+  0% {
+      transform: rotateZ(0deg);
+  }
+  100% {
+      transform: rotateZ(-360deg);
+  }
+}
+
+.spinner-cw {
+  -webkit-animation: spin-cw 3s linear infinite;
+  -moz-animation: spin-cw 3s linear infinite;
+  animation: spin-cw 3s linear infinite;
+}
+
+@keyframes spin-cw {
+  0% {
+      transform: rotateZ(0deg);
+  }
+  100% {
+      transform: rotateZ(360deg);
+  }
+}

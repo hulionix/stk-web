@@ -1,0 +1,155 @@
+@import "./common";
+
+main.home {
+    clear: both;
+    position: relative;
+    z-index: 400;
+    padding-top: 0;
+    height: 100vh;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-align: center;
+       -ms-flex-align: center;
+          align-items: center;
+    -webkit-box-pack: center;
+       -ms-flex-pack: center;
+     justify-content: center;
+
+     .artworks-button {
+        margin-bottom: -40vh;
+
+        @include link-hover-transition();
+
+        @include showTime(2s);
+
+        -webkit-transition : border-color 300ms ease-in-out, opacity 2s ease-in-out;
+        -moz-transition : border-color 300ms ease-in-out, opacity 2s ease-in-out;
+        transition : border-color 300ms ease-in-out, opacity 2s ease-in-out;
+     }
+     
+
+     div.drops {
+         position: absolute;
+
+     }
+
+     .home-video {
+        clear: both;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        left: 0;
+        right: 0;
+
+        @include showTime(2s);
+    }
+}
+
+a.toggle-audio {
+    pointer-events: all; 
+    position: relative;
+    display: block;
+    width: 70px;
+    margin-left: auto;
+    z-index: 900;
+
+    @include showTime(4s);
+    svg, svg * {
+        font-size: 1px;
+    }
+
+    #speaker {
+        fill: $primary-color;
+        fill-opacity: 0.6;
+
+        &:hover {
+            fill-opacity: 1;
+        }
+    }
+
+    #wave {
+        fill:none;
+        fill-rule:nonzero;
+        stroke:rgba(255, 255, 255, 0.088);
+        stroke-width:3px;
+
+        -webkit-animation: wavy 3s linear infinite;
+           -moz-animation: wavy 3s linear infinite;
+                animation: wavy 3s linear infinite;
+
+        -webkit-animation-play-state: paused;
+           -moz-animation-play-state: paused;
+                animation-play-state: paused;
+
+        
+        -webkit-transition: stroke .3s ease-in-out;
+           -moz-transition: stroke .3s ease-in-out;
+                transition: stroke .3s ease-in-out;
+                
+        clip-path: url(#wave-clip);
+    }
+
+    #wave-clip-rect {
+        -webkit-animation: wave-clip-rect 3s linear infinite;
+           -moz-animation: wave-clip-rect 3s linear infinite;
+                animation: wave-clip-rect 3s linear infinite;
+
+        -webkit-animation-play-state: paused;
+           -moz-animation-play-state: paused;
+                animation-play-state: paused;
+    }
+
+    &.active {
+
+        #speaker {
+            fill: $primary-color;
+            fill-opacity: 1;
+        }
+        
+        #wave {
+            stroke: $primary-color;
+
+            -webkit-animation-play-state: running;
+               -moz-animation-play-state: running;
+                    animation-play-state: running;
+        }
+
+        #wave-clip-rect {
+            -webkit-animation-play-state: running;
+               -moz-animation-play-state: running;
+                    animation-play-state: running;
+        }
+    }
+
+    
+    
+
+    @keyframes wave-clip-rect {
+        0% {
+            -webkit-transform: translateX(0px);
+               -moz-transform: translateX(0px);
+                    transform: translateX(0px);
+        }
+        100% {
+        -webkit-transform: translateX(100px);
+           -moz-transform: translateX(100px);
+                transform: translateX(100px);
+        }
+    }
+
+    @keyframes wavy {
+        0% {
+            -webkit-transform: translateX(0px);
+               -moz-transform: translateX(0px);
+                    transform: translateX(0px);
+        }
+        100% {
+            -webkit-transform: translateX(-100px);
+               -moz-transform: translateX(-100px);
+                    transform: translateX(-100px);
+        }
+    }   
+ }

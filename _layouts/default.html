@@ -1,0 +1,15 @@
+---
+layout: compress
+---
+
+<!DOCTYPE html>
+<html lang="{{ page.lang | default: site.lang | default: 'en' }}">
+	{% include head.html %}
+	<link rel="stylesheet" href="/assets/css/{{ page.style }}.css?v={{ site.cssv }}">
+	<title>{{ page.title }}</title>
+	<body>
+		{% include nav.html %}
+		{{ content }}
+		<!-- Last modified at: {{ site.time }} -->
+	</body>
+</html>

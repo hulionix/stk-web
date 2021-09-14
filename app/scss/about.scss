@@ -1,0 +1,138 @@
+@import "./common";
+main.about {
+    padding-top: $logo-height * $IPHI * 10;
+    padding: $logo-height * $IPHI * 12 $logo-height * $IPHI * 1 $logo-height * $IPHI * 3;
+    background-color: $bg-page;
+
+    @include breakpoint(iphone8) {
+        padding-left: $logo-height*$IPHI * 2;
+        padding-right: $logo-height*$IPHI * 2;
+    };
+    
+
+    a {
+        border-bottom: 1px solid $primary-color;
+        @include link-hover-transition();
+    }
+    h3 {
+        margin: 0;
+        margin-bottom: $logo-height*$IPHI;
+        letter-spacing: 0.08em;
+    }
+
+    .top, .projects, .tools, .contact {
+        margin-bottom: $logo-height*$PHI;
+
+    }
+    .intro {
+        display: inline-block;
+        @include breakpoint(medium) {
+            max-width: $IPHI*100%;
+        };
+
+        @include showTimeY(2s, -50px);
+    }
+
+    .plta {
+        position: relative;
+        max-width: $max-width;
+        margin-bottom: $logo-height * $IPHI * 5;
+        .spinner {
+            position: relative;
+            
+            width: 500px;
+            max-width: 80%;
+            margin: 0 auto;
+            transform: translateZ(1px);
+        }
+    }
+
+    .image {
+        display: inline-block;
+        vertical-align: top;
+        text-align: center;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        margin-top: $logo-height * $IPHI * 4;
+
+        @include showTimeY(2s, 50px);
+        @include breakpoint(medium) {
+            overflow-y: visible;
+            text-align: left;
+            padding-left: $logo-height*$IPHI;
+            width: (0.99-$IPHI)*100%;
+            position: relative;
+        };
+        img {
+            max-width: 70%;
+            margin-top: $logo-height*$IPHI;
+            border-radius: 50%;
+            @include breakpoint(medium) {
+                margin-top: 0;
+                width: 100%;
+                max-width: 70%;
+                position: absolute;
+                right: 0;
+            }
+        }
+    }
+
+    .tools p{
+        line-height: 1.6em;
+    }
+
+    .content-wrapper {
+        max-width: $max-width;
+        width: 100%;
+        margin: 0 auto;
+
+        @include breakpoint(medium) {
+            padding: $logo-height*$IPHI 2*$logo-height*$IPHI;
+        }
+
+        a {
+            background-color: black;
+            border: 1px solid rgb(190, 190, 190);
+            border-radius: 50%;
+            font-weight: 300;
+            line-height: 1.8em;
+            padding: 0 0.4em;
+            &:hover {
+                border: 1px solid #fff;
+            }
+            @extend .font-mid;
+        }
+
+        p.text {
+            font-size: 1.7em;
+            font-weight: 300;
+            letter-spacing: 0.1em;
+            line-height: 1.8em;
+            margin: 0;
+            margin-bottom: 2em;
+            color: rgb(149, 149, 149);
+
+            @extend .font-mid;
+        }
+    }
+
+    p.note {
+        text-align: justify;
+    }
+
+    #background-canvas {
+        clear: both;
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        width: 100vw;
+        height: 100vh;
+        z-index: -1;
+    
+        @include breakpoint(medium) {
+            width: 45vw;
+            margin-left: 10%;
+        }
+    }
+}
