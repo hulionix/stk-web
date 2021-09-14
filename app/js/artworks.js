@@ -93,9 +93,9 @@ $( function() {
     function showPage(filter) {
         showTime('.artworks-button', 100);
         showTime('.filter-buttons', 2000);
-        showTime('.bg-balls', 1500);
+        showTime('.bg-balls', 000);
         showTime('.end', 3000);
-        setTimeout(function () { showFilter(filter); }, 100);
+        setTimeout(function () { showFilter(filter); }, 1500);
         $("html, body").animate({ scrollTop: 0 }, 500, function() {
           windowScroll();
         });

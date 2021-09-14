@@ -2,7 +2,7 @@
 
 @-moz-document url-prefix() {
   .drops {
-    background-color: #26262687 !important;
+    background-color: #6060608f !important;
   }
 }
 
@@ -144,7 +144,7 @@ main.showcase {
       padding: .5em 1em .5em 1em;
       background-color: rgba(0, 0, 0, 0.5);
       font-size: 0.77em;
-      border: 2px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba(255, 255, 255, 0.3);
       margin: 13px 4px;
       color: white;
       -webkit-transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
@@ -173,7 +173,7 @@ main.showcase {
       }
   
       &:hover {
-        border: 2px solid rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba(255, 255, 255, 0.8);
       }
   
       &:active,
@@ -181,7 +181,7 @@ main.showcase {
         outline: none;
         color: black;
         background: $primary-color;
-        border: 2px solid $primary-color;
+        border: 1px solid $primary-color;
         @extend .cursor-default-overlay;
       }
     }
@@ -211,7 +211,7 @@ main.showcase {
       width: 500px;
       max-width: 70%;
       max-height: 40vh;
-      margin-bottom: 200px;
+      margin-bottom: 150px;
       transform: translateZ(10px);
     }
   }
@@ -339,7 +339,7 @@ main.showcase {
           line-height: 1.5em;
           padding: 3px 12px;
           background-color: black;
-          font-weight:500;
+          font-weight:300;
           color: $primary-color;
           @extend .font-mid;
         }

@@ -735,8 +735,25 @@ svg.loader .square {
  body.active {
 
     .cookies-jar {
+        background-color: #000000b6 !important;
         p {
             color: #fff;
         }
     }
  }
+
+ @-moz-document url-prefix() {
+    .cookies-jar {
+      background-color: #000000d3 !important;
+    }
+  }
+
+  main.four-o-four {
+      text-align: center;
+      min-height: 100vh;
+      .artworks-button {
+          margin: 30vh auto 0;
+          font-size: 6em;
+          display: inline-block;
+      }
+  }

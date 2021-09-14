@@ -267,7 +267,7 @@ $(document).ready(function() {
 
     checkCookie();
     $('.cookies-jar a.ok').click(function () {
-        setCookie(cookieName, cookieContent, 3650);
+        setCookie(cookieName, cookieContent, 365);
         $('.cookies-jar').remove();
     });
 
