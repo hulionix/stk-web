@@ -4,9 +4,10 @@ layout: default
 title: STACKOZA // 404
 style: main
 ---
+{% assign cacheBust = site.time | date:'?v=%s' %}
 <main class="four-o-four">
   <span class="artworks-button">404</span>
 </main>
 <footer class="padded-footer">
-	<script src="/assets/js/stackoza.js?v={{ site.jsv }}"></script>
+	<script src="/assets/js/stackoza.js?v={{ cacheBust }}"></script>
 </footer>

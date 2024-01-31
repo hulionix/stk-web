@@ -55,8 +55,6 @@ plugins:
 
 timezone: Europe/Berlin
 
-jsv: 1
-cssv: 1
 
 exclude:
   - node_modules/

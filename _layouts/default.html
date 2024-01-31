@@ -1,11 +1,11 @@
 ---
 layout: compress
 ---
-
+{% assign cacheBust = site.time | date:'?v=%s' %}
 <!DOCTYPE html>
 <html lang="{{ page.lang | default: site.lang | default: 'en' }}">
 	{% include head.html %}
-	<link rel="stylesheet" href="/assets/css/{{ page.style }}.css?v={{ site.cssv }}">
+	<link rel="stylesheet" href="/assets/css/{{ page.style }}.css?v={{ cacheBust }}">
 	<title>{{ page.title }}</title>
 	<body>
 		{% include nav.html %}

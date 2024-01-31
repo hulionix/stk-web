@@ -144,6 +144,7 @@ $(document).ready(function() {
         if ( isViewerActive === true ) { 
             viewer.fadeToggle(400);
             isViewerActive = false;
+            viewer.trigger('close');
             toggleActive("active-light");
             return 
         }
@@ -154,10 +155,13 @@ $(document).ready(function() {
     });
 
     $("main.showcase").on("click", ".viewer .slide", function (e) {
-        e.preventDefault();
+        if ($(e.target).hasClass("nft-url") == false ) {
+            e.preventDefault();
+        }
         e.stopPropagation();
         if ($(e.target).is(".slide, .card, .overlay") == false ) return;
         isViewerActive = false;
+        viewer.trigger('close');
         viewer.fadeToggle(400);
         toggleActive("active-light");
     });
@@ -257,7 +261,6 @@ $(document).ready(function() {
         $(this).toggleClass('active');
         video.muted = !video.muted;
     });
-
 });
 
 $(document).ready(function() {
@@ -286,7 +289,7 @@ $(document).ready(function() {
             `
             $('body').append(text);
         }
-      }
+    }
 });
 
 function setCookie(cname, cvalue, exdays) {

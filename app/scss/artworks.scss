@@ -52,24 +52,40 @@ main.showcase {
     @include breakpoint(medium) {
       position: fixed;
         padding-top: $logo-height * $PHI * 4 + $logo-height * $IPHI;
-        padding-top: 20vh;
+        padding-top: 15vh;
     }
 
     .artworks-button{
-      -webkit-text-stroke: 1px #bbb;
-      padding-left: 3vw;
+      display: inline-block;
+      padding-left: $logo-height * $IPHI * 1;
+      padding-right: $logo-height * $IPHI * 1;
+      padding-top: 2em;
+      padding-bottom: 2em;
       font-size: 8vw;
+      border-bottom: 2px solid rgb(66, 68, 75);
+      border-radius: 0px 500px 500px 0px;
+      min-width: 60vw;
+
+      //margin-right: 16vw;
+      @include breakpoint(small) {
+        font-size: 5vw;
+        //margin-right: 20vw;
+      }
+      @include breakpoint(medium) {
+        padding-left: $logo-height * $IPHI * 5;
+        padding-right: $logo-height * $IPHI * 5;
+      }
       @include breakpoint(large) {
-        margin-right: 20vw;
+        //margin-right: 20vw;
         font-size: 5vw;
       }
       
-      -webkit-text-stroke-color: #bbbbbb00;
-      -webkit-transition: -webkit-text-stroke-color 0.5s ease-in-out, opacity .5s ease-out;
-      -moz-transition: -webkit-text-stroke-color 0.5s ease-in-out, opacity .5s ease-out;
-      transition: -webkit-text-stroke-color 0.5s ease-in-out, opacity .5s ease-out;
+      -webkit-text-stroke: 1px #cdd3d500;
+      -webkit-transition: -webkit-text-stroke-color 0.5s ease-in-out, opacity 1.5s ease-out;
+      -moz-transition: -webkit-text-stroke-color 0.5s ease-in-out, opacity 1.5s ease-out;
+      transition: -webkit-text-stroke-color 0.5s ease-in-out, opacity 1.5s ease-out;
       &.showing {
-        -webkit-text-stroke-color: #bbb;
+        -webkit-text-stroke-color: #cdd3d5AF;
       }
     }
   }
@@ -93,6 +109,7 @@ main.showcase {
       left: 0;
       right: 0;
       margin: 5vw auto 0 auto;
+
     }
   }
   .button-group {
@@ -144,9 +161,9 @@ main.showcase {
       padding: .5em 1em .5em 1em;
       background-color: rgba(0, 0, 0, 0.5);
       font-size: 0.77em;
-      border: 1px solid rgba(255, 255, 255, 0.3);
+      border: 1px solid rgba($primary-color, 0.3);
       margin: 13px 4px;
-      color: white;
+      color: $primary-color;
       -webkit-transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
       -moz-transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
       transition: background 0.3s ease, color 0.3s ease, border 0.3s ease;
@@ -173,7 +190,7 @@ main.showcase {
       }
   
       &:hover {
-        border: 1px solid rgba(255, 255, 255, 0.8);
+        border: 1px solid rgba($primary-color, 0.8);
       }
   
       &:active,
@@ -192,13 +209,10 @@ main.showcase {
   .content {
     position: relative;
     z-index: 100;
-    padding-top: 10vh;
     max-width: $max-width;
     margin: 0 auto 20vh;
-
-    @include breakpoint(medium) {
-      padding-top: 50vh;
-    }
+    min-height: 100vh;
+    padding-top: 1px;
   }
 
   .end {
@@ -206,22 +220,20 @@ main.showcase {
     position: relative;
     z-index: 1;
     @include showTime(1s);
+    min-height: 50vh;
 
     img {
-      width: 500px;
-      max-width: 70%;
-      max-height: 40vh;
-      margin-bottom: 150px;
+      max-width: 30vh;
+      max-height: 30vh;
       transform: translateZ(10px);
     }
   }
 
   .grid {
-    //padding-top: ($logo-height * $IPHI * 1);
     max-width: $max-width;
-    //width: 70%;
     margin: 0 auto;
-    width: 90%;
+    width: 100%;
+    margin-top: 10vh;
     
     @include showTime(.5s);
 
@@ -229,8 +241,13 @@ main.showcase {
       @include showTime(2s);
     }
 
-    @media (max-width: 740px) {
-      width: 100%;
+
+    @include breakpoint(medium) {
+      margin-top: 60vh;
+    }
+
+    @media (min-width: 741px) {
+      width: 90%;
     }
     
     .message {
@@ -242,14 +259,21 @@ main.showcase {
 
       @include breakpoint(medium) {
         margin-left: 0;
-
       } 
 
       img {
-        max-width: 100%;  
+        width: 100%;
         height: auto;
         vertical-align: top;
-        border-radius: 10%;
+        border-radius: 20px 20px  70px 70px;
+        border-bottom: 1px solid rgb(66, 68, 75);
+        -webkit-backdrop-filter: blur(20px);
+        backdrop-filter: blur(20px);
+        background-color: rgba(26, 26, 26, 0.38);
+
+        @include breakpoint(medium) {
+          border-radius: 20px 20px 150px 150px;
+        }
       }
 
       .spinner {
@@ -305,11 +329,11 @@ main.showcase {
         backdrop-filter: blur(12px);
         vertical-align: top;
         padding: 40px 20px;
-        border-top: 2px solid hsla(0, 0%, 100%, 0.32);
+        border-top: 4px solid hsla(0, 0%, 100%, 0.48);
         width: 336px;
         min-height: 336px;
         max-width: 90vw;
-        margin-top: -10%;
+        margin-top: -60px;
         font-size: 2em;
         overflow: hidden;
         box-shadow: 0 0 7px rgba(255, 255, 255, 0.31) inset;
@@ -317,10 +341,10 @@ main.showcase {
         @include breakpoint(medium) {
           width: 400px;
           min-height: 400px;
-          position: absolute;
-          bottom: -25%;
-          right: 20%;
-          margin-top: 0;
+          //position: absolute;
+          //bottom: -15%;
+          //right: 20%;
+          //margin-top: 0;
           font-size: 1em;
         }
 
@@ -339,9 +363,11 @@ main.showcase {
           line-height: 1.5em;
           padding: 3px 12px;
           background-color: black;
-          font-weight:300;
+          font-weight: 500;
           color: $primary-color;
           @extend .font-mid;
+          // -webkit-text-stroke: 1px $primary-color;
+          // color: transparent;
         }
 
         .small-title {
@@ -448,70 +474,105 @@ main.showcase {
 
     article {
       position: relative;
-      display: block;
-      margin: 7%;
-      width: 19%;
+      display: inline-block;
+      vertical-align: top;
+      margin: 10vh 0;
+      width: 100%;
+      background-image: radial-gradient(#fff0 30%,#fffa,#fff0 50%);
+      background-size: 20vw 20vw;
+      background-repeat: no-repeat;
+      background-position: 50%;
 
-      @media (max-width: 740px) {
-        width: 40%;
-        margin: 5%;
+      @include breakpoint(medium) {
+        -webkit-transition: transform 1s ease-out;
+        -moz-transition: transform 1s ease-out;
+        transition: transform 1s ease-out;
       }
 
-      @media (max-width: 479px) {
-        margin: 25% 0;
-        width: 100%;
-        img {
+      @media only screen and (min-width: 479px) and (max-width: 740px) {
+        width: 40%;
+        margin: 5%;
+        background-size: 10vw 10vw;
+        
+        &:nth-child(2n) {
+          margin-top: 20%;
+        }
+
+        &:nth-child(2n+1) {
+          margin-top: 0%;
+          margin-bottom: 10%;
+        }
+      }
+      
+      @media only screen and (min-width: 741px) {
+        margin: 7%;
+        width: 19%;
+        background-size: 4vw 4vw;
+        &:nth-child(2n+1) {
+          margin-top: 7%;
+        }
+        &:nth-child(2n) {
+          margin-bottom: 7%;
+        }
+
+        &:nth-child(3n+1) {
+          margin-top: 0%;
+        }
+        &:nth-child(3n+2) {
+          margin-top: 10%;
+        }
+        &:nth-child(3n) {
+          margin-top: 20%;
+        }
+      }
+
+      &:before,
+      &:after {
+        opacity: 1;
+        position: absolute;
+        width: 25px;
+        height: 25px;
+        content: " ";
+        pointer-events: none;
+        @extend .thin-star-icon;
+      }
+
+      img {
           width: 100%;
           height: auto;
         }
 
-        .card:hover {
-          transform: none;
-        }
-      }
-
-    &:before,
-    &:after {
-      opacity: 1;
-      position: absolute;
-      width: 25px;
-      height: 25px;
-      content: " ";
-      pointer-events: none;
-      @extend .thin-star-icon;
-    }
-
-    &:before {
-      top: -35%;
-      left: -20%;
-      border-width: 1px 0 0 1px;
-      -webkit-transition: top 0.4s ease-out, left 0.4s ease-out, opacity 0.4s ease-out;
-      -moz-transition: top 0.4s ease-out, left 0.4s ease-out, opacity 0.4s ease-out;
-      transition: top 0.4s ease-out, left 0.4s ease-out, opacity 0.4s ease-out;
-    }
-
-    &:after {
-      top: -35%;
-      right: -20%;
-      border-width: 1px 1px 0 0;
-      -webkit-transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
-      -moz-transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
-      transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
-    }
-
-    &:hover {
       &:before {
-        top: 10%;
-        left: 10%;
-        opacity: 0;
+        top: -15vh;
+        left: -20%;
+        border-width: 1px 0 0 1px;
+        -webkit-transition: top 0.4s ease-out, left 0.4s ease-out, opacity 0.4s ease-out;
+        -moz-transition: top 0.4s ease-out, left 0.4s ease-out, opacity 0.4s ease-out;
+        transition: top 0.4s ease-out, left 0.4s ease-out, opacity 0.4s ease-out;
       }
 
       &:after {
-        top: 10%;
-        right: 10%;
-        opacity: 0;
+        top: -8vh;
+        right: -20%;
+        border-width: 1px 1px 0 0;
+        -webkit-transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
+        -moz-transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
+        transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
       }
-    }
+
+      &:hover {
+        &:before {
+          top: 10%;
+          left: 10%;
+          opacity: 0;
+        }
+
+        &:after {
+          top: 10%;
+          right: 10%;
+          opacity: 0;
+        }
+      }
 
       &:hover .card .overlay,
       &.active .card .overlay {
@@ -521,35 +582,45 @@ main.showcase {
       &:hover .card .overlay .title-container {
         animation-play-state: running;
       }
+
+      .play-icon {
+        z-index: 1;
+        position: absolute;
+        width: 3.5em;
+        height: 2.2em;
+        background: #70707069;
+        border-radius: 100%;
+        padding: .6em .8em .6em 1em;
+        top: 10px;
+        left: 10px;
+        backdrop-filter: blur(4px);
+        -webkit-backdrop-filter: blur(4px);
+        &, & * {
+          @extend .cursor-zoom;
+        }
+      }
     }
   }
       
   .card {
-    -webkit-transition: transform 0.15s ease-in-out;
-    -moz-transition: transform 0.15s ease-in-out;
-    transition: transform 0.15s ease-in-out;
-    &:hover {
-      // -webkit-transform: scale(1.1);
-      // -moz-transform: scale(1.1);
-      // transform: scale(1.1);
-    }
+    position: relative;
+    z-index:0;
+    min-height: 100%;
+    border-radius: 500px;
+    overflow: hidden;
+    -webkit-transition: border-radius 0.4s ease-out;
+    -moz-transition: border-radius 0.4s ease-out;
+    transition: border-radius 0.4s ease-out;
+    border-top: 2px solid #e0dff540;
+
+    // &:hover {
+    //   border-radius: 10px;
+    // }
+
     .image-content {
       display: block;
       max-width: 100%;
       height: auto;
-      //border-radius: 10px;
-    }
-
-    .play-icon {
-      position: absolute;
-      width: 3.5em;
-      height: 2.2em;
-      background: #000000ae;
-      border-radius: 7px;
-      padding: .6em .8em .6em 1em;
-      top: 5px;
-      left: 5px;
-      backdrop-filter: blur(10px);
     }
 
     .overlay {
@@ -559,11 +630,18 @@ main.showcase {
       left: 0;
       width: 100%;
       height: 100%;
-      overflow: hidden;
-      -webkit-transition: opacity 0.2s ease-out;
-      -moz-transition: opacity 0.2s ease-out;
-      transition: opacity 0.2s ease-out;
+      -webkit-transition: opacity 0.5s ease-out;
+      -moz-transition: opacity 0.5s ease-out;
+      transition: opacity 0.5s ease-out;
       cursor: inherit;
+      overflow: hidden;
+      font-size: .8em;
+      @include breakpoint(showcase-filters) {
+        font-size: 1em;
+        .nft-url span, .show-btn span {
+          padding: 5px .8em;
+        }
+      }
     }
 
     .overlay .title-container {
@@ -617,11 +695,11 @@ main.showcase {
       }
     }
 
-    .nft-url {
+    .nft-url, .show-btn {
       position: absolute;
       bottom: 0;
       display: block;
-      line-height: 3em;
+      line-height: 3.1em;
       //border-radius: 0 0 10px 10px;
       color: $primary-color;
       text-decoration: none;
@@ -647,40 +725,20 @@ main.showcase {
         overflow: hidden;
         font-size: 1em;
         letter-spacing: 0.2em;
-        color: #f1f1f1;
-        border-radius: 20px;
-        padding: 5px 20px;
+        color: $primary-color;
+        border-radius: 100%;
+        padding: 5px .5em;
         z-index: 200;
         background-color: black;
         @extend .font-mid;
         font-weight: 500;
         pointer-events: none;
 
-        &:before {
-          position: fixed;
-          left: 0;
-          right: 0;
-          //font-size: 1.5em;
-          filter: blur(3px);
-          background: transparent;
-          pointer-events: none;
-        }
 
-        &::after {
-          position: fixed;
-          left: 0;
-          right: 0;
-          content: 'COLLECT';
-          color: white;
-          z-index: 100;
-          pointer-events: none;
-        }
-
-        &.show::after {
-          content: 'SHOW'
+        &:after {
+          content: '';
         }
       }
-
       &:hover {
         -webkit-animation-play-state: running;
         -moz-animation-play-state: running;
@@ -743,6 +801,8 @@ main.showcase {
 
     .slider {
       display: flex;
+      scroll-snap-type-x: mandatory;
+      -webkit-scroll-snap-type: x mandatory;
       scroll-snap-type: x mandatory;
       overflow-x: scroll;
       width: 100vw;
@@ -781,7 +841,9 @@ main.showcase {
         text-align: center;
         overflow: visible;
         height: 100vh;
-        width: 900px;
+        max-width: 900px;
+        border: 0px solid black;
+        border-radius: 0px;
 
         @include breakpoint(medium) {
           padding-top: $logo-height * $IPHI * 6
@@ -850,6 +912,9 @@ main.showcase {
           left: 0;
           right: 0;
           max-width: 400px;
+          span {
+            padding: 5px 1em;
+          }
 
           &::before {
             right: 0;
@@ -990,7 +1055,7 @@ main.creator {
     background-color: black;
     //border: 3px solid #1d1d1d;
     border-radius: 50%;
-    box-shadow: 50px 50px 10vh #ffffff2e inset, 20px 20px 10vh #fff4;
+    box-shadow: inset 50px 50px 10vh #d4e4f74f,20px 20px 10vh #dbdef045;
     -webkit-transition: transform 1.5s ease-out;
     -moz-transition: transform 1.5s ease-out;
     transition: transform 1.5s ease-out;
@@ -1003,4 +1068,37 @@ main.creator {
     width: 70vw;
     height: 70vw;
     transform: translateZ(4px);
+  }
+
+  .chain-grid {
+    position: absolute;
+    top: 1000px;
+    left: 50%;
+    width: 50vw;
+    height: auto;
+    max-width: 700px;
+    max-height: 591px;
+
+    -webkit-transition: transform 1.5s ease-out;
+    -moz-transition: transform 1.5s ease-out;
+    transition: transform 1.5s ease-out;
+
+    transform: translateZ(5px);
+
+    // -webkit-animation: moveChainGrid 8s ease-in-out infinite;
+    //   -moz-animation: moveChainGrid 8s ease-in-out infinite;
+    //   animation: moveChainGrid 8s ease-in-out infinite;
+    
+    //transform: translateY(30px);
+    //@include showTime(3s);
+
+    @include breakpoint(medium) {
+      width: 30vw;
+    }
+  }
+
+  @keyframes moveChainGrid {
+    0% { transform: translateY(30px); }
+    50% { transform: translateY(0px); }
+    100% { transform: translateY(30px); }
   }

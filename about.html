@@ -4,8 +4,8 @@ layout: default
 style: about
 title: STACKOZA // ABOUT
 ---
+{% assign cacheBust = site.time | date:'?v=%s' %}
 <main class="about">
-	<!-- <canvas id="background-canvas"></canvas> -->
 	<div class="content-wrapper">
 		<section class="top">
 		<article class="intro">
@@ -13,7 +13,7 @@ title: STACKOZA // ABOUT
 				Stackoza is an artist/programmer from Cairo and currently based in Berlin. He makes <a href="/artworks">artworks</a> with surreal/abstract aesthetics while incorporating procedural techniques in his process. His interest in arts and technology began with drawing, then moved towards a digital direction right after laying his hands on a pc with Microsoft Paint, wanting to remake an adidas poster he saw earlier, he tries, and the result is far off anything he liked about the poster, nevertheless there was great pleasure. He is intrigued by the magical act of creation and the enabling super powers technology can give us. Few years forward, a friend shows him a fake together with celebrities photo they made with Photoshop, the possibilities he saw in it were bottomless, taking him into a deep dive in the creative apps domain. His interests translated to studying and graduating with a bachelor's degree in software engineering, focusing on new media technologies from both the artist and programmer points of view.
 			</p>
 			<p class="text">
-				At the age of 16, he landed his first job working for a digital marketing agency where he delivered his first live work, a desktop media <a href="https://vimeo.com/manage/videos/202377980" target="_blank">app</a> for Schweppes/Coca Cola as part of their 2009 digital campaign. Later he worked on more projects delivering new experiences on the web and mobile platforms. His last project was teaching playing the piano through a mobile app with the super talented and passionate people at <a href="https://www.skoove.com" target="_blank">Skoove</a>.
+				At the age of 18, he landed his first job working for a digital marketing agency where he delivered his first live work, a desktop media <a href="https://vimeo.com/manage/videos/202377980" target="_blank">app</a> for Schweppes/Coca Cola as part of their 2007 digital campaign. Later he worked on more projects delivering new experiences on the web and mobile platforms. His last project was teaching playing the piano through a mobile app with the super talented and passionate people at <a href="https://www.skoove.com" target="_blank">Skoove</a>.
 			</p>
 		</article>
 		<div class="image">
@@ -28,5 +28,5 @@ title: STACKOZA // ABOUT
 	</div>
 </main>
 <footer class="padded-footer">
-	<script src="/assets/js/stackoza.js?v={{ site.jsv }}"></script>
+	<script src="/assets/js/stackoza.js?v={{ cacheBust }}"></script>
 </footer>

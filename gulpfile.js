@@ -24,7 +24,7 @@ function scssTask() {
 	return src(files.scssPath, { sourcemaps: true }) // set source and turn on sourcemaps
 		.pipe(sass()) // compile SCSS to CSS
 		.pipe(postcss([autoprefixer(), cssnano()])) // PostCSS plugins
-		.pipe(dest('_site/assets/css', { sourcemaps: '.' })); // put final CSS in dist folder with sourcemap
+		.pipe(dest('assets/css', { sourcemaps: '.' })); // put final CSS in dist folder with sourcemap
 }
 
 // JS task: concatenates and uglifies JS files to script.js
@@ -38,7 +38,7 @@ function jsTask() {
 	)
 		//.pipe(concat('all.js'))
 		.pipe(terser())
-		.pipe(dest('_site/assets/js', { sourcemaps: '.' }));
+		.pipe(dest('assets/js', { sourcemaps: '.' }));
 }
 
 // Cachebust
@@ -51,14 +51,20 @@ function cacheBustTask() {
 		  }));
 }
 
-// Watch task: watch SCSS and JS files for changes
-// If any change, run scss and js tasks simultaneously
-function watchTask() {
+function watchJSTask() {
 	watch(
-		[files.scssPath, files.jsPath],
+		[files.jsPath],
 		{ interval: 1000, usePolling: true }, //Makes docker work
-		series(parallel(scssTask, jsTask))
+		jsTask
 	);
 }
 
-exports.default = series(parallel(scssTask, jsTask), watchTask);
+function watchSCSSTask() {
+	watch(
+		[files.scssPath],
+		{ interval: 1000, usePolling: true }, //Makes docker work
+		scssTask
+	);
+}
+
+exports.default = series(parallel(scssTask, jsTask), parallel(watchJSTask, watchSCSSTask));

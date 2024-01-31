@@ -87,6 +87,10 @@ html, body {
     scroll-behavior: smooth;
 }
 
+html {
+    scroll-behavior: smooth;
+}
+
 body {
     background-color: $bg-page;
     color: white;
@@ -225,7 +229,6 @@ figure {
         svg {
             width: 100%;
             fill: $primary-color;
-            fill: #b3b7b9
         }
 
         &.active, &.active * {
@@ -264,9 +267,6 @@ figure {
     margin: 0 auto;
     padding: $logo-height * $IPHI * 2 $logo-height * $IPHI * 1;
     height: $logo-height * $PHI + $logo-height * $IPHI;
-    @include breakpoint(iphone8) {
-        padding: $logo-height * $IPHI * 2;
-    }
 
     @include breakpoint(medium) {
         padding: $logo-height * $IPHI * 3;
@@ -402,7 +402,7 @@ figure {
                     }
 
                     &:hover  .default {
-                        clip-path: inset(77% -1% 20% -1%);
+                        clip-path: inset(50% -1% 51% -1%);
                     }       
                 }
             }
@@ -506,15 +506,18 @@ nav {
     @extend .font-big;
     color: rgba(255, 255, 255, 0);
     font-weight: 800;
-    padding: 0.5em 0em;
+    padding: 0.5em 0.3em;
     text-decoration: none;
-    border-bottom: 1px solid #bbb;
+    border-bottom: 1px solid $primary-color;
     font-size: 10vw;
     letter-spacing: 0.1em;
     margin-left: auto;
     margin-right: auto;
-    -webkit-text-stroke: 1px #bbb;
+    -webkit-text-stroke: 1px $primary-color;
     -webkit-text-fill: rgba(255, 255, 255, 0);
+    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter: blur(25px);
+    //border-radius: 100px;
      
     @include breakpoint(small) {
         font-size: 5vw;
@@ -584,11 +587,6 @@ svg.loader .square {
     right: 0;
     z-index: 10000;
 
-    
-    @include breakpoint(iphone8) {
-        padding: $logo-height * $IPHI * 2;
-    }
-
     @include breakpoint(medium) {
         padding: $logo-height * $IPHI * 3;
     }
@@ -624,7 +622,7 @@ svg.loader .square {
             }
 
             svg {
-                fill: #fff;
+                fill: $primary-color;
                 padding-right: 1px;
             }
         }
@@ -649,8 +647,8 @@ svg.loader .square {
  }
 
  body.active-light {
-    .social-links svg {
-        opacity: 0;
+    .social-links a {
+        display: none;
     }
  }
 
@@ -715,15 +713,16 @@ svg.loader .square {
 
     a {
         background-color: black;
-        border: 1px solid #AAA;
+        border: 1px solid rgba($primary-color, 0.5);
         border-radius: 50%;
         margin-left: 15px;
         padding: 4px;
         line-height: 2em;
         font-family: inherit;
         font-weight: 300;
+        color: $primary-color;
         &:hover {
-            border: 1px solid #fff;
+            border: 1px solid $primary-color;
         }
 
         &.info {

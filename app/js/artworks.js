@@ -9,6 +9,7 @@ $( function() {
     let s3 = document.querySelector('.bg-balls .s3');
     let s4 = document.querySelector('.bg-balls .s4');
     let s5 = document.querySelector('.bg-balls .s5');
+    let chainGrid = document.querySelector('.bg-balls .chain-grid');
     let content = document.querySelector('main.showcase .content');
     let currentFilter = '';
     let dataSources = {'all': [], 'nft': [], '2d': [], '3d': [], 'code': [], 'animation': [], 'procreate': []};
@@ -48,6 +49,8 @@ $( function() {
 
   }
 
+  
+
     // To ScrollAnimation
     function scrollTranslateXYZ( elem, targetXMax, targetYMax, targetScroll, z, scroll ) {
         const targetY = (targetYMax / targetScroll) * (scroll);
@@ -56,27 +59,28 @@ $( function() {
     }
     // To ScrollAnimation
     function scrollOpacity( elem, opacityMin, targetScroll, scroll ) {
-        const opacity = (1 - (opacityMin * ( scroll / targetScroll)));
-        if ( opacity >= opacityMin || elem.currentOpacity  > opacityMin ) {
-            elem.currentOpacity = Math.max(opacityMin, opacity);
-            elem.style.opacity = `${elem.currentOpacity}`;
-        }
+        const scrollRatio = Math.min(targetScroll, scroll) / targetScroll;
+        const opacity = 1 + ((opacityMin - 1) * scrollRatio);
+
+        elem.currentOpacity = opacity;
+        elem.style.opacity = `${elem.currentOpacity}`;
     }
 
 
     (function(){
-      scrollOpacity(title, 0.2, 100, window.scrollY);
+      scrollOpacity(title, 0.0, 100, window.scrollY);
       setTimeout(arguments.callee, 1000);
     })();
   
     // ScrollAnimation User
-    window.addEventListener('scroll', throttle(windowScroll, 200));  
+    window.addEventListener('scroll', throttle(windowScroll, 200));
     function windowScroll() {
         let scroll = window.scrollY;
         scrollTranslateXYZ(s3, -200, 500, 5000, 3, scroll);
         scrollTranslateXYZ(s4, 30, -300, 5000, 4, scroll);
+        scrollTranslateXYZ(chainGrid, 0, -200, 5000, 5, scroll);
         // text
-        scrollOpacity(title, 0.2, 100, scroll);
+        scrollOpacity(title, 0.0, 100, scroll);
     }
     // To Utils
     function throttle(fn, wait) {
@@ -99,6 +103,7 @@ $( function() {
         $("html, body").animate({ scrollTop: 0 }, 500, function() {
           windowScroll();
         });
+        visuals();
     }
   
 
@@ -118,8 +123,8 @@ $( function() {
         if (filter == currentFilter) {
             return;
         }
-        if ( filter == "nft" || (currentFilter == "nft" && filter != "nft" ) ) {
-            $(title).removeClass('showing');
+        if ( (filter == "nft" && currentFilter != '') || (currentFilter == "nft" && filter != "nft" ) ) {
+          $(title).removeClass('showing');
             setTimeout(function() {
                 if (filter == "nft") {
                     $(title).html("CryptoArt");
@@ -142,10 +147,6 @@ $( function() {
         setTimeout(function () {
             currentFilter = filter
             $grid.children().remove();
-
-            if ($grid.data('masonry') != undefined) {
-                $grid.masonry('destroy');
-            }
             
             let added = 0;
     
@@ -171,22 +172,37 @@ $( function() {
                 $grid.addClass('showing');
                 return;
             }
-            
-            $grid.masonry({
-                itemSelector: 'article'
-            });
             $(window).trigger("resize");
-            updateDuration();
+            // document.querySelectorAll(".grid article").forEach((elem) => {
+            //     if (elem) { observer.observe(elem); }
+            // });
             $end.addClass('showing');
             $grid.addClass('showing');
           }, delay);
     }
 
+    // let observer = new IntersectionObserver(function(entries) {
+    //   for (let i = 0; i< entries.length; i++) {
+    //     let entry = entries[i];
+    //     if (entry.isIntersecting == true) {
+    //       entry.target.style.transform = `translateY(0px)`;
+    //     } else {
+    //       if (entry.boundingClientRect.top < 10) {
+    //         entry.target.style.transform = `translateY(-250px)`;
+  
+    //       } else {
+    //         entry.target.style.transform = `translateY(250px)`;
+    //       }
+    //     }
+    //   }
+      
+    // }, { threshold: [0.01] });
+
     function getCryptoMessage() {
       return `
       <div class="message">
-        <img src="/assets/images/FirstDrop.png" width="800" height="800" />
-        <span class="text">FIRST DROP<span><img class="spinner-cw" src="/assets/images/soon-hollow.svg"/></span></span>
+        <img src="/assets/images/Metaverse.png" width="1500" height="2793 " />
+        <!--span class="text">FIRST DROP<span><img class="spinner-cw" src="/assets/images/soon-hollow.svg"/></span></span-->
         <div class="drops">
           <form action="https://icloud.us5.list-manage.com/subscribe/post?u=2907ec70735bb82d8366cf6b5&amp;id=aba3770b55" class="validate" target="_blank">
             <h2 class="title">KNOW<br/>WHEN</h2>
@@ -204,6 +220,15 @@ $( function() {
       </div>
       
       `
+    }
+
+    function visuals() {
+      var postImage = new Image();
+      postImage.src = "/assets/images/Grid.png"
+      postImage.onload = function(){
+        $(".chain-grid").attr("src", postImage.src).addClass("showing");
+        
+      };
     }
 
     // To Utils, helper to get gallery image sizes
@@ -289,6 +314,7 @@ $( function() {
     }
 
     $(window).resize(function() {
+        updateDuration();
         const id = sliderData.currentSlide;
         const dataSourceId = sliderData.dataSourceId;
         const maxSlides = sliderData.maxSlides;
@@ -297,7 +323,7 @@ $( function() {
         sliderData = {
             slideWidth: $slider.width(),
             currentSlide: id,
-            scrollMax: $slider.width() * 2,
+            scrollMax: Math.round($slider.width() * 2),
             maxSlides: maxSlides,
             dataSourceId: dataSourceId,
             preventDoubles: preventDoubles
@@ -309,17 +335,14 @@ $( function() {
     $slider.scroll( function(e) {
         if (sliderData.preventDoubles) { 
             if (sliderData.currentSlide == 0) {
-                $slider.scrollLeft(0); 
-                setActiveSlide(0);
+                $slider.scrollLeft(0);
                 return; 
             }
             if (sliderData.currentSlide == sliderData.maxSlides) {
-                $slider.scrollLeft(sliderData.slideWidth * 2); 
-                setActiveSlide(2);
+                $slider.scrollLeft(sliderData.slideWidth * 2);
                 return; 
             }
             $slider.scrollLeft(sliderData.slideWidth);
-            setActiveSlide(1);
             return;
         }
         let hScroll = $slider.scrollLeft();
@@ -358,6 +381,7 @@ $( function() {
         
         // Preload next
         if (hScroll === sliderData.scrollMax && sliderData.currentSlide < sliderData.maxSlides) {
+        
             let advance = 1;
             if (sliderData.currentSlide == 0) advance = 2;
             sliderData.currentSlide += advance;
@@ -370,26 +394,50 @@ $( function() {
                 $slider.append(next);
                 $slider.scrollLeft(sliderData.slideWidth);
                 setActiveSlide(1);
-            }  else {
+            } else {
                 setActiveSlide(2);
             }
             return;
          }
     });
 
+    let lastVideoId = '';
     function setActiveSlide(id) {
         $slider.children().removeClass('active');
         $slider.children().eq(id).addClass('active');
+        // terminate video
+        if (lastVideoId != '') {  
+          let iframe = $slider.find(`#${lastVideoId} iframe`)[0];
+          iframe.src += '';
+          lastVideoId = '';
+        }
+        let slide = $slider.children().eq(id);
+        let iframes = slide.find('iframe');
+        if (iframes.length) {
+          lastVideoId = slide.attr('id');
+        }
+    }
+    $("main.showcase .viewer").on('close', function() { 
+      setTimeout(function() {
+        clearSlides();
+      }, 400);
+    });
+    
+    function clearSlides() {
+      lastVideoId = '';
+      $slider.children().remove();
     }
 
     $('main.showcase .grid').on("click", "article", function (e) {
+      if ($(e.target).hasClass("nft-url") == false ) {
         e.preventDefault();
+      }
         e.stopPropagation();
+        
         let dataSourceId = $('.filters-button-group .is-checked').attr('id');
         sliderData.dataSourceId = dataSourceId;
         sliderData.maxSlides = dataSources[dataSourceId].length-1;
-
-        $slider.children().remove();
+        clearSlides();
         let itemId = parseInt($(this).attr("data-id"));
         sliderData.currentSlide = dataSources[dataSourceId].indexOf(itemId);
         $slider.append(getSlideFor(sliderData.currentSlide));
@@ -443,7 +491,7 @@ $( function() {
         }
         let collect = '';
         if (obj.nftURL) {
-            collect = `<a class="nft-url" href="${obj.nftURL}"><span>COLLECT</span></a>`;
+            collect = `<a class="nft-url" target="_blank" href="${obj.nftURL}"><span>COLLECT</span></a>`;
         }
         return `<div id="${id}-slide" class="slide cursor-close">
                     <div class="card cursor-close">
@@ -459,9 +507,9 @@ $( function() {
     }
 
     function getGridItemFor(obj, id) {
-        let url = `<a class="nft-url"><span class="show">SHOW</span></a>`;
+        let url = `<a class="show-btn"><span class="show">SHOW</span></a>`;
         if (obj.nftURL != '') {
-            url = `<a class="nft-url" href="${obj.nftURL}"><span class="collect">COLLECT</span></a>`;
+            url = `<a class="nft-url" target="_blank" href="${obj.nftURL}"><span class="collect">COLLECT</span></a>`;
         }
         let playIcon = '';
         if (obj.vimeoID != '') {
@@ -471,9 +519,8 @@ $( function() {
         //  let yPos = randomPositiveOrNegative(-3, 3);
         //let transform = makePrefixed('transform', `translate(${xPos}vh, ${yPos}vw)`);
         return `<article data-id="${id}" class="${obj.tags}">
+                    ${playIcon}
                     <div class="card cursor-zoom">
-                        ${playIcon}
-                        <!--svg class="image-content placeholder" viewBox="0 0 ${obj.width} ${obj.height}"><rect x="0" y="0" width="${obj.width}" height="${obj.height}" style="fill:#0f7;"/></svg-->
                         <img src="/assets/content/${obj.image}-mini.png" alt="${obj.title}" width="${obj.width}" height="${obj.height}" class="image-content" />
                         <div class="overlay">
                             <div class="title-container">
@@ -504,7 +551,489 @@ $( function() {
 });
 
 const dataObjs = [
-    {
+  {
+    image: "Kleo",
+    title: "Kleo",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+  {
+    image: "Wompland",
+    title: "Wompland",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+  // {
+  //   image: "RTX6090",
+  //   title: "RTX 6090",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+  // {
+  //   image: "Stackoza-Logotype",
+  //   title: "Stackoza Logotype",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+  {
+    image: "Didi",
+    title: "Didi",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+  // {
+  //   image: "AR-Eyewear-Computer-Of-The-Future",
+  //   title: "AR-Eyewear Computer Of The Future",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+
+
+  {
+    image: "Luna",
+    title: "Luna",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+  {
+    image: "Dancing-In-A-Lake-At-Night",
+    title: "Dancing In A Lake At Night",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+  {
+    image: "Not-A-Monument",
+    title: "Not A Monument",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+
+
+  {
+    image: "Alien-Egg-1",
+    title: "Alien Pod - 1",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Alien-Egg-2",
+    title: "Alien Pod - 2",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Alien-Egg-3",
+    title: "Alien Pod - 3",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+
+  {
+    image: "Alien-Predator",
+    title: "Alien Predator",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 392,
+    nftURL: ""
+  },
+
+  {
+    image: "Extraterrestrial-Structure-9",
+    title: "Extraterrestrial Structure - 1",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Extraterrestrial-Structure-8",
+    title: "Extraterrestrial Structure - 2",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Extraterrestrial-Structure-7",
+    title: "Extraterrestrial Structure - 3",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Extraterrestrial-Structure-6",
+    title: "Extraterrestrial Structure - 4",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Extraterrestrial-Structure-5",
+    title: "Extraterrestrial Structure - 5",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Extraterrestrial-Structure-4",
+    title: "Extraterrestrial Structure - 6",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Extraterrestrial-Structure-3",
+    title: "Extraterrestrial Structure - 7",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+  // {
+  //   image: "Extraterrestrial-Structure-2",
+  //   title: "Extraterrestrial Structure - 8",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },{
+  //   image: "Extraterrestrial-Structure-1",
+  //   title: "Extraterrestrial Structure - 9",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+
+  {
+    image: "Korean-Grill",
+    title: "Korean Grill",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Through-Space-Vortex",
+    title: "Through Space Vortex",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Twisted-Dream-1",
+    title: "Twisted Dream 1",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Twisted-Dream-2",
+    title: "Twisted Dream 2",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+
+  {
+    image: "Molecules-Of-Pleasure-Red",
+    title: "Molecules Of Pleasure - Red",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Molecules-Of-Pleasure-1",
+    title: "Molecules Of Pleasure - 1",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Molecules-Of-Pleasure-2",
+    title: "Molecules Of Pleasure - 2",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Molecules-Of-Pleasure-3",
+    title: "Molecules Of Pleasure - 3",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 392,
+    nftURL: ""
+  },{
+    image: "Molecules-Of-Pleasure-4",
+    title: "Molecules Of Pleasure - 4",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+
+  {
+    image: "Knots-1",
+    title: "Knots - 1",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Knots-2",
+    title: "Knots - 2",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Knots-3",
+    title: "Knots - 3",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Knots-4",
+    title: "Knots - 4",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+
+  {
+    image: "Foundation-In-Progress-1",
+    title: "Foundation In Progress - 1",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Foundation-In-Progress-2",
+    title: "Foundation In Progress - 2",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Is-There-Anybody-Out-There",
+    title: "Is There Anybody Out There",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+
+
+  {
+    image: "Love-Kills",
+    title: "Love Kills",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Trinity",
+    title: "Trinity",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+  // {
+  //   image: "Dark-Matter-1",
+  //   title: "Dark Matter",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+  // {
+  //   image: "Dark-Matter-2",
+  //   title: "Dark Matter - 2",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+
+
+
+  // {
+  //   image: "New-Planet",
+  //   title: "New Planet",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+  {
+    image: "What-Have-You-Done!",
+    title: "What Have You Done!",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },
+  // {
+  //   image: "Silver-Future",
+  //   title: "Silver Future",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+
+  {
+    image: "Flying-in-Eden",
+    title: "Flying in Eden",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Happy-Monsters",
+    title: "Happy Monsters",
+    tags: "3d nft",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Good-Plan",
+    title: "Good Plan",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Glass-Eyes",
+    title: "Glass Eyes",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Gentle-Pressure",
+    title: "Ascending Order",
+    tags: "3d nft",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  },{
+    image: "Getting-There-Together",
+    title: "Getting There Together",
+    tags: "3d",
+    vimeoID: "",
+    width: 392,
+    height: 500,
+    nftURL: ""
+  }, 
+  // {
+  //   image: "Gold-Infection",
+  //   title: "Gold Infection",
+  //   tags: "3d nft",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },{
+  //   image: "Sending-Good-Vibes",
+  //   title: "Sending Good Vibes",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // }, {
+  //   image: "Wild-Card",
+  //   title: "Wild Card",
+  //   tags: "3d",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // }, 
+  // {
+  //   image: "Cosmic-Born",
+  //   title: "Cosmic Born",
+  //   tags: "3d nft",
+  //   vimeoID: "",
+  //   width: 392,
+  //   height: 500,
+  //   nftURL: ""
+  // },
+  {
       image: "Eclipse",
       title: "Eclipse",
       tags: "3d",
@@ -549,15 +1078,15 @@ const dataObjs = [
       height: 720,
       nftURL: ""
     },
-    {
-      image: "Peaks-and-Valleys",
-      title: "Peaks and Valleys",
-      tags: "3d",
-      vimeoID: "",
-      width: 392,
-      height: 500,
-      nftURL: ""
-    },
+    // {
+    //   image: "Peaks-and-Valleys",
+    //   title: "Peaks and Valleys",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 392,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "Floating-Point-Planet",
       title: "Floating Point Planet",
@@ -594,53 +1123,44 @@ const dataObjs = [
       height: 500,
       nftURL: ""
     },
-    {
-      image: "Gold-Landscapes-1",
-      title: "Gold Landscapes 1 of 4",
-      tags: "3d",
-      vimeoID: "",
-      width: 392,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Gold-Landscapes-2",
-      title: "Gold Landscapes 2 of 4",
-      tags: "3d",
-      vimeoID: "",
-      width: 392,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Gold-Landscapes-3",
-      title: "Gold Landscapes 3 of 4",
-      tags: "3d",
-      vimeoID: "",
-      width: 392,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Gold-Landscapes-4",
-      title: "Gold Landscapes 4 of 4",
-      tags: "3d",
-      vimeoID: "",
-      width: 392,
-      height: 500,
-      nftURL: ""
-    },
+    // {
+    //   image: "Gold-Landscapes-1",
+    //   title: "Gold Landscapes 1 of 4",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 392,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Gold-Landscapes-2",
+    //   title: "Gold Landscapes 2 of 4",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 392,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Gold-Landscapes-3",
+    //   title: "Gold Landscapes 3 of 4",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 392,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Gold-Landscapes-4",
+    //   title: "Gold Landscapes 4 of 4",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 392,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "Diamonds-and-Chains-1",
-      title: "Diamonds & Chains 2 of 2",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Diamonds-and-Chains-2",
       title: "Diamonds & Chains 1 of 2",
       tags: "3d",
       vimeoID: "",
@@ -649,14 +1169,23 @@ const dataObjs = [
       nftURL: ""
     },
     {
-      image: "Gold-Mine",
-      title: "Gold Mine",
+      image: "Diamonds-and-Chains-2",
+      title: "Diamonds & Chains 2 of 2",
       tags: "3d",
       vimeoID: "",
       width: 500,
       height: 500,
       nftURL: ""
     },
+    // {
+    //   image: "Gold-Mine",
+    //   title: "Gold Mine",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "Flight-Around-a-Universe-Instance",
       title: "Flight Around a Universe Instance",
@@ -702,15 +1231,15 @@ const dataObjs = [
       height: 500,
       nftURL: ""
     },
-    {
-      image: "Interconnected-Skies",
-      title: "Interconnected Skies",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
+    // {
+    //   image: "Interconnected-Skies",
+    //   title: "Interconnected Skies",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "Multiversal-Trip-1",
       title: "Multiversal Trip 1 of 2",
@@ -738,33 +1267,33 @@ const dataObjs = [
       height: 500,
       nftURL: ""
     },
-    {
-      image: "Keyless-Box",
-      title: "Keyless Box",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Welcome-to-the-Chain",
-      title: "Welcome to the Chain",
-      tags: "3d",
-      vimeoID: "",
-      width: 375,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "The-Incubation-which-Preceded-the-Population-of-a-Futureverse",
-      title: "The Incubation which Preceded the Population of a Futureverse",
-      tags: "3d procreate",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
+    // {
+    //   image: "Keyless-Box",
+    //   title: "Keyless Box",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Welcome-to-the-Chain",
+    //   title: "Welcome to the Chain",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 375,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "The-Incubation-which-Preceded-the-Population-of-a-Futureverse",
+    //   title: "The Incubation which Preceded the Population of a Futureverse",
+    //   tags: "3d procreate",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "Valley-of-the-Rising-Stellar",
       title: "Valley of the Rising Stellar",
@@ -774,15 +1303,15 @@ const dataObjs = [
       height: 500,
       nftURL: ""
     },
-    {
-      image: "Where-the-Mice-Went",
-      title: "Where the Mice Went",
-      tags: "3d procreate",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
+    // {
+    //   image: "Where-the-Mice-Went",
+    //   title: "Where the Mice Went",
+    //   tags: "3d procreate",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "Somewhere-Feeling-Happy",
       title: "Somewhere Feeling Happy",
@@ -803,7 +1332,7 @@ const dataObjs = [
     },
     {
       image: "Face-It",
-      title: "Face It",
+      title: "Black Desert",
       tags: "3d procreate",
       vimeoID: "",
       width: 500,
@@ -828,15 +1357,15 @@ const dataObjs = [
       height: 500,
       nftURL: ""
     },
-    {
-      image: "Declining-Orbits",
-      title: "Declining Orbits",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
+    // {
+    //   image: "Declining-Orbits",
+    //   title: "Declining Orbits",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "The-Floating-Busts-of-an-Ancient-Museum-Built-at-a-Time-Once-Called-Modern",
       title: "The Floating Busts of an Ancient Museum Built at a Time Once Called Modern",
@@ -846,102 +1375,84 @@ const dataObjs = [
       height: 500,
       nftURL: ""
     },
-    {
-      image: "Tide-Caused-by-the-Approaching-Planet-Over-a-Scarlet-Rose",
-      title: "Tide Caused by the Approaching Planet Over a Scarlet Rose",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Catching-a-Star-a-Moment-Before-Cosmic-Competition",
-      title: "Catching a Star a Moment Before Cosmic Competition",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Love-Star",
-      title: "Love Star",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Planet-Rainbow-Everywhere",
-      title: "Planet Rainbow Everywhere",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Planet-Pure-Gold",
-      title: "Planet Pure Gold",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Planet-Holo",
-      title: "Planet Holo",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Stairway-to-Vega",
-      title: "Stairway to Vega",
-      tags: "3d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "8-Bit-Celestial",
-      title: "8-Bit Celestial",
-      tags: "3d",
-      vimeoID: "",
-      width: 374,
-      height: 500,
-      nftURL: ""
-    },
+    // {
+    //   image: "Tide-Caused-by-the-Approaching-Planet-Over-a-Scarlet-Rose",
+    //   title: "Tide Caused by the Approaching Planet Over a Scarlet Rose",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Catching-a-Star-a-Moment-Before-Cosmic-Competition",
+    //   title: "Catching a Star a Moment Before Cosmic Competition",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Love-Star",
+    //   title: "Love Star",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Planet-Rainbow-Everywhere",
+    //   title: "Planet Rainbow Everywhere",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Planet-Pure-Gold",
+    //   title: "Planet Pure Gold",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Planet-Holo",
+    //   title: "Planet Holo",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "Stairway-to-Vega",
+    //   title: "Stairway to Vega",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 500,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+    // {
+    //   image: "8-Bit-Celestial",
+    //   title: "8-Bit Celestial",
+    //   tags: "3d",
+    //   vimeoID: "",
+    //   width: 374,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "Class-Glass",
       title: "Class Glass",
       tags: "3d",
       vimeoID: "",
       width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Ultraviolet",
-      title: "Ultraviolet",
-      tags: "2d",
-      vimeoID: "",
-      width: 500,
-      height: 500,
-      nftURL: ""
-    },
-    {
-      image: "Golden-Gate",
-      title: "Golden Gate",
-      tags: "2d",
-      vimeoID: "",
-      width: 324,
       height: 500,
       nftURL: ""
     },
@@ -1044,12 +1555,31 @@ const dataObjs = [
       height: 500,
       nftURL: ""
     },
+    // {
+    //   image: "Summer-Garden",
+    //   title: "Summer Garden",
+    //   tags: "2d procreate",
+    //   vimeoID: "",
+    //   width: 329,
+    //   height: 500,
+    //   nftURL: ""
+    // },
+
     {
-      image: "Summer-Garden",
-      title: "Summer Garden",
-      tags: "2d procreate",
+      image: "Ultraviolet",
+      title: "Ultraviolet",
+      tags: "2d",
       vimeoID: "",
-      width: 329,
+      width: 500,
+      height: 500,
+      nftURL: ""
+    },
+    {
+      image: "Golden-Gate",
+      title: "Golden Gate",
+      tags: "2d",
+      vimeoID: "",
+      width: 324,
       height: 500,
       nftURL: ""
     },
@@ -1098,15 +1628,15 @@ const dataObjs = [
       height: 395,
       nftURL: ""
     },
-    {
-      image: "They-are-Watching",
-      title: "THEY’RE WATCHING",
-      tags: "2d procreate",
-      vimeoID: "",
-      width: 374,
-      height: 500,
-      nftURL: ""
-    },
+    // {
+    //   image: "They-are-Watching",
+    //   title: "THEY’RE WATCHING",
+    //   tags: "2d procreate",
+    //   vimeoID: "",
+    //   width: 374,
+    //   height: 500,
+    //   nftURL: ""
+    // },
     {
       image: "Somewhere-on-Venus",
       title: "Somewhere on Venus",

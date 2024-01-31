@@ -73,7 +73,7 @@ a.toggle-audio {
     #wave {
         fill:none;
         fill-rule:nonzero;
-        stroke:rgba(255, 255, 255, 0.088);
+        stroke:rgba($primary-color, 0.088);
         stroke-width:3px;
 
         -webkit-animation: wavy 3s linear infinite;

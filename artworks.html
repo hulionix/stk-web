@@ -4,10 +4,12 @@ layout: default
 title: STACKOZA // ARTWORKS
 style: artworks
 ---
+{% assign cacheBust = site.time | date:'?v=%s' %}
 <main class="showcase" >
 	<div class="bg-balls">
 		<div class="ball s3"></div>
 		<div class="ball s4"></div>
+		<!-- <img class="chain-grid" width="700" height="591" src=""/> -->
 	</div>
 	<div class="filter-buttons">
 		<div class="button-group filters-button-group">
@@ -15,16 +17,14 @@ style: artworks
 			<button id="3d" class="button 3d" data-filter="3d">3D</button>
 			<button id="2d" class="button 2d" data-filter="2d">2D</button>
 			<button id="code" class="button code" data-filter="code">CODE</button>
-			<button id="nft" class="button nft" data-filter="nft">NFTs</button>
+			<!--button id="nft" class="button nft" data-filter="nft">NFTs</button-->
 		</div>
 	</div>
 	<header class="top">
 		<div class="artworks-button">&nbsp;</div>
 	</header>
 	<div class="content" data-scroll-container>
-		<!--section id="grid-container" class="transitions-enabled fluid masonry js-masonry grid">
-		</section-->
-		<section class="masonry grid slow">
+		<section class="grid slow">
 		</section>
 	</div>
 	<section class="viewer">
@@ -37,11 +37,10 @@ style: artworks
 		</div>
 	</section>
 	<section class="end">
-		<img class="spinner" src="/assets/images/ALL.svg"/>
+		<img class="spinner" src="/assets/images/All.png"/>
 	</section>
 </main>
 <footer class="padded-footer">
-  	<script src="https://unpkg.com/masonry-layout@4/dist/masonry.pkgd.js"></script>
-  	<script src="/assets/js/stackoza.js?v={{ site.jsv }}"></script>
-  	<script src="/assets/js/artworks.js?v={{ site.jsv }}"></script>
+  	<script src="/assets/js/stackoza.js?v={{ cacheBust }}"></script>
+  	<script src="/assets/js/artworks.js?v={{ cacheBust }}"></script>
 </footer>

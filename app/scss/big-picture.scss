@@ -1,0 +1,12 @@
+@import "./common";
+main.big-picture {
+    padding-top: $logo-height * $IPHI * 10;
+    padding: $logo-height * $IPHI * 12 $logo-height * $IPHI * 1 $logo-height * $IPHI * 3;
+    background-color: $bg-page;
+    height: 100vh;
+
+    @include breakpoint(iphone8) {
+        padding-left: $logo-height*$IPHI * 2;
+        padding-right: $logo-height*$IPHI * 2;
+    };
+}
