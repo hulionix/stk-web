@@ -108,14 +108,16 @@ $( function() {
     }
 
     function reveal() {
-        showTime('a.logo', 1000);
-        showTime('.nav-right-button svg', 1000);
-        showTime('.social-links', 1800);
+        showTime('.social-links', 3800);
+        // Home
         showTime('main.home .artworks-button', 2000);
-        showTime('main.home .home-video', 100);
-        showTime('a.toggle-audio', 100);
-        showTime('main.about .intro', 100);
-        showTime('main.about .image', 100);
+        showTime('main.home .home-video', 250);
+        showTime('main.home .text-wrapper', 1000);
+        showTime('a.toggle-audio', 2500);
+
+        // About
+        showTime('main.about .image', 200);
+        showTime('main.about .intro', 200);
     }
 });
 
@@ -257,7 +259,33 @@ $(document).ready(function() {
 
     if (video === null) { return }
 
+    let isPlaying = false;
+
+    video.muted = true;
+    var promise = video.play();
+
+    if (promise !== undefined) {
+      promise.then(_ => {
+        console.log("yes");
+        isPlaying = true;
+      }).catch(error => {
+        isPlaying = false;
+        $('main.home').addClass("no-autoplay");
+      });
+    }
+
+    $(video).click(function (){
+        video.play();
+        video.muted = false;
+        $('main.home').removelass("no-autoplay");
+        $('a.toggle-audio').addClass('active');
+    });
+
     $('a.toggle-audio').click( function () {
+        if( !isPlaying ) {
+            video.play();
+            $('main.home').removeClass("no-autoplay");
+        }
         $(this).toggleClass('active');
         video.muted = !video.muted;
     });
@@ -284,7 +312,7 @@ $(document).ready(function() {
             let text = `
             <div class="cookies-jar">
                 <p class="more-info">Cookies are required to show you videos stored on <a href="https://vimeo.com/cookie_policy" target="_blank">vimeo</a>, and to remember your consent on allowing cookies.</p>
-                <p>Essential cookies will be stored when you use this website. <span><a class="info">?</a><a class="ok">Ok</a></span></p>
+                <p>Essential cookies will be stored when you use this website. <br/><span><a class="info">?</a><a class="ok">Ok</a></span></p>
             </div>
             `
             $('body').append(text);

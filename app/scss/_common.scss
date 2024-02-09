@@ -77,6 +77,15 @@ a * {
     @extend .cursor-pointer-overlay;
 }
 
+svg text, svg textPath, svg textPath tspan {
+    fill: $primary-color;
+    @extend .font-mid;
+    font-size: 35px;
+    font-weight: 300;
+    pointer-events: none;
+
+}
+
 html, body {
 	padding: 0;
 	margin: 0;
@@ -153,7 +162,7 @@ figure {
         margin-top: 4px;   
     }
     svg {
-        @include showTime(2s);
+        //@include showTime(2s);
         -webkit-transition: -webkit-transform .3s ease-in-out, fill .3s ease-in-out, opacity 2s ease-in-out;
         -ms-transition: -ms-transform .3s ease-in-out, fill .3s ease-in-out, opacity 2s ease-in-out;
         transition: transform .3s ease-in-out, fill .3s ease-in-out, opacity 2s ease-in-out;
@@ -216,7 +225,7 @@ figure {
         -webkit-backdrop-filter: blur(10px);
         backdrop-filter: blur(10px);
 
-        @include showTime(1s);
+        //@include showTime(1s);
 
         h1 {
             text-indent: -199999px;
@@ -333,57 +342,28 @@ figure {
                         border: none;
                         span {
                             font-weight: 800;
-                            font-size: 8vw;
+                            font-size: 2em;
                             -webkit-background-clip: text;
                             background-clip: text;
                             color: transparent;
-                            @include breakpoint(medium){
-                                font-size: 8vw;
-                                font-size: min(6vw, 8vh);
-                            }
 
                             &.star-icon {
 
                             }
 
                             &.artworks {
-                                background-image: linear-gradient(
-                                    -15deg,
-                                    #a382ff 0%,
-                                    #8b9df3 20%,
-                                    #bcefbd 30%,
-                                    #ebda45 50%,
-                                    #c86e50 70%,
-                                    #ff8175 80%,
-                                    #a2b1fd 100%
-                                  );
+                                background-image: linear-gradient(-15deg,#ae82ff,#ae82ff 15%, #54ccff 20%,#bcefbd 40%,#ebda45 60%,#ff4d4d 80%,#ff1900 90%,#a2b1fd)
                             }
 
                             &.collect {
-                                background-image: linear-gradient(
-                                    -35deg,
-                                    #fadf6b 0%,
-                                    #f1de2d 20%,
-                                    #ffbe68 30%,
-                                    #b2992c 50%,
-                                    #ffd06b 70%,
-                                    #d09941 80%,
-                                    #ebce4d 100%
-                                  );
+                                background-image: $secondry-color;
+                                color: $secondry-color;
                                 
                             }
 
                             &.about {
-                                background-image: linear-gradient(
-                                    -15deg,
-                                    #646c92 0%,
-                                    #577c83 20%,
-                                    #c6dacb 30%,
-                                    #b2caca 50%,
-                                    #c4c850 70%,
-                                    #4158d0 80%,
-                                    #41d07d 100%
-                                  );
+                                background-image: $secondry-color;
+                                color: $secondry-color;
                             }
                         }
 
@@ -396,7 +376,7 @@ figure {
                             transition: clip-path 0.4s ease;
 
                             span {
-                                color: #000;
+                                color: $master-color;
                             }
                         }
                     }
@@ -508,15 +488,10 @@ nav {
     font-weight: 800;
     padding: 0.5em 0.3em;
     text-decoration: none;
-    border-bottom: 1px solid $primary-color;
     font-size: 10vw;
     letter-spacing: 0.1em;
     margin-left: auto;
     margin-right: auto;
-    -webkit-text-stroke: 1px $primary-color;
-    -webkit-text-fill: rgba(255, 255, 255, 0);
-    -webkit-backdrop-filter: blur(25px);
-    backdrop-filter: blur(25px);
     //border-radius: 100px;
      
     @include breakpoint(small) {
@@ -586,6 +561,7 @@ svg.loader .square {
     left: 0;
     right: 0;
     z-index: 10000;
+    vertical-align: bottom;
 
     @include breakpoint(medium) {
         padding: $logo-height * $IPHI * 3;
@@ -613,6 +589,9 @@ svg.loader .square {
             }
 
             &:hover {
+                svg {
+                    fill: $secondry-color;
+                }
                 opacity: 1;
             }
 
@@ -635,13 +614,20 @@ svg.loader .square {
 
  body.active {
 
-    .social-links {
+    .social-links a {
         svg {
-            fill: #000;
+            fill: #000 !important;
+        }
+        &:hover {
+            svg {
+                fill: #000 !important;
+            }
+            opacity: 1;
         }
 
-        a, a * {
+        &, * {
             @extend .cursor-pointer-overlay;
+            
         }
     }
  }
@@ -653,25 +639,25 @@ svg.loader .square {
  }
 
  .cookies-jar {
-     padding: 5px 20px;
+     padding: 5px 20px 20px 20px;
      margin: 0 auto;
      position: fixed;
      bottom: 0px;
      width: 100%;
      text-align: center;
      z-index: 20000;
-     background-color: rgba(0, 0, 0, 0.5);
-     -webkit-backdrop-filter: blur(10px);
-     backdrop-filter: blur(10px);
-     font-size: 1.1em;
-     line-height: 1.5em;
+     background-color: rgba(#010101, 0.5);
+     -webkit-backdrop-filter: blur(50px);
+     backdrop-filter: blur(50px);
+     font-size: 1.3em;
+     line-height: 1.3em;
      left: 0;
      right: 0;
-     width: fit-content;
-     width: -moz-fit-content;
+     max-width: 780px;
      letter-spacing: .1em;
-     border-top: 1px solid #222;
+     border-top: 2px solid rgba(#FFF, 0.1);
      border-bottom: none;
+     border-radius: 6px 6px 0 0;
      font-weight: 300;
 
      p {
@@ -683,26 +669,39 @@ svg.loader .square {
 
      p.more-info {
          margin-bottom: 30px;
-         border-bottom: 1px solid #AAA;
+         border-bottom: 1px solid #777;
          display: none;
-         max-width: 200px;
+         max-width: 300px;
          padding-bottom: 20px;
          margin: 20px auto;
         
-         a {
-             margin-left: 0;
-             font-family: inherit;
-         }
+        a {
+            margin: 0px;
+            font-family: inherit;
+        }
+
+        &:before,
+        &:after {
+                top: 20%;
+                right: 10%;
+                opacity: 1;
+                position: absolute;
+                width: 30px;
+                height: 30px;
+                content: " ";
+                pointer-events: none;
+                @extend .thin-star-icon;
+                opacity: 0.75
+        }
+        &:before   {
+            left: 10%;
+        }
 
          &.active {
             display: block;
          }
 
      }
-
-     @include breakpoint(medium) {
-        font-size: 1.3em;
-    }
 
     
     span {
@@ -712,17 +711,20 @@ svg.loader .square {
     
 
     a {
-        background-color: black;
-        border: 1px solid rgba($primary-color, 0.5);
+        @include link-hover-transition();
+
+        background-color: rgba(0, 0, 0, 0.1);
+        border: 2px solid rgba($primary-color, 0.3);
         border-radius: 50%;
-        margin-left: 15px;
-        padding: 4px;
-        line-height: 2em;
+        padding: 4px 10px;
+        min-width: 4em;
+        display: inline-block;
         font-family: inherit;
         font-weight: 300;
-        color: $primary-color;
+        color: $secondry-color;
+        margin: 10px 7.5px;
         &:hover {
-            border: 1px solid $primary-color;
+            border: 2px solid $secondry-color;
         }
 
         &.info {
@@ -738,6 +740,14 @@ svg.loader .square {
         p {
             color: #fff;
         }
+    }
+
+      .copyright-note textPath, .copyright-note tspan {
+        pointer-events: none;
+        fill: rgba($master-color, 0.6);
+      }
+      .copyright-name {
+        fill: rgba($master-color, 0.7);
     }
  }
 
@@ -756,3 +766,37 @@ svg.loader .square {
           display: inline-block;
       }
   }
+
+.copyright-note {
+
+    .curved-note {
+        display: block;
+    }
+    .line-note {
+        display: none;
+    }
+
+
+    margin-bottom: -10px;
+    textPath, tspan {
+        pointer-events: none;
+        fill: rgba($primary-color, 0.5);
+    }
+
+    .copyright-name {
+        fill: rgba($primary-color, 0.7);
+    }
+
+    @media only screen and (max-width: 740px) {
+        .curved-note {
+            display: none;
+        }
+        .line-note {
+            display: block;
+        }
+
+        textPath, tspan {
+            font-size: 27px;
+        }
+    }
+}

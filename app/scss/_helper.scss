@@ -81,9 +81,9 @@
 }
 
 @mixin link-hover-transition() {
-    -webkit-transition : border-color 300ms ease-in-out;
-       -moz-transition : border-color 300ms ease-in-out;
-            transition : border-color 300ms ease-in-out;
+    -webkit-transition : border-color 50ms ease-in-out;
+       -moz-transition : border-color 50ms ease-in-out;
+            transition : border-color 50ms ease-in-out;
 
     &:hover {
         border-color: transparent;

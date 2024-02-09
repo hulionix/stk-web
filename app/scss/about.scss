@@ -10,11 +10,6 @@ main.about {
     };
     
 
-    a {
-        border-bottom: 1px solid $primary-color;
-        @include link-hover-transition();
-    }
-
     h3 {
         margin: 0;
         margin-bottom: $logo-height*$IPHI;
@@ -38,13 +33,22 @@ main.about {
         position: relative;
         max-width: $max-width;
         margin-bottom: $logo-height * $IPHI * 5;
+        text-align: center;
+        max-width: 500px;
+        max-width: 500px;
+        width: 80vw;
+        height: auto;
+        margin: 0 auto;
+        overflow: hidden;
         .spinner {
             position: relative;
             
-            width: 500px;
-            max-width: 80%;
-            margin: 0 auto;
             transform: translateZ(1px);
+            img {
+                width: 100%;
+                height: auto;
+                border-radius: 500px;
+            }
         }
     }
 
@@ -66,7 +70,7 @@ main.about {
             position: relative;
         };
         img {
-            max-width: 70%;
+            max-width: 80vw;
             margin-top: $logo-height*$IPHI;
             border-radius: 50%;
             @include breakpoint(medium) {
@@ -93,17 +97,24 @@ main.about {
         }
 
         a {
-            background-color: black;
-            border: 1px solid rgb(190, 190, 190);
+            @include link-hover-transition();
+
+            background-color: rgba(0, 0, 0, 0.1);
+            border: 2px solid rgba($primary-color, 0.3);
             border-radius: 50%;
+            padding: 0px 14px;
+            //min-width: 4em;
+            display: inline-block;
+            font-family: inherit;
             font-weight: 300;
-            line-height: 1.8em;
-            padding: 0 0.4em;
+            color: $secondry-color;
+            margin: -2px 5px;
             &:hover {
-                border: 1px solid #fff;
+                border: 2px solid $secondry-color;
             }
             @extend .font-mid;
         }
+
 
         p.text {
             font-size: 1.7em;

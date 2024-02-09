@@ -6,9 +6,14 @@ main.home {
     z-index: 400;
     padding-top: 0;
     height: 100vh;
+    max-height: 100vh;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
+    overflow: hidden;
+
+    
+
     -webkit-box-align: center;
        -ms-flex-align: center;
           align-items: center;
@@ -17,15 +22,19 @@ main.home {
      justify-content: center;
 
      .artworks-button {
+        -webkit-backdrop-filter: blur(25px);
+        backdrop-filter: blur(25px);
         margin-bottom: -40vh;
+        color: $secondry-color;
+        border-bottom: 1px solid $secondry-color;
 
         @include link-hover-transition();
 
         @include showTime(2s);
 
-        -webkit-transition : border-color 300ms ease-in-out, opacity 2s ease-in-out;
-        -moz-transition : border-color 300ms ease-in-out, opacity 2s ease-in-out;
-        transition : border-color 300ms ease-in-out, opacity 2s ease-in-out;
+        -webkit-transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
+           -moz-transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
+                transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
      }
      
 
@@ -35,16 +44,66 @@ main.home {
      }
 
      .home-video {
+        visibility: visible;
         clear: both;
         position: absolute;
-        top: 0;
-        bottom: 0;
-        width: 100vw;
-        height: 100vh;
-        left: 0;
-        right: 0;
-
+        //object-fit: cover;
+        height: 100%;
+        width: 100%;
+        vertical-align: middle;
+        margin: auto;
+        overflow: hidden;
         @include showTime(2s);
+    }
+
+    &.no-autoplay {
+        background-image: url("/assets/videos/LG4.mp4");
+        background-repeat: no-repeat;
+        //background-size: justify-content;
+        background-size: contain;
+        background-position: 50%;
+        video {
+            visibility: hidden;
+        }
+    }
+
+    .text-wrapper {
+            position: fixed;
+            text-align: center;
+            overflow: visible;
+            padding-left: 10vw;
+            padding-top: 10vw;
+            pointer-events: none;
+            @include showTime(2s);
+
+            .text-line {
+                width: 120vw;
+                height: auto;
+                margin-top: -20vw;
+                margin-bottom: -3vw;
+                transform: rotate(20deg);
+                padding-left: 5vw;
+                textPath, tspan {
+                    font-size: 15px;
+                    font-weight: 300;
+                    fill: #BFBFBF;
+
+                    tspan {
+                        fill: #fff;
+                    font-weight: 500;
+                    }
+
+                }
+                
+            }
+
+            @include breakpoint(medium) {
+                padding-left: 20vw;
+                padding-top: 10vw;
+                .text-line {
+                    width: 80vw;
+                }
+            } 
     }
 }
 
@@ -54,27 +113,29 @@ a.toggle-audio {
     display: block;
     width: 70px;
     margin-left: auto;
+    margin-top: auto;
     z-index: 900;
+    transform: scale(1) translateZ(3px);
 
     @include showTime(4s);
     svg, svg * {
         font-size: 1px;
     }
 
-    #speaker {
-        fill: $primary-color;
-        fill-opacity: 0.6;
+    -webkit-transition: transform .2s ease-out, opacity 4s ease-in-out;
+       -moz-transition: transform .2s ease-out, opacity 4s ease-in-out;
+            transition: transform .2s ease-out, opacity 4s ease-in-out;
 
-        &:hover {
-            fill-opacity: 1;
-        }
+    #speaker {
+        fill: $secondry-color;
+        fill-opacity: 1;
     }
 
     #wave {
         fill:none;
         fill-rule:nonzero;
-        stroke:rgba($primary-color, 0.088);
-        stroke-width:3px;
+        stroke:rgba($secondry-color, 0.4);
+        stroke-width:10px;
 
         -webkit-animation: wavy 3s linear infinite;
            -moz-animation: wavy 3s linear infinite;
@@ -92,6 +153,14 @@ a.toggle-audio {
         clip-path: url(#wave-clip);
     }
 
+    &:hover {
+
+        transform: scale(1.1) translateZ(3px);
+        #wave {
+            stroke: rgba($secondry-color, 0.7);
+        }
+    }
+
     #wave-clip-rect {
         -webkit-animation: wave-clip-rect 3s linear infinite;
            -moz-animation: wave-clip-rect 3s linear infinite;
@@ -105,12 +174,12 @@ a.toggle-audio {
     &.active {
 
         #speaker {
-            fill: $primary-color;
+            fill: $secondry-color;
             fill-opacity: 1;
         }
         
         #wave {
-            stroke: $primary-color;
+            stroke: rgba($secondry-color, 0.7);
 
             -webkit-animation-play-state: running;
                -moz-animation-play-state: running;

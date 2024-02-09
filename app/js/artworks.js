@@ -9,6 +9,7 @@ $( function() {
     let s3 = document.querySelector('.bg-balls .s3');
     let s4 = document.querySelector('.bg-balls .s4');
     let s5 = document.querySelector('.bg-balls .s5');
+    let topHeader = document.querySelector('header.top');
     let chainGrid = document.querySelector('.bg-balls .chain-grid');
     let content = document.querySelector('main.showcase .content');
     let currentFilter = '';
@@ -57,6 +58,12 @@ $( function() {
         const targetX = (targetXMax / targetScroll) * (scroll);
         elem.style.transform = `translate(${targetX}px, ${targetY}px) translateZ(${z}px)`;
     }
+    function scrollTranslateXYZ2( elem, targetXMax, targetYMax, targetScroll, z, scroll ) {
+        const targetY = (targetYMax / targetScroll) * (scroll);
+        const targetX = (targetXMax / targetScroll) * (scroll);
+
+        $(elem).css({transform: `translate(${targetX}px, ${targetY}px) translateZ(${z}px)`});
+    }
     // To ScrollAnimation
     function scrollOpacity( elem, opacityMin, targetScroll, scroll ) {
         const scrollRatio = Math.min(targetScroll, scroll) / targetScroll;
@@ -67,20 +74,24 @@ $( function() {
     }
 
 
-    (function(){
-      scrollOpacity(title, 0.0, 100, window.scrollY);
-      setTimeout(arguments.callee, 1000);
-    })();
+    // (function(){
+    //   scrollOpacity(title, 0.0, 100, window.scrollY);
+    //   setTimeout(arguments.callee, 1000);
+    // })();
   
     // ScrollAnimation User
-    window.addEventListener('scroll', throttle(windowScroll, 200));
+
+    $(window).scroll(windowScroll);
+
+    //window.addEventListener('scroll', throttle(windowScroll, 200));
     function windowScroll() {
         let scroll = window.scrollY;
-        scrollTranslateXYZ(s3, -200, 500, 5000, 3, scroll);
-        scrollTranslateXYZ(s4, 30, -300, 5000, 4, scroll);
-        scrollTranslateXYZ(chainGrid, 0, -200, 5000, 5, scroll);
+        // scrollTranslateXYZ2(s3, -200, 500, 7000, 3, scroll);
+        // scrollTranslateXYZ2(s4, 30, -300, 300, 4, scroll);
+        // scrollTranslateXYZ2(chainGrid, -200, 500, 7000, 5, scroll);
+
         // text
-        scrollOpacity(title, 0.0, 100, scroll);
+        scrollOpacity(topHeader, 0.0, 450, scroll);
     }
     // To Utils
     function throttle(fn, wait) {
@@ -95,11 +106,10 @@ $( function() {
       
     // Page intro animation
     function showPage(filter) {
-        showTime('.artworks-button', 100);
-        showTime('.filter-buttons', 2000);
-        showTime('.bg-balls', 000);
-        showTime('.end', 3000);
-        setTimeout(function () { showFilter(filter); }, 1500);
+        showTime('header.top', 2000);
+        showTime('.filter-buttons', 2500);
+        showTime('.end', 1500);
+        setTimeout(function () { showFilter(filter); }, 1000);
         $("html, body").animate({ scrollTop: 0 }, 500, function() {
           windowScroll();
         });
@@ -224,9 +234,9 @@ $( function() {
 
     function visuals() {
       var postImage = new Image();
-      postImage.src = "/assets/images/Grid.png"
+      postImage.src = "/assets/content/Luna.png"
       postImage.onload = function(){
-        $(".chain-grid").attr("src", postImage.src).addClass("showing");
+        //$(".bg-image img").attr("src", postImage.src).addClass("showing");
         
       };
     }
@@ -507,13 +517,13 @@ $( function() {
     }
 
     function getGridItemFor(obj, id) {
-        let url = `<a class="show-btn"><span class="show">SHOW</span></a>`;
+        let url = `<a class="show-btn"><span class="show eye">VIEW</span></a>`;
         if (obj.nftURL != '') {
             url = `<a class="nft-url" target="_blank" href="${obj.nftURL}"><span class="collect">COLLECT</span></a>`;
         }
         let playIcon = '';
         if (obj.vimeoID != '') {
-            playIcon = `<span class="play-icon"><svg width="100%" height="100%" viewBox="0 0 73 73"><path d="M72.886,36.189l-72.886,36.189l0,-72.378l72.886,36.189Z" style="fill:#fffC;"/></svg></span>`;
+            playIcon = `<span class="play-icon"><svg width="100%" height="100%" viewBox="0 0 73 73"><path d="M72.886,36.189l-72.886,36.189l0,-72.378l72.886,36.189Z" style="fill:#000;"/></svg></span>`;
         }
         //let xPos = randomPositiveOrNegative(-5, 5);
         //  let yPos = randomPositiveOrNegative(-3, 3);
@@ -551,6 +561,202 @@ $( function() {
 });
 
 const dataObjs = [
+  {
+    image: "Cherries-On-Top",
+    title: "Cherries On Top",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+
+  {
+    image: "White-Rose",
+    title: "White Rose",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+
+  {
+    image: "There-Is-No-Time-To-Kill-Today",
+    title: "There Is No Time To Kill Today",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+  {
+    image: "Acid-Typo-2",
+    title: "Acid Typo - 2",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+  {
+    image: "Oilstan",
+    title: "The Ruins Of Oilstan",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+{
+    image: "High-Tubs",
+    title: "High Tubs",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+  {
+    image: "Melting-Green-Brains",
+    title: "Melting Green Brains",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+
+  {
+    image: "Swimming-With-My-Bubble",
+    title: "Swimming With A Bubble",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+
+  {
+    image: "Anger-Hunger",
+    title: "Anger Hunger",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+  {
+    image: "Acid-Typo-1",
+    title: "Acid Typo - 1",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+  {
+    image: "Magic-Feeling-Lost",
+    title: "Magic Feeling Lost",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+  {
+    image: "Alien-Pro-Pool",
+    title: "Alien Pro-Pool",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+  {
+    image: "Layers-Of-perception",
+    title: "Layers Of Perception",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+  {
+    image: "The-Green-Mask",
+    title: "The Green Mask",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+    {
+    image: "Space-Island",
+    title: "Space Island",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+
+  {
+    image: "Sokkar",
+    title: "Sokkar",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 500,
+    nftURL: ""
+  },
+  {
+    image: "Glass-Dream",
+    title: "Glass Dream",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+  {
+    image: "Dangerous-Gardens",
+    title: "Dangerous Gardens",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+  {
+    image: "Far-Away-Letters-1",
+    title: "Far Away Letters - 3",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+
+  {
+    image: "Far-Away-Letters-3",
+    title: "Far Away Letters - 2",
+    tags: "3d",
+    vimeoID: "",
+    width: 500,
+    height: 374,
+    nftURL: ""
+  },
+  {
+    image: "Far-Away-Letters-2",
+    title: "Far Away Letters - 1",
+    tags: "3d",
+    vimeoID: "",
+    width: 374,
+    height: 500,
+    nftURL: ""
+  },
+
   {
     image: "Kleo",
     title: "Kleo",
@@ -1602,21 +1808,21 @@ const dataObjs = [
       nftURL: ""
     },
     {
-      image: "Shiny-Celestial-Dust",
-      title: "Shiny Celestial Dust",
-      tags: "2d code",
-      vimeoID: "",
-      width: 500,
-      height: 285,
-      nftURL: ""
-    },
-    {
       image: "Sonic-Curtain",
       title: "Sonic Curtain",
       tags: "2d code",
       vimeoID: "",
       width: 500,
       height: 281,
+      nftURL: ""
+    },
+    {
+      image: "Shiny-Celestial-Dust",
+      title: "Shiny Celestial Dust",
+      tags: "2d code",
+      vimeoID: "",
+      width: 285,
+      height: 500,
       nftURL: ""
     },
     {

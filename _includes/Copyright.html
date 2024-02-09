@@ -1,0 +1,30 @@
+<div class="copyright-note">
+    <svg class="curved-note" viewbox="0 0 356 356" height="200px" xmlns="http://www.w3.org/2000/svg">
+        <path id="copy-curve" fill="transparent" d="M 6 0 l 0 200 A 150 150 0 0 0 156 350 l 200 0"></path>
+        <text width="100%" style="transform:translate3d(0,0,0);">
+            <textPath startOffset="0%" 
+                      style="transform:translate3d(0,0,0);" 
+                      alignment-baseline="top" 
+                      xlink:href="#copy-curve">
+            &copy; <tspan class="copyright-name">Stackoza</tspan> <tspan class="copyright-year">2077</tspan> &bull; All rights reserved &bull;
+            </textPath>
+        </text>
+    </svg>
+    <svg class="line-note" viewbox="0 0 50 500" height="350px" xmlns="http://www.w3.org/2000/svg">
+        <path id="copy-line" fill="transparent" d="M 6 0 l 0 500"></path>
+        <text width="100%" style="transform:translate3d(0,0,0);">
+            <textPath startOffset="0%" 
+                      style="transform:translate3d(0,0,0);" 
+                      alignment-baseline="top" 
+                      xlink:href="#copy-line">
+            &copy; <tspan class="copyright-name">Stackoza</tspan> <tspan class="copyright-year">2077</tspan> &bull; All rights reserved &bull;
+            </textPath>
+        </text>
+    </svg>
+</div>
+<script type="text/javascript">
+    $( function() {
+    let year = new Date().getFullYear();
+    $('.copyright-year').text(year);
+    });
+</script>
