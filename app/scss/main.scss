@@ -35,6 +35,48 @@ main.home {
         -webkit-transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
            -moz-transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
                 transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
+
+        &::after {
+            $triangle: 2vw;
+
+            position: absolute;
+            content: " ";
+            right: 0;
+            top: 0;
+            width: 0px;
+            height: 0px;
+            border-top: solid $triangle $secondry-color;
+            border-right: solid $triangle $secondry-color;
+            border-left: solid $triangle transparent;
+            border-bottom: solid $triangle transparent;
+
+            -webkit-transition: top .3s ease-in-out, right .3s ease-in-out;
+               -moz-transition: top .3s ease-in-out, right .3s ease-in-out;
+                    transition: top .3s ease-in-out, right .3s ease-in-out;
+
+            @include breakpoint(medium) {
+                $triangle: 1vw;
+                border-top: solid $triangle $secondry-color;
+                border-right: solid $triangle $secondry-color;
+                border-left: solid $triangle transparent;
+                border-bottom: solid $triangle transparent;
+            }
+
+            &::after {
+                position: absolute;
+                content: " ";
+                width: 1vw;
+                height: 1vw;
+                background-color: red;
+                top: 2vw;
+                right: 2vw;
+            }
+        }
+
+        &:hover { &::after {
+            top: -1vw;
+            right: -1vw;
+        }}
      }
      
 
