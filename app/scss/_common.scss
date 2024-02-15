@@ -363,7 +363,7 @@ figure {
         background-position: 50%;
         background-repeat: no-repeat;
         pointer-events: none;
-        z-index: 1000;
+        //z-index: 1000;
     }
 }
 
@@ -411,7 +411,6 @@ figure {
                         margin: 0;
                         padding:0;
                         @extend .font-big;
-                        background-color: $bg-page;
                         display: block;
                         padding: .5em;
                         width:100vw;
@@ -426,52 +425,40 @@ figure {
                             -webkit-background-clip: text;
                             background-clip: text;
                             color: transparent;
-
-                            &.star-icon {
-
-                            }
-
-                            &.artworks {
-                                background-image: linear-gradient(-15deg, 
-                                    #ae82ff,#ae82ff 15%, 
-                                    #5488ff 20%,
-                                    $secondry-color 30%,
-                                    $secondry-color 50%,
-                                    #ff8d8d 70%,
-                                    #ff1919 80%,
-                                    #a2b1fd)
-                            }
-
-                            &.collect {
-                                background-image: $bg-nav;
-                                color: $bg-nav;
-                                
-                            }
-
-                            &.about {
-                                background-image: $bg-nav;
-                                color: $bg-nav;
-                            }
+                            background-image: linear-gradient(-15deg, 
+                                    $bg-page,
+                                    $bg-page);
                         }
 
-                        &.default {
+                        &.reveal {
                             position: absolute;
-                            background-color: $bg-nav;
-                            clip-path: inset(-1% -1% -1% -1%);
-                            -webkit-transition: clip-path 0.4s ease;
-                               -moz-transition: clip-path 0.4s ease;
-                                    transition: clip-path 0.4s ease;
-
+                            background-color: $bg-page;
                             span {
-                                color: $bg-page;
+                                background-image: linear-gradient(-15deg, 
+                                    $bg-nav,
+                                    $bg-nav);
+
+                                &.artworks {
+                                    background-image: linear-gradient(-15deg, 
+                                        #ae82ff,#ae82ff 15%, 
+                                        #5488ff 20%,
+                                        $secondry-color 30%,
+                                        $secondry-color 50%,
+                                        #ff8d8d 70%,
+                                        #ff1919 80%,
+                                        #a2b1fd)
+                                }
                             }
+                            -webkit-transition: opacity 0.3s ease;
+                               -moz-transition: opacity 0.3s ease;
+                                    transition: opacity 0.3s ease;
+                            opacity: 0;
                         }
                     }
 
                     &:hover {
-                        z-index: 1200;
-                        .default {
-                            clip-path: inset(50% -1% 51% -1%);
+                        .reveal {
+                            opacity: 1;
                         }
                     }       
                 }
@@ -859,7 +846,7 @@ svg.loader .square {
   }
 
 .copyright-note {
-
+    margin-left: -5px;
     .curved-note {
         display: block;
     }
