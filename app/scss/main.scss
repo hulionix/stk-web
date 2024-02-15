@@ -129,6 +129,9 @@ a.toggle-audio {
     #speaker {
         fill: $secondry-color;
         fill-opacity: 1;
+        -webkit-transition: fill .3s ease-in-out;
+           -moz-transition: fill .3s ease-in-out;
+                transition: fill .3s ease-in-out;
     }
 
     #wave {
@@ -221,4 +224,33 @@ a.toggle-audio {
                     transform: translateX(-100px);
         }
     }   
+ }
+
+ 
+ body.active a.toggle-audio {
+
+    #speaker {
+        fill: $master-color;
+    }
+
+    #wave {
+        stroke:rgba($master-color, 0.4);
+    }
+
+    &:hover #wave {
+     
+        stroke: rgba($master-color, 0.7);
+    }
+
+    &.active {
+
+        #speaker {
+            fill: $master-color;
+            fill-opacity: 1;
+        }
+        
+        #wave {
+            stroke: rgba($master-color, 0.7);
+        }
+    }
  }

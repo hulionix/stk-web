@@ -41,11 +41,11 @@
 }
 
 .cursor-default {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Cpath d='M43.336,0c23.918,0 43.336,19.418 43.336,43.336c-0,23.918 -19.418,43.336 -43.336,43.336c-23.918,-0 -43.336,-19.418 -43.336,-43.336c0,-23.918 19.418,-43.336 43.336,-43.336Zm-0,10c18.399,0 33.336,14.937 33.336,33.336c-0,18.399 -14.937,33.336 -33.336,33.336c-18.399,-0 -33.336,-14.937 -33.336,-33.336c0,-18.399 14.937,-33.336 33.336,-33.336Z' style='fill:%23fff;fill-opacity:0.6;'/%3E%3C/svg%3E") 12 12, default;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Cpath d='M43.336,0c23.918,0 43.336,19.418 43.336,43.336c-0,23.918 -19.418,43.336 -43.336,43.336c-23.918,-0 -43.336,-19.418 -43.336,-43.336c0,-23.918 19.418,-43.336 43.336,-43.336Zm-0,10c18.399,0 33.336,14.937 33.336,33.336c-0,18.399 -14.937,33.336 -33.336,33.336c-18.399,-0 -33.336,-14.937 -33.336,-33.336c0,-18.399 14.937,-33.336 33.336,-33.336Z' style='fill:%23fff;fill-opacity:0.7;'/%3E%3C/svg%3E") 12 12, default;
 }
 
 .cursor-pointer {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Ccircle cx='43.336' cy='43.336' r='43.336' style='fill:%23fff;fill-opacity:0.65;'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Ccircle cx='43.336' cy='43.336' r='43.336' style='fill:%23fAf;fill-opacity:0.8;'/%3E%3C/svg%3E") 12 12, pointer;
 }
 
 .cursor-default-overlay {
@@ -53,7 +53,15 @@
 }
 
 .cursor-pointer-overlay {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Ccircle cx='43.336' cy='43.336' r='43.336' style='fill:%23000;fill-opacity:0.5;'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Ccircle cx='43.336' cy='43.336' r='43.336' style='fill:%23fAf;fill-opacity:0.8;'/%3E%3C/svg%3E") 12 12, pointer;
+}
+
+.menu-pointer {
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Ccircle cx='43.336' cy='43.336' r='43.336' style='fill:%23#{$secondry-color-url};fill-opacity:0.8;'/%3E%3C/svg%3E");
+}
+
+.menu-pointer-overlay {
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Ccircle cx='43.336' cy='43.336' r='43.336' style='fill:%23fAf;fill-opacity:0.8;'/%3E%3C/svg%3E");
 }
 
 
@@ -80,7 +88,7 @@ a * {
 svg text, svg textPath, svg textPath tspan {
     fill: $primary-color;
     @extend .font-mid;
-    font-size: 35px;
+    font-size: 34px;
     font-weight: 300;
     pointer-events: none;
 
@@ -129,16 +137,16 @@ main {
 
 
 *:selection {
-  background: $primary-color;
-  color: $master-color !important;
+  background: $master-color;
+  color: $secondry-color !important;
 }
 *::-webkit-selection {
-  background: $primary-color;
-  color: $master-color !important;
+  background: $master-color;
+  color: $secondry-color !important;
 }
 *::-moz-selection {
-    background: $primary-color;
-    color: $master-color !important;
+    background: $master-color;
+    color: $secondry-color !important;
 }
 
 figure {
@@ -155,8 +163,6 @@ figure {
     width: $nav-button-height;
     height: $nav-button-height;
     pointer-events: all;
-    fill: $primary-color;
-    $color: "cgray";
     z-index: 2000;
     @include breakpoint(medium) {
         margin-top: 4px;   
@@ -164,52 +170,107 @@ figure {
     svg {
         //@include showTime(2s);
         -webkit-transition: -webkit-transform .3s ease-in-out, fill .3s ease-in-out, opacity 2s ease-in-out;
-        -ms-transition: -ms-transform .3s ease-in-out, fill .3s ease-in-out, opacity 2s ease-in-out;
-        transition: transform .3s ease-in-out, fill .3s ease-in-out, opacity 2s ease-in-out;
+            -ms-transition: -ms-transform .3s ease-in-out    , fill .3s ease-in-out, opacity 2s ease-in-out;
+                transition: transform .3s ease-in-out        , fill .3s ease-in-out, opacity 2s ease-in-out;
+        transform: translateZ(2px);
         width: $nav-button-height;
         height: $nav-button-height;
         fill: $primary-color;
     }
-    @extend .clearfix;
+    //@extend .clearfix;
 }
 
 @mixin nav-right-button($button-color, $action) {
     .nav-right-button {
-        -webkit-backdrop-filter: blur(10px);
-        backdrop-filter: blur(10px);
-        border-radius: 50%;
+        .button-spinner {
+            -webkit-backdrop-filter: blur(10px);
+            backdrop-filter: blur(10px);
+            border-radius: 50%;
+            position: relative;
+            display: inline-block;
+            width: $nav-button-height;
+            height: $nav-button-height;
+            pointer-events: all;
+            z-index: 2000;
+            transform: translateZ(1px);
+            -webkit-transition: -webkit-transform .3s ease-in-out;
+                -ms-transition: -ms-transform     .3s ease-in-out;
+                    transition: transform         .3s ease-in-out;
+        }
+        
+        
         -webkit-transition: -webkit-transform .3s ease-in-out, fill .3s ease-in-out;
-        -ms-transition: -ms-transform .3s ease-in-out, fill .3s ease-in-out;
-        transition: transform .3s ease-in-out, fill .3s ease-in-out;
+            -ms-transition: -ms-transform .3s ease-in-out    , fill .3s ease-in-out;
+                transition: transform .3s ease-in-out        , fill .3s ease-in-out;
     
+        transform: translateZ(1px);
+        @include header-right-button($button-color, $action);
 
-        @include header-right-button($button-color, $action)
+        &::before {
+                clear: both;
+                top: -10px;
+                left: math.div($nav-button-height, 2) - 2;
+                opacity: 1;
+                position: absolute;
+                width: 5px;
+                height: 5px;
+                content: " ";
+                pointer-events: none;
+                @extend .menu-pointer;
+                background-size: cover;
+
+                -webkit-transition: top .3s ease-in-out;
+                    -ms-transition: top .3s ease-in-out;
+                        transition: top .3s ease-in-out;
+
+                @extend .spinner;
+        }
+
     }
 
     .nav-right-button:hover {
-        -ms-transform:rotate(90deg);
-        -webkit-transform:rotate(90deg);
-        transform:rotate(90deg);
+        .button-spinner {
+            -ms-transform: translateZ(1px) rotate(90deg) scale(1.4);
+        -webkit-transform: translateZ(1px) rotate(90deg) scale(1.4);
+                transform: translateZ(1px) rotate(90deg) scale(1.4);
+        }
+        svg {
+            fill: $secondry-color;
+        }
+
+        &::before {
+            top: math.div($nav-button-height, 2) - 3;
+        }
     }
     .nav-right-button.active, .nav-right-button.active * {
         @extend .cursor-pointer-overlay;
     }
 
-    .nav-right-button.active-light, .nav-right-button.active-light * {
-        @extend .cursor-pointer;
+    .nav-right-button.active-light {
+        .button-spinner {
+             -webkit-backdrop-filter: blur(0px);
+            backdrop-filter: blur(0px);
+        }
+        &, & * {
+            @extend .cursor-pointer;
+        }
+
+        &::before {
+            top: math.div($nav-button-height, 2);
+        }
     }
     .nav-right-button.active svg {
         fill: $master-color;
-        -ms-transform:rotate(90deg + 45deg);
-        -webkit-transform:rotate(90deg + 45deg);
-        transform:rotate(90deg + 45deg);
+        -ms-transform: translateZ(2px) rotate(90deg + 45deg);
+        -webkit-transform: translateZ(2px) rotate(90deg + 45deg);
+        transform: translateZ(2px) rotate(90deg + 45deg);
     }
 
     .nav-right-button.active-light svg {
-        fill: $primary-color;
-        -ms-transform:rotate(90deg + 45deg);
-        -webkit-transform:rotate(90deg + 45deg);
-        transform:rotate(90deg + 45deg);
+        fill: $secondry-color;
+        -ms-transform: translateZ(2px) rotate(90deg + 45deg);
+        -webkit-transform: translateZ(2px) rotate(90deg + 45deg);
+        transform: translateZ(2px) rotate(90deg + 45deg);
     }
 }
 
@@ -241,6 +302,7 @@ figure {
         }
 
         &.active, &.active * {
+            z-index: 1300;
             @extend .cursor-pointer-overlay;
         }
     
@@ -289,6 +351,22 @@ figure {
     }
 }
 
+@mixin nav-bg() {
+    .nav-bg {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100vw;
+        height: 100vh;
+        background-image: url("/assets/images/nav-bg.png");
+        background-size: cover;
+        background-position: 50%;
+        background-repeat: no-repeat;
+        pointer-events: none;
+        z-index: 1000;
+    }
+}
+
 @mixin nav-content($background-color, $content-color) {
     .nav-content {
         position: relative;
@@ -302,6 +380,8 @@ figure {
         pointer-events: all;
         display: flex;
         align-items: center;
+
+        @include nav-bg();
 
         ul.nav-links {
             padding: 0;
@@ -331,7 +411,7 @@ figure {
                         margin: 0;
                         padding:0;
                         @extend .font-big;
-                        background-color: #000;
+                        background-color: $bg-page;
                         display: block;
                         padding: .5em;
                         width:100vw;
@@ -352,18 +432,25 @@ figure {
                             }
 
                             &.artworks {
-                                background-image: linear-gradient(-15deg,#ae82ff,#ae82ff 15%, #54ccff 20%,#bcefbd 40%,#ebda45 60%,#ff4d4d 80%,#ff1900 90%,#a2b1fd)
+                                background-image: linear-gradient(-15deg, 
+                                    #ae82ff,#ae82ff 15%, 
+                                    #5488ff 20%,
+                                    $secondry-color 30%,
+                                    $secondry-color 50%,
+                                    #ff8d8d 70%,
+                                    #ff1919 80%,
+                                    #a2b1fd)
                             }
 
                             &.collect {
-                                background-image: $secondry-color;
-                                color: $secondry-color;
+                                background-image: $bg-nav;
+                                color: $bg-nav;
                                 
                             }
 
                             &.about {
-                                background-image: $secondry-color;
-                                color: $secondry-color;
+                                background-image: $bg-nav;
+                                color: $bg-nav;
                             }
                         }
 
@@ -372,17 +459,20 @@ figure {
                             background-color: $bg-nav;
                             clip-path: inset(-1% -1% -1% -1%);
                             -webkit-transition: clip-path 0.4s ease;
-                            -moz-transition: clip-path 0.4s ease;
-                            transition: clip-path 0.4s ease;
+                               -moz-transition: clip-path 0.4s ease;
+                                    transition: clip-path 0.4s ease;
 
                             span {
-                                color: $master-color;
+                                color: $bg-page;
                             }
                         }
                     }
 
-                    &:hover  .default {
-                        clip-path: inset(50% -1% 51% -1%);
+                    &:hover {
+                        z-index: 1200;
+                        .default {
+                            clip-path: inset(50% -1% 51% -1%);
+                        }
                     }       
                 }
             }
@@ -615,6 +705,7 @@ svg.loader .square {
  body.active {
 
     .social-links a {
+        z-index: 1300;
         svg {
             fill: #000 !important;
         }

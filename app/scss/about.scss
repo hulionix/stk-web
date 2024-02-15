@@ -44,12 +44,14 @@ main.about {
             position: relative;
             
             transform: translateZ(1px);
-            img {
+
+            
+        }
+        img {
                 width: 100%;
                 height: auto;
                 border-radius: 500px;
             }
-        }
     }
 
     .image {

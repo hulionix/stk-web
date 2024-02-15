@@ -47,7 +47,7 @@ $eye: 'data:image/svg+xml,<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http:/
 }
 
 .button-circles {
-  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='100%25' height='100%25' viewBox='0 0 101 122' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;'%3E%3Cg%3E%3Ccircle cx='39.333' cy='60.872' r='37.25' style='fill:none;stroke:%23e1e1e1;stroke-width:4.17px;'/%3E%3Cpath d='M39.333,119.662c32.469,-0 58.789,-26.321 58.789,-58.79c0,-32.468 -26.32,-58.789 -58.789,-58.789l0,58.789l0,58.79Z' style='fill:none;stroke:%23e1e1e1;stroke-width:4.17px;'/%3E%3C/g%3E%3C/svg%3E");
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='100%25' height='100%25' viewBox='0 0 101 122' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;'%3E%3Cg%3E%3Ccircle cx='39.333' cy='60.872' r='0' style='fill:none;stroke:%23e1e1e1;stroke-width:4.17px;'/%3E%3Cpath d='M39.333,119.662c32.469,-0 58.789,-26.321 58.789,-58.79c0,-32.468 -26.32,-58.789 -58.789,-58.789l0,58.789l0,58.79Z' style='fill:none;stroke:%23e1e1e1;stroke-width:4.17px;'/%3E%3C/g%3E%3C/svg%3E");
 }
 
 .cursor-close {
@@ -55,7 +55,7 @@ $eye: 'data:image/svg+xml,<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http:/
 }
 
 .cursor-zoom {
-  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 94 94' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Cg%3E%3Ccircle cx='46.836' cy='46.836' r='40.361' style='fill:%23262626;fill-opacity:0.3;'/%3E%3Cpath d='M82.38,46.836c-9.809,0 -27.044,-2.008 -30.29,-5.254c-3.245,-3.245 -5.254,-20.481 -5.254,-30.289c0,9.808 -2.008,27.044 -5.254,30.289c-3.245,3.246 -20.481,5.254 -30.289,5.254c9.808,0 27.044,2.009 30.289,5.254c3.246,3.246 5.254,20.481 5.254,30.29c0,-9.809 2.009,-27.044 5.254,-30.29c3.246,-3.245 20.481,-5.254 30.29,-5.254Z' style='fill:%23fff;fill-opacity:0.8;'/%3E%3Cpath d='M46.836,0c25.85,0 46.837,20.987 46.837,46.836c-0,25.85 -20.987,46.837 -46.837,46.837c-25.849,-0 -46.836,-20.987 -46.836,-46.837c0,-25.849 20.987,-46.836 46.836,-46.836Zm0,6.475c22.276,0 40.361,18.085 40.361,40.361c0,22.276 -18.085,40.361 -40.361,40.361c-22.276,0 -40.361,-18.085 -40.361,-40.361c0,-22.276 18.085,-40.361 40.361,-40.361Z' style='fill:%23ebebeb;fill-opacity:0.6;'/%3E%3C/g%3E%3C/svg%3E") 16 16, pointer;
+  cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 94 94' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Cg%3E%3Ccircle cx='46.836' cy='46.836' r='40.361' style='fill:%23fff;fill-opacity:0.3;'/%3E%3Cpath d='M82.38,46.836c-9.809,0 -27.044,-2.008 -30.29,-5.254c-3.245,-3.245 -5.254,-20.481 -5.254,-30.289c0,9.808 -2.008,27.044 -5.254,30.289c-3.245,3.246 -20.481,5.254 -30.289,5.254c9.808,0 27.044,2.009 30.289,5.254c3.246,3.246 5.254,20.481 5.254,30.29c0,-9.809 2.009,-27.044 5.254,-30.29c3.246,-3.245 20.481,-5.254 30.29,-5.254Z' style='fill:%23fff;fill-opacity:0.8;'/%3E%3Cpath d='M46.836,0c25.85,0 46.837,20.987 46.837,46.836c-0,25.85 -20.987,46.837 -46.837,46.837c-25.849,-0 -46.836,-20.987 -46.836,-46.837c0,-25.849 20.987,-46.836 46.836,-46.836Zm0,6.475c22.276,0 40.361,18.085 40.361,40.361c0,22.276 -18.085,40.361 -40.361,40.361c-22.276,0 -40.361,-18.085 -40.361,-40.361c0,-22.276 18.085,-40.361 40.361,-40.361Z' style='fill:%23fff;fill-opacity:0.8;'/%3E%3C/g%3E%3C/svg%3E") 16 16, pointer;
 }
 
 
@@ -70,10 +70,10 @@ main.showcase {
     width: 100%;
     min-height: 100vh;
     margin: 0 auto;
-    padding-top: ($logo-height * $IPHI * 3) - 8;//($logo-height * $PHI) + ($logo-height / 2);
+    padding-top: ($logo-height * $IPHI * 3) - 9;//($logo-height * $PHI) + ($logo-height / 2);
     text-align: center;
     @include breakpoint(medium) {
-      padding-top: ($logo-height * $IPHI * 4) - 4;
+      padding-top: ($logo-height * $IPHI * 4) - 4.5;
     }
 
     will-change: opacity;
@@ -596,9 +596,9 @@ main.showcase {
         //top: -8vh;
         //right: -30%;
         border-width: 1px 1px 0 0;
-        -webkit-transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
-        -moz-transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
-        transition: top 0.4s ease-out, right 0.4s ease-out, opacity 0.4s ease-out; 
+        -webkit-transition: right 0.4s ease-out, opacity 0.4s ease-out; 
+           -moz-transition: right 0.4s ease-out, opacity 0.4s ease-out; 
+                transition: right 0.4s ease-out, opacity 0.4s ease-out; 
       }
 
       &:hover {
@@ -629,7 +629,7 @@ main.showcase {
         position: absolute;
         width: 3.5em;
         height: 2.2em;
-        background: #b9ff00;
+        background: $secondry-color;
         border-radius: 100%;
         padding: .6em .8em .6em 1em;
         top: 10px;
@@ -649,11 +649,8 @@ main.showcase {
     min-height: 100%;
     border-radius: 500px;
     overflow: hidden;
-    -webkit-transition: border-radius 0.4s ease-out;
-    -moz-transition: border-radius 0.4s ease-out;
-    transition: border-radius 0.4s ease-out;
-    border-top: 2px solid rgba(#fff, 0.1);
-    border-bottom: 2px solid rgba(#fff, 0.1);
+    border-top: 2px solid #222;
+    border-bottom: 2px solid #222;
 
     // &:hover {
     //   border-radius: 10px;
@@ -986,34 +983,39 @@ main.showcase {
       }
 
       .prev, .next {
+        $width: 50px;
         position: relative;
-        width: 50px;
-        height: 50px;
-        background-repeat: no-repeat;
-        opacity: 0.5;
+        width: $width * 2;
+        height: $width;
+        border-top-right-radius: 50px;
+        border-top-left-radius: 50px;
         pointer-events: all;
-        -webkit-transition: opacity 0.3s ease-in-out;
-        -moz-transition: opacity 0.3s ease-in-out;
-        transition: opacity 0.3s ease-in-out;
+        -webkit-appearance: none;
+           -moz-appearance: none;
+                appearance: none;
+        outline: 2px solid rgba($primary-color, 0.5);
+
+        -webkit-transition: outline 0.3s ease-out;
+           -moz-transition: outline 0.3s ease-out;
+                transition: outline 0.3s ease-out;
+
         &:hover {
-          opacity: .8;
+          outline: 2px solid rgba($secondry-color, 1.0);
           z-index: 2000;
         }
         &.disabled {
-          opacity: 0.1;
-          //pointer-events: none;
+          outline: 2px solid rgba($primary-color, 0.1);
+          @extend .cursor-default;
         }
       }
       .prev {
         float: left;
-        text-indent: -1999999px;
-        transform: scaleX(-1);
-        
+        transform: rotate(-90deg);
       }
 
       .next {
         float: right;
-        text-indent: -1999999px;
+        transform: rotate(90deg);
       }
     }
   }
