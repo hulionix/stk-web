@@ -209,7 +209,7 @@ figure {
         &::before {
                 clear: both;
                 top: -10px;
-                left: math.div($nav-button-height, 2) - 2;
+                left: math.div($nav-button-height, 2) - 2.5;
                 opacity: 1;
                 position: absolute;
                 width: 5px;
@@ -421,13 +421,17 @@ figure {
                         border: none;
                         span {
                             font-weight: 800;
-                            font-size: 2em;
+                            font-size: 1.5em;
                             -webkit-background-clip: text;
                             background-clip: text;
                             color: transparent;
                             background-image: linear-gradient(-15deg, 
                                     $bg-page,
                                     $bg-page);
+
+                            @include breakpoint(medium) {
+                                font-size: 2em;
+                            }
                         }
 
                         &.reveal {
