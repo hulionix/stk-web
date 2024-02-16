@@ -273,6 +273,11 @@ $(document).ready(function() {
       });
     }
 
+    video.addEventListener('waiting', () => {
+        let isPlaying = true;
+        $('main.home').removeClass("no-autoplay");
+    });
+
     $(video).click(function (){
         video.play();
         video.muted = false;

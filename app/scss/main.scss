@@ -36,8 +36,10 @@ main.home {
            -moz-transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
                 transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
 
+
+        $size: 0.4em;
         &::after {
-            $size: 0.4em;
+            
             position: absolute;
             content: " ";
             right: 0;
@@ -60,8 +62,8 @@ main.home {
         }
 
         &:hover { &::after {
-            top: -1vw;
-            right: -1vw;
+            top: -0.5 * $size;
+            right: -0.5 * $size;
         }}
     }
      
