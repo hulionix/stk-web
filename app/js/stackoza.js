@@ -266,7 +266,6 @@ $(document).ready(function() {
 
     if (promise !== undefined) {
       promise.then(_ => {
-        console.log("yes");
         isPlaying = true;
       }).catch(error => {
         isPlaying = false;
@@ -277,16 +276,17 @@ $(document).ready(function() {
     $(video).click(function (){
         video.play();
         video.muted = false;
-        $('main.home').removelass("no-autoplay");
+        $('main.home').removeClass("no-autoplay");
         $('a.toggle-audio').addClass('active');
     });
 
-    $('a.toggle-audio').click( function () {
+    $('a.toggle-audio, a.play-btn').click( function () {
         if( !isPlaying ) {
             video.play();
             $('main.home').removeClass("no-autoplay");
         }
-        $(this).toggleClass('active');
+        $('a.toggle-audio').toggleClass('active');
+        isPlaying = !isPlaying;
         video.muted = !video.muted;
     });
 });

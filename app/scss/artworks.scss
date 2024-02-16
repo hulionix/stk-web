@@ -630,8 +630,6 @@ main.showcase {
         padding: .6em .8em .6em 1em;
         top: 10px;
         left: 10px;
-        backdrop-filter: blur(4px);
-        -webkit-backdrop-filter: blur(4px);
         &, & * {
           @extend .cursor-zoom;
         }

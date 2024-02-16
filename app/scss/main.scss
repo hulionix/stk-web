@@ -21,7 +21,7 @@ main.home {
        -ms-flex-pack: center;
      justify-content: center;
 
-     .artworks-button {
+    .artworks-button {
         -webkit-backdrop-filter: blur(25px);
         backdrop-filter: blur(25px);
         margin-bottom: -40vh;
@@ -37,55 +37,41 @@ main.home {
                 transition: border-color 300ms ease-in-out, opacity 2s ease-in-out;
 
         &::after {
-            $triangle: 2vw;
-
+            $size: 0.4em;
             position: absolute;
             content: " ";
             right: 0;
             top: 0;
-            width: 0px;
-            height: 0px;
-            border-top: solid $triangle $secondry-color;
-            border-right: solid $triangle $secondry-color;
-            border-left: solid $triangle transparent;
-            border-bottom: solid $triangle transparent;
+            width: $size;
+            height: $size;
+            // border-top: solid $triangle $secondry-color;
+            // border-right: solid $triangle $secondry-color;
+            // border-left: solid $triangle transparent;
+            // border-bottom: solid $triangle transparent;
+
+            @extend .link-icon-secondry;
+            background-size: $size $size;
+            background-position: 50%;
+            background-repeat: no-repeat;
 
             -webkit-transition: top .3s ease-in-out, right .3s ease-in-out;
                -moz-transition: top .3s ease-in-out, right .3s ease-in-out;
                     transition: top .3s ease-in-out, right .3s ease-in-out;
-
-            @include breakpoint(medium) {
-                $triangle: 1vw;
-                border-top: solid $triangle $secondry-color;
-                border-right: solid $triangle $secondry-color;
-                border-left: solid $triangle transparent;
-                border-bottom: solid $triangle transparent;
-            }
-
-            &::after {
-                position: absolute;
-                content: " ";
-                width: 1vw;
-                height: 1vw;
-                background-color: red;
-                top: 2vw;
-                right: 2vw;
-            }
         }
 
         &:hover { &::after {
             top: -1vw;
             right: -1vw;
         }}
-     }
+    }
      
 
-     div.drops {
-         position: absolute;
+    div.drops {
+        position: absolute;
 
-     }
+    }
 
-     .home-video {
+    .home-video {
         visibility: visible;
         clear: both;
         position: absolute;
@@ -98,14 +84,32 @@ main.home {
         @include showTime(2s);
     }
 
-    &.no-autoplay {
-        background-image: url("/assets/videos/LG4.mp4");
+    .play-btn {
+        opacity: 0;
+    }
+
+    &.no-autoplay .play-btn {
+        opacity: 1;
+        position: absolute;
+        width: 100px;
+        height: 100px;
+        margin-left: -50px;
+        margin-top: -50px;
+        left: 50%;
+        top: 50%;
+        -webkit-transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
+           -moz-transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
+                transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
+        background-color: rgba($secondry-color, 0.8);
+        border-radius: 500px;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 73 73'%3E%3Cpath d='M72.886,36.189l-72.886,36.189l0,-72.378l72.886,36.189Z' style='fill:%23000;'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
-        //background-size: justify-content;
-        background-size: contain;
-        background-position: 50%;
-        video {
-            visibility: hidden;
+        background-position: 58% center;
+        background-size: 36%;
+        border: none;
+        text-indent: -199999px;
+        &:hover {
+            background-color: rgba($secondry-color, 1);
         }
     }
 
@@ -136,7 +140,6 @@ main.home {
                     }
 
                 }
-                
             }
 
             @include breakpoint(medium) {
