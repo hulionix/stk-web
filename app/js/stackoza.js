@@ -296,54 +296,54 @@ $(document).ready(function() {
     });
 });
 
-$(document).ready(function() {
-    // GDPR
-    const cookieName = "cookies-consent";
-    const cookieContent = "Agreed";
+// $(document).ready(function() {
+//     // GDPR
+//     const cookieName = "cookies-consent";
+//     const cookieContent = "Agreed";
 
-    checkCookie();
-    $('.cookies-jar a.ok').click(function () {
-        setCookie(cookieName, cookieContent, 365);
-        $('.cookies-jar').remove();
-    });
+//     checkCookie();
+//     $('.cookies-jar a.ok').click(function () {
+//         setCookie(cookieName, cookieContent, 365);
+//         $('.cookies-jar').remove();
+//     });
 
-    $('.cookies-jar a.info').click(function () {
-        $('p.more-info').toggleClass('active');
-    });
+//     $('.cookies-jar a.info').click(function () {
+//         $('p.more-info').toggleClass('active');
+//     });
 
-    function checkCookie() {
-        let cookie = getCookie(cookieName);
-        if (cookie == "") {
-            let text = `
-            <div class="cookies-jar">
-                <p class="more-info">Cookies are required to show you videos stored on <a href="https://vimeo.com/cookie_policy" target="_blank">vimeo</a>, and to remember your consent on allowing cookies.</p>
-                <p>Essential cookies will be stored when you use this website. <br/><span><a class="info">?</a><a class="ok">Ok</a></span></p>
-            </div>
-            `
-            $('body').append(text);
-        }
-    }
-});
+//     function checkCookie() {
+//         let cookie = getCookie(cookieName);
+//         if (cookie == "") {
+//             let text = `
+//             <div class="cookies-jar">
+//                 <p class="more-info">Cookies are required to show you videos stored on <a href="https://vimeo.com/cookie_policy" target="_blank">vimeo</a>, and to remember your consent on allowing cookies.</p>
+//                 <p>Essential cookies will be stored when you use this website. <br/><span><a class="info">?</a><a class="ok">Ok</a></span></p>
+//             </div>
+//             `
+//             $('body').append(text);
+//         }
+//     }
+// });
 
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
+// function setCookie(cname, cvalue, exdays) {
+//     const d = new Date();
+//     d.setTime(d.getTime() + (exdays*24*60*60*1000));
+//     let expires = "expires="+ d.toUTCString();
+//     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+// }
 
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-      let c = ca[i];
-      while (c.charAt(0) == ' ') {
-        c = c.substring(1);
-      }
-      if (c.indexOf(name) == 0) {
-        return c.substring(name.length, c.length);
-      }
-    }
-    return "";
-}
+// function getCookie(cname) {
+//     let name = cname + "=";
+//     let decodedCookie = decodeURIComponent(document.cookie);
+//     let ca = decodedCookie.split(';');
+//     for(let i = 0; i <ca.length; i++) {
+//       let c = ca[i];
+//       while (c.charAt(0) == ' ') {
+//         c = c.substring(1);
+//       }
+//       if (c.indexOf(name) == 0) {
+//         return c.substring(name.length, c.length);
+//       }
+//     }
+//     return "";
+// }

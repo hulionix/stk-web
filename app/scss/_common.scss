@@ -725,110 +725,7 @@ svg.loader .square {
     }
  }
 
- .cookies-jar {
-     padding: 5px 20px 20px 20px;
-     margin: 0 auto;
-     position: fixed;
-     bottom: 0px;
-     width: 100%;
-     text-align: center;
-     z-index: 20000;
-     background-color: rgba(#010101, 0.5);
-     -webkit-backdrop-filter: blur(50px);
-     backdrop-filter: blur(50px);
-     font-size: 1.3em;
-     line-height: 1.3em;
-     left: 0;
-     right: 0;
-     max-width: 780px;
-     letter-spacing: .1em;
-     border-top: 2px solid rgba(#FFF, 0.1);
-     border-bottom: none;
-     border-radius: 6px 6px 0 0;
-     font-weight: 300;
-
-     p {
-        color: #CCC;
-        font-weight: 300;
-        text-shadow: 0px 2px 4px rgba(0, 0, 0, 0.651);
-        @extend .font-mid;
-     }
-
-     p.more-info {
-         margin-bottom: 30px;
-         border-bottom: 1px solid #777;
-         display: none;
-         max-width: 300px;
-         padding-bottom: 20px;
-         margin: 20px auto;
-        
-        a {
-            margin: 0px;
-            font-family: inherit;
-        }
-
-        &:before,
-        &:after {
-                top: 22%;
-                right: 10%;
-                opacity: 1;
-                position: absolute;
-                width: 30px;
-                height: 30px;
-                content: " ";
-                pointer-events: none;
-                @extend .thin-star-icon;
-                opacity: 0.75
-        }
-        &:before   {
-            left: 10%;
-        }
-
-         &.active {
-            display: block;
-         }
-
-     }
-
-    
-    span {
-        display: inline-block;
-        font-family: inherit;
-    }
-    
-
-    a {
-        @include link-hover-transition();
-
-        background-color: rgba(0, 0, 0, 0.1);
-        border: 2px solid rgba($primary-color, 0.3);
-        border-radius: 50%;
-        padding: 4px 10px;
-        min-width: 4em;
-        display: inline-block;
-        font-family: inherit;
-        font-weight: 300;
-        color: $secondry-color;
-        margin: 10px 7.5px;
-        &:hover {
-            border: 2px solid $secondry-color;
-        }
-
-        &.info {
-            padding: 4px 10px 4px 13px;
-        }
-    }
- }
-
  body.active {
-
-    .cookies-jar {
-        background-color: #000000b6 !important;
-        p {
-            color: #fff;
-        }
-    }
-
       .copyright-note textPath, .copyright-note tspan {
         pointer-events: none;
         fill: rgba($master-color, 0.6);
@@ -837,12 +734,6 @@ svg.loader .square {
         fill: rgba($master-color, 0.7);
     }
  }
-
- @-moz-document url-prefix() {
-    .cookies-jar {
-      background-color: #000000d3 !important;
-    }
-  }
 
   main.four-o-four {
       text-align: center;

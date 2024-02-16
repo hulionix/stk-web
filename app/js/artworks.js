@@ -497,7 +497,7 @@ $( function() {
         let obj = dataObjs[dataSources[sliderData.dataSourceId][id]];
         let content = `<img src="/assets/content/${obj.image}.png" class="image-content" />`;
         if (obj.vimeoID != '') {
-            content = `<iframe id="${obj.vimeoID}" class="video-content" src="https://player.vimeo.com/video/${obj.vimeoID}?color=b7b8b9&title=0&byline=0&portrait=0" width="${obj.width}" height="${obj.height}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
+            content = `<iframe id="${obj.vimeoID}" class="video-content" src="https://player.vimeo.com/video/${obj.vimeoID}?dnt=1&color=b7b8b9&title=0&byline=0&portrait=0" width="${obj.width}" height="${obj.height}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
         }
         let collect = '';
         if (obj.nftURL) {
