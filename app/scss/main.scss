@@ -88,10 +88,6 @@ main.home {
 
     .play-btn {
         opacity: 0;
-    }
-
-    &.no-autoplay .play-btn {
-        opacity: 1;
         position: absolute;
         width: 100px;
         height: 100px;
@@ -117,6 +113,10 @@ main.home {
         @include breakpoint(medium) {
             left: 50%;
         }
+    }
+
+    &.no-autoplay .play-btn {
+        opacity: 1;
     }
 
     .text-wrapper {
