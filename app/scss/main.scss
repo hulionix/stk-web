@@ -39,17 +39,12 @@ main.home {
 
         $size: 0.4em;
         &::after {
-            
             position: absolute;
             content: " ";
             right: 0;
             top: 0;
             width: $size;
             height: $size;
-            // border-top: solid $triangle $secondry-color;
-            // border-right: solid $triangle $secondry-color;
-            // border-left: solid $triangle transparent;
-            // border-bottom: solid $triangle transparent;
 
             @extend .link-icon-secondry;
             background-size: $size $size;
@@ -61,10 +56,12 @@ main.home {
                     transition: top .3s ease-in-out, right .3s ease-in-out;
         }
 
-        &:hover { &::after {
-            top: -0.5 * $size;
-            right: -0.5 * $size;
-        }}
+        &:hover {
+            &::after {
+                top: -0.5 * $size;
+                right: -0.5 * $size;
+            }
+        }
     }
      
 

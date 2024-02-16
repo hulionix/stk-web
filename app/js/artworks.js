@@ -252,9 +252,6 @@ $( function() {
                 dataObjs[i].width = this.width;
                 dataObjs[i].height = this.height;
                 loaded += 1;
-                if (loaded == total) {
-                    console.log(dataObjs);
-                }
             };
         }
     }
@@ -331,7 +328,7 @@ $( function() {
         const preventDoubles = sliderData.preventDoubles;
         
         sliderData = {
-            slideWidth: $slider.width(),
+            slideWidth: Math.round($slider.width()),
             currentSlide: id,
             scrollMax: Math.round($slider.width() * 2),
             maxSlides: maxSlides,
@@ -343,6 +340,7 @@ $( function() {
     $(window).trigger("resize");
 
     $slider.scroll( function(e) {
+
         if (sliderData.preventDoubles) { 
             if (sliderData.currentSlide == 0) {
                 $slider.scrollLeft(0);
