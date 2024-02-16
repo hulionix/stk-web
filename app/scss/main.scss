@@ -97,7 +97,7 @@ main.home {
         height: 100px;
         margin-left: -50px;
         margin-top: -50px;
-        left: 50%;
+        left: 100px;
         top: 50%;
         -webkit-transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
            -moz-transition: background-color .3s ease-in-out, opacity .3s ease-in-out;
@@ -112,6 +112,10 @@ main.home {
         text-indent: -199999px;
         &:hover {
             background-color: rgba($secondry-color, 1);
+        }
+
+        @include breakpoint(medium) {
+            left: 50%;
         }
     }
 
@@ -133,8 +137,8 @@ main.home {
                 padding-left: 5vw;
                 textPath, tspan {
                     font-size: 15px;
-                    font-weight: 300;
-                    fill: #CFCFCF;
+                    font-weight: 500;
+                    fill: #fff;
 
                     tspan {
                         fill: #fff;
@@ -149,6 +153,10 @@ main.home {
                 padding-top: 10vw;
                 .text-line {
                     width: 80vw;
+                    textPath, tspan {
+                        font-weight: 300;
+                        fill: #CFCFCF;
+                    }
                 }
             } 
     }
