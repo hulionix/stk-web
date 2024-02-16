@@ -109,6 +109,9 @@ main.showcase {
       min-width: 100vw;
       text-align: center;
 
+      margin-left: auto;
+      margin-right: auto;
+
       will-change: -webkit-text-stroke-color opacity;
       
         -webkit-transition: -webkit-text-stroke-color 0.5s ease-out, opacity 1.5s ease-out;
