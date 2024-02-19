@@ -4,6 +4,7 @@ $( function() {
     let collectLink = $(".collect-link");
     let $end = $(".end");
     let title = document.querySelector('.artworks-button');
+    let bgImage = document.querySelector('.bg-image-2');
     let s1 = document.querySelector('.bg-balls .s1');
     let s2 = document.querySelector('.bg-balls .s1');
     let s3 = document.querySelector('.bg-balls .s3');
@@ -14,6 +15,7 @@ $( function() {
     let content = document.querySelector('main.showcase .content');
     let currentFilter = '';
     let dataSources = {'all': [], 'nft': [], '2d': [], '3d': [], 'code': [], 'animation': [], 'procreate': []};
+    let sliderIsOn = false;
     main();
 
     function main() {
@@ -73,6 +75,12 @@ $( function() {
         elem.style.opacity = `${elem.currentOpacity}`;
     }
 
+    function scrollScale( elem, scaleInitial, scaleTarget, targetScroll, scroll ) {
+        const scrollRatio = Math.min(targetScroll, scroll) / targetScroll;
+        const targetScale = scaleInitial + (scaleTarget - scaleInitial) * scrollRatio;
+        $(elem).css({transform: `scale(${targetScale}) translateZ(3px)`});
+    }
+
 
     // (function(){
     //   scrollOpacity(title, 0.0, 100, window.scrollY);
@@ -89,7 +97,7 @@ $( function() {
         // scrollTranslateXYZ2(s3, -200, 500, 7000, 3, scroll);
         // scrollTranslateXYZ2(s4, 30, -300, 300, 4, scroll);
         // scrollTranslateXYZ2(chainGrid, -200, 500, 7000, 5, scroll);
-
+        //scrollScale(bgImage, 1, 0.0001, 450, scroll);
         // text
         scrollOpacity(topHeader, 0.0, 450, scroll);
     }
@@ -261,8 +269,8 @@ $( function() {
         let filter = $( this ).attr('data-filter');
         history.replaceState(null, null, '#' + filter);
         setActiveFilterButton(filter);
-        $("html, body").animate({ scrollTop: 0 }, 500, function() {
-          windowScroll();
+        $("html, body").animate({ scrollTop: 0 }, 100, function() {
+            windowScroll();
         });
         showFilter(filter);
     });
@@ -277,20 +285,34 @@ $( function() {
         if (e.key == "ArrowLeft") prevSlide();
     });
 
-    $('.viewer a.next').click(function(e) {
-        nextSlide();
-    });
+    $('.viewer a.next').click(nextSlide);
 
-    $('.viewer a.prev').click(function(e) {
-        prevSlide();
-    });
+    $('.viewer a.prev').click(prevSlide);
 
     function nextSlide() {
-        $slider.get(0).scrollLeft += sliderData.slideWidth;
+        $('.viewer a.next').off('click');
+        setTimeout( function () {
+            $('.viewer a.next').click(nextSlide);
+         }, 500);
+
+        $slider.get(0).scroll({
+            left: $slider.get(0).scrollLeft + sliderData.slideWidth,
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     function prevSlide() {
-        $slider.get(0).scrollLeft -= sliderData.slideWidth;
+        $('.viewer a.prev').off('click');
+        setTimeout( function () {
+            $('.viewer a.prev').click(prevSlide);
+         }, 500);
+
+        $slider.get(0).scroll({
+            left: $slider.get(0).scrollLeft - sliderData.slideWidth,
+            top: 0,
+            behavior: 'smooth'
+        });
     }
 
     $('article .overlay').hover( function() {
@@ -339,7 +361,8 @@ $( function() {
     
     $(window).trigger("resize");
 
-    $slider.scroll( function(e) {
+    $slider.scroll(sliderScroll);
+    function sliderScroll(e) {
 
         if (sliderData.preventDoubles) { 
             if (sliderData.currentSlide == 0) {
@@ -386,10 +409,13 @@ $( function() {
             }
            return;
         }
-        
+        if(hScroll > sliderData.scrollMax + sliderData.slideWidth){
+            console.log("overshoot end");
+        }
         // Preload next
-        if (hScroll === sliderData.scrollMax && sliderData.currentSlide < sliderData.maxSlides) {
-        
+        if (hScroll === sliderData.scrollMax && 
+            sliderData.currentSlide < sliderData.maxSlides) {
+
             let advance = 1;
             if (sliderData.currentSlide == 0) advance = 2;
             sliderData.currentSlide += advance;
@@ -407,7 +433,7 @@ $( function() {
             }
             return;
          }
-    });
+    }
 
     let lastVideoId = '';
     function setActiveSlide(id) {
@@ -425,10 +451,11 @@ $( function() {
           lastVideoId = slide.attr('id');
         }
     }
-    $("main.showcase .viewer").on('close', function() { 
-      setTimeout(function() {
-        clearSlides();
-      }, 400);
+    $("main.showcase .viewer").on('close', function() {
+        if(sliderIsOn == true) {
+            sliderIsOn = false;
+            setTimeout(function() { clearSlides(); }, 400);
+        }
     });
     
     function clearSlides() {
@@ -441,7 +468,7 @@ $( function() {
         e.preventDefault();
       }
         e.stopPropagation();
-        
+        sliderIsOn = true;
         let dataSourceId = $('.filters-button-group .is-checked').attr('id');
         sliderData.dataSourceId = dataSourceId;
         sliderData.maxSlides = dataSources[dataSourceId].length-1;
@@ -493,7 +520,7 @@ $( function() {
         if (id < 0 || id > sliderData.maxSlides) return "";
     
         let obj = dataObjs[dataSources[sliderData.dataSourceId][id]];
-        let content = `<img src="/assets/content/${obj.image}.png" class="image-content" />`;
+        let content = `<img src="/assets/content/${obj.image}.png" class="image-content"/>`;
         if (obj.vimeoID != '') {
             content = `<iframe id="${obj.vimeoID}" class="video-content" src="https://player.vimeo.com/video/${obj.vimeoID}?dnt=1&color=b7b8b9&title=0&byline=0&portrait=0" width="${obj.width}" height="${obj.height}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
         }
@@ -515,7 +542,7 @@ $( function() {
     }
 
     function getGridItemFor(obj, id) {
-        let url = `<a class="show-btn"><span class="show eye">VIEW</span></a>`;
+        let url = `<a class="show-btn"><span class="show">VIEW</span></a>`;
         if (obj.nftURL != '') {
             url = `<a class="nft-url" target="_blank" href="${obj.nftURL}"><span class="collect">COLLECT</span></a>`;
         }
@@ -727,8 +754,8 @@ const dataObjs = [
     nftURL: ""
   },
   {
-    image: "Far-Away-Letters-1",
-    title: "Far Away Letters - 3",
+    image: "Letters-From-Far-Away-1",
+    title: "Letters From Far Away - 3",
     tags: "3d",
     vimeoID: "",
     width: 374,
@@ -737,8 +764,8 @@ const dataObjs = [
   },
 
   {
-    image: "Far-Away-Letters-3",
-    title: "Far Away Letters - 2",
+    image: "Letters-From-Far-Away-3",
+    title: "Letters From Far Away - 2",
     tags: "3d",
     vimeoID: "",
     width: 500,
@@ -746,8 +773,8 @@ const dataObjs = [
     nftURL: ""
   },
   {
-    image: "Far-Away-Letters-2",
-    title: "Far Away Letters - 1",
+    image: "Letters-From-Far-Away-2",
+    title: "Letters From Far Away - 1",
     tags: "3d",
     vimeoID: "",
     width: 374,
@@ -1464,7 +1491,7 @@ const dataObjs = [
     },
     {
       image: "The-Loop",
-      title: "The L♾p",
+      title: "The Loop",
       tags: "3d",
       vimeoID: "",
       width: 500,

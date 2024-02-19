@@ -166,17 +166,18 @@ a.toggle-audio {
     width: 70px;
     margin-left: auto;
     margin-top: auto;
+    bottom: -12px;
     z-index: 900;
     transform: scale(1) translateZ(3px);
 
-    @include showTime(4s);
+    @include showTime(2s);
     svg, svg * {
         font-size: 1px;
     }
 
-    -webkit-transition: transform .2s ease-out, opacity 4s ease-in-out;
-       -moz-transition: transform .2s ease-out, opacity 4s ease-in-out;
-            transition: transform .2s ease-out, opacity 4s ease-in-out;
+    -webkit-transition: transform .2s ease-out, opacity 2s ease-in-out;
+       -moz-transition: transform .2s ease-out, opacity 2s ease-in-out;
+            transition: transform .2s ease-out, opacity 2s ease-in-out;
 
     #speaker {
         fill: $secondry-color;

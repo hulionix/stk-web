@@ -162,6 +162,7 @@ $(document).ready(function() {
         }
         e.stopPropagation();
         if ($(e.target).is(".slide, .card, .overlay") == false ) return;
+        if (isViewerActive == false ) return;
         isViewerActive = false;
         viewer.trigger('close');
         viewer.fadeToggle(400);

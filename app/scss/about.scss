@@ -18,6 +18,7 @@ main.about {
 
     .top, .projects, .tools, .contact {
         margin-bottom: $logo-height*$PHI;
+        height: fit-content;
 
     }
     .intro {
@@ -61,7 +62,8 @@ main.about {
         width: 100%;
         height: 100%;
         border-radius: 50%;
-        margin-top: $logo-height * $IPHI * 4;
+        //margin-top: $logo-height * $IPHI;
+        @extend .clearfix;
 
         @include showTimeY(2s, 50px);
         @include breakpoint(medium) {
@@ -70,17 +72,18 @@ main.about {
             padding-left: $logo-height*$IPHI;
             width: (0.99-$IPHI)*100%;
             position: relative;
+            float: right;
+            right: 0;
         };
         img {
             max-width: 80vw;
-            margin-top: $logo-height*$IPHI;
             border-radius: 50%;
+            margin-bottom: 5em;
             @include breakpoint(medium) {
-                margin-top: 0;
+                position: relative;
+                margin-top: 0.9em;
                 width: 100%;
-                max-width: 70%;
                 position: absolute;
-                right: 0;
             }
         }
     }
@@ -95,7 +98,7 @@ main.about {
         margin: 0 auto;
 
         @include breakpoint(medium) {
-            padding: $logo-height*$IPHI 2*$logo-height*$IPHI;
+            padding: $logo-height*$IPHI 3*$logo-height*$IPHI;
         }
 
         a {
@@ -109,14 +112,23 @@ main.about {
             display: inline-block;
             font-family: inherit;
             font-weight: 300;
-            color: $secondry-color;
+            color: $primary-color;
             margin: -2px 5px;
             &:hover {
                 border: 2px solid $secondry-color;
+                color: $secondry-color;
             }
             @extend .font-mid;
         }
 
+        .intro {
+            @include breakpoint(medium) {
+                // position: relative;
+                // float: left;
+                // left: 0;
+                // @extend .clearfix;
+            }
+        }
 
         p.text {
             font-size: 1.7em;

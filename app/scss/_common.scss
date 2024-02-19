@@ -336,9 +336,13 @@ figure {
     max-width: $max-width;
     width: 100%;
     margin: 0 auto;
-    padding: $logo-height * $IPHI * 2 $logo-height * $IPHI * 1;
     height: $logo-height * $PHI + $logo-height * $IPHI;
 
+   @include screen-padding();
+}
+
+@mixin screen-padding() {
+    padding: $logo-height * $IPHI * 2 $logo-height * $IPHI * 1;
     @include breakpoint(medium) {
         padding: $logo-height * $IPHI * 3;
     }
@@ -425,7 +429,7 @@ figure {
                             -webkit-background-clip: text;
                             background-clip: text;
                             color: transparent;
-                            background-image: linear-gradient(-15deg, 
+                            background-image: linear-gradient( -15deg, 
                                     $bg-page,
                                     $bg-page);
 
@@ -438,12 +442,12 @@ figure {
                             position: absolute;
                             background-color: $bg-page;
                             span {
-                                background-image: linear-gradient(-15deg, 
-                                    $bg-nav,
-                                    $bg-nav);
+                                background-image: linear-gradient( -15deg, 
+                                    $bg-nav 40%,
+                                    $bg-nav 60%);
 
                                 &.artworks {
-                                    background-image: linear-gradient(-15deg, 
+                                    background-image: linear-gradient( -15deg, 
                                         #ae82ff,#ae82ff 15%, 
                                         #5488ff 20%,
                                         $secondry-color 30%,
