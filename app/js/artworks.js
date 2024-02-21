@@ -11,6 +11,9 @@ $( function() {
     let s4 = document.querySelector('.bg-balls .s4');
     let s5 = document.querySelector('.bg-balls .s5');
     let parallax = $(".parallax");
+    let orbitBG = $(".parallax-layer-orbit")[0];
+    let scrollHeight = 0;
+    let viewHeight = 0;
     let topHeader = document.querySelector('header.top');
     let chainGrid = document.querySelector('.bg-balls .chain-grid');
     let content = document.querySelector('main.showcase .content');
@@ -68,9 +71,9 @@ $( function() {
         $(elem).css({transform: `translate(${targetX}px, ${targetY}px) translateZ(${z}px)`});
     }
     // To ScrollAnimation
-    function scrollOpacity( elem, opacityMin, targetScroll, scroll ) {
+    function scrollOpacity( elem, opacityInitial, opacityTarget, targetScroll, scroll ) {
         const scrollRatio = Math.min(targetScroll, scroll) / targetScroll;
-        const opacity = 1 + ((opacityMin - 1) * scrollRatio);
+        const opacity = opacityInitial + ((opacityTarget - opacityInitial) * scrollRatio);
 
         elem.currentOpacity = opacity;
         elem.style.opacity = `${elem.currentOpacity}`;
@@ -78,7 +81,7 @@ $( function() {
 
     function scrollScale( elem, scaleInitial, scaleTarget, targetScroll, scroll ) {
         const scrollRatio = Math.min(targetScroll, scroll) / targetScroll;
-        const targetScale = scaleInitial + (scaleTarget - scaleInitial) * scrollRatio;
+        const targetScale = scaleInitial + ((scaleTarget - scaleInitial) * scrollRatio);
         $(elem).css({transform: `scale(${targetScale}) translateZ(3px)`});
     }
 
@@ -90,6 +93,7 @@ $( function() {
   
     // ScrollAnimation User
     parallax.scroll(windowScroll);
+    const parallaxDom = parallax.get(0);
 
     //window.addEventListener('scroll', throttle(windowScroll, 200));
     function windowScroll() {
@@ -99,7 +103,12 @@ $( function() {
         // scrollTranslateXYZ2(chainGrid, -200, 500, 7000, 5, scroll);
         //scrollScale(bgImage, 1, 0.0001, 450, scroll);
         // text
-        scrollOpacity(topHeader, 0.0, 150, scroll);
+        // document.body.style.setProperty(
+        //   "--scrollPage",
+        //   scroll / viewHeight
+        // );
+        scrollOpacity(orbitBG, 0.6, 0.0, 150, scroll);
+        scrollOpacity(topHeader, 1.0, 0.0, 150, scroll);
     }
     // To Utils
     function throttle(fn, wait) {
@@ -357,6 +366,10 @@ $( function() {
             dataSourceId: dataSourceId,
             preventDoubles: preventDoubles
         }
+
+        scrollHeight = Math.round(parallax[0].scrollHeight);
+        viewHeight = Math.round(parallax.height());
+
     }); 
     
     $(window).trigger("resize");
@@ -409,15 +422,8 @@ $( function() {
             }
            return;
         }
-        if(hScroll > sliderData.scrollMax + sliderData.slideWidth){
-            console.log("overshoot end");
-        }
-        // Preload next
 
-        console.log("hScroll " + hScroll);
-        console.log("sliderData.scrollMax " + sliderData.scrollMax);
-        console.log("sliderData.currentSlide " + sliderData.currentSlide);
-        console.log("sliderData.maxSlides " + sliderData.maxSlides);
+        // Preload next
         if (hScroll === sliderData.scrollMax && 
             sliderData.currentSlide < sliderData.maxSlides) {
 

@@ -57,7 +57,7 @@
 }
 
 .cursor-pointer-overlay {
-    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Ccircle cx='43.336' cy='43.336' r='43.336' style='fill:%23bf1;fill-opacity:0.8;'/%3E%3C/svg%3E") 12 12, pointer;
+    cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' xmlns:serif='http://www.serif.com/' width='24' height='24' viewBox='0 0 87 87' version='1.1' xml:space='preserve' style='fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;'%3E%3Ccircle cx='43.336' cy='43.336' r='43.336' style='fill:%23000;fill-opacity:0.8;'/%3E%3C/svg%3E") 12 12, pointer;
 }
 
 .menu-pointer {
@@ -86,7 +86,7 @@ a * {
 }
 
 .overlay-nav a, .overlay-nav a * {
-    @extend .cursor-pointer-overlay;
+    @extend .cursor-pointer;
 }
 
 svg text, svg textPath, svg textPath tspan {
@@ -247,7 +247,7 @@ figure {
         }
     }
     .nav-right-button.active, .nav-right-button.active * {
-        @extend .cursor-pointer-overlay;
+        @extend .cursor-pointer;
     }
 
     .nav-right-button.active-light {
@@ -307,7 +307,7 @@ figure {
 
         &.active, &.active * {
             z-index: 1300;
-            @extend .cursor-pointer-overlay;
+            @extend .cursor-pointer;
         }
     
         &.active-light, &.active-light * {
@@ -721,7 +721,7 @@ svg.loader .square {
         }
 
         &, * {
-            @extend .cursor-pointer-overlay;
+            @extend .cursor-pointer;
             
         }
     }

@@ -88,7 +88,7 @@ main.showcase {
     .artworks-button{
         position: relative;
       display: inline-block;
-      -webkit-text-stroke: 2px rgba($primary-color, 0.6);
+      -webkit-text-stroke: 1px rgba($primary-color, 0.6);
       //-webkit-text-fill: rgba(255, 255, 255, 0.2);
       // background-image: linear-gradient(
       //                               -90deg,
@@ -117,6 +117,9 @@ main.showcase {
       text-indent: -15vw;
         z-index: 111;
         transform: translateZ(1px);
+    @include breakpoint(medium) {
+      -webkit-text-stroke: 2px rgba($primary-color, 0.6);
+    }
 
       will-change: -webkit-text-stroke-color;
       
@@ -1394,7 +1397,7 @@ main.creator {
     min-height: 20%;
     aspect-ratio: 1;
     background-image: url("/assets/images/bg-obj-white.png");
-    transform: translateZ(-2px) scale(3.5);
+    transform: scale(3.5) translateZ(-2px) ;
 }
 .parallax-layer-red {
     top: 70%;
@@ -1403,7 +1406,7 @@ main.creator {
     min-height: 20%;
     aspect-ratio: 1;
     background-image: url("/assets/images/bg-obj-red.png");
-    transform: translateZ(-0.3px) scale(1.7);
+    transform: scale(1.7) translateZ(-0.3px) ;
 }
 .parallax-layer-green {
     top: 35%;
@@ -1412,7 +1415,7 @@ main.creator {
     min-height: 30%;
     aspect-ratio: 1;
     background-image: url("/assets/images/bg-obj-green.png");
-    transform: translateZ(-0.1px) scale(1.5);
+    transform: scale(1.5) translateZ(-0.1px);
 
 }
 .parallax-layer-smile {
@@ -1422,8 +1425,28 @@ main.creator {
     min-height: 50%;
     aspect-ratio: 1.1311594203;
     background-image: url("/assets/images/bg-obj-smile.png");
-    transform: translateZ(0.3px) scale(0.8);
+    transform: scale(0.8) translateZ(0.3px) ;
     @include breakpoint(medium) {
         right: 20%;
     }
+}
+.parallax-layer-orbit {
+    background-image: url("/assets/content/Valley-of-the-Rising-Stellar.png");
+    top: 20%;
+    left: 0; right: 0;
+    margin: 0 auto;
+    aspect-ratio: 1.62083;
+    min-width: 45vmin;
+    max-width: 90vmin;
+    border-radius: 100%;
+    transform: rotate(-55deg) scale(3) translateZ(-2px);
+    opacity: 0.6;
+    filter: hue-rotate(255deg) saturate(0.3);
+    @include breakpoint(medium) {
+        top: 30%;
+    }
+
+    -webkit-transition: opacity .3s ease-out;
+       -moz-transition: opacity .3s ease-out;
+            transition: opacity .3s ease-out;
 }
