@@ -4,12 +4,13 @@ $( function() {
     let collectLink = $(".collect-link");
     let $end = $(".end");
     let title = document.querySelector('.artworks-button');
-    let bgImage = document.querySelector('.bg-image-2');
+    //let bgImage = document.querySelector('.bg-image-2');
     let s1 = document.querySelector('.bg-balls .s1');
     let s2 = document.querySelector('.bg-balls .s1');
     let s3 = document.querySelector('.bg-balls .s3');
     let s4 = document.querySelector('.bg-balls .s4');
     let s5 = document.querySelector('.bg-balls .s5');
+    let parallax = $(".parallax");
     let topHeader = document.querySelector('header.top');
     let chainGrid = document.querySelector('.bg-balls .chain-grid');
     let content = document.querySelector('main.showcase .content');
@@ -88,18 +89,17 @@ $( function() {
     // })();
   
     // ScrollAnimation User
-
-    $(window).scroll(windowScroll);
+    parallax.scroll(windowScroll);
 
     //window.addEventListener('scroll', throttle(windowScroll, 200));
     function windowScroll() {
-        let scroll = window.scrollY;
+        let scroll = parallax.scrollTop();
         // scrollTranslateXYZ2(s3, -200, 500, 7000, 3, scroll);
         // scrollTranslateXYZ2(s4, 30, -300, 300, 4, scroll);
         // scrollTranslateXYZ2(chainGrid, -200, 500, 7000, 5, scroll);
         //scrollScale(bgImage, 1, 0.0001, 450, scroll);
         // text
-        scrollOpacity(topHeader, 0.0, 450, scroll);
+        scrollOpacity(topHeader, 0.0, 150, scroll);
     }
     // To Utils
     function throttle(fn, wait) {
@@ -118,7 +118,7 @@ $( function() {
         showTime('.filter-buttons', 2500);
         showTime('.end', 1500);
         setTimeout(function () { showFilter(filter); }, 1000);
-        $("html, body").animate({ scrollTop: 0 }, 500, function() {
+        parallax.animate({ scrollTop: 0 }, 500, function() {
           windowScroll();
         });
         visuals();
@@ -129,7 +129,7 @@ $( function() {
     collectLink.on('click', function () {
         toggleActive();
         $('.overlay-nav').fadeToggle(400, function (){
-            $("html, body").animate({ scrollTop: 0 }, 500, function() {
+            parallax.animate({ scrollTop: 0 }, 500, function() {
               windowScroll();
             });
             showFilter("nft");
@@ -269,10 +269,10 @@ $( function() {
         let filter = $( this ).attr('data-filter');
         history.replaceState(null, null, '#' + filter);
         setActiveFilterButton(filter);
-        $("html, body").animate({ scrollTop: 0 }, 100, function() {
+        parallax.animate({ scrollTop: 0 }, 1000, function() {
             windowScroll();
+            showFilter(filter);
         });
-        showFilter(filter);
     });
 
     function setActiveFilterButton(filter) {
@@ -376,7 +376,7 @@ $( function() {
             $slider.scrollLeft(sliderData.slideWidth);
             return;
         }
-        let hScroll = $slider.scrollLeft();
+        let hScroll = Math.round($slider.scrollLeft());
         
         // handle first and last slides
         if (hScroll === sliderData.slideWidth) {
@@ -413,6 +413,11 @@ $( function() {
             console.log("overshoot end");
         }
         // Preload next
+
+        console.log("hScroll " + hScroll);
+        console.log("sliderData.scrollMax " + sliderData.scrollMax);
+        console.log("sliderData.currentSlide " + sliderData.currentSlide);
+        console.log("sliderData.maxSlides " + sliderData.maxSlides);
         if (hScroll === sliderData.scrollMax && 
             sliderData.currentSlide < sliderData.maxSlides) {
 
@@ -555,8 +560,8 @@ $( function() {
         //let transform = makePrefixed('transform', `translate(${xPos}vh, ${yPos}vw)`);
         return `<article data-id="${id}" class="${obj.tags}">
                     ${playIcon}
-                    <div class="card cursor-zoom">
-                        <img src="/assets/content/${obj.image}-mini.png" alt="${obj.title}" width="${obj.width}" height="${obj.height}" class="image-content" />
+                    <div class="card">
+                        <img src="/assets/content/${obj.image}-mini.png" alt="${obj.title}" width="${obj.width}" height="${obj.height}" class="image-content cursor-pointer" />
                         <div class="overlay">
                             <div class="title-container">
                                 <span class=title>${obj.title}</span>
@@ -1838,7 +1843,7 @@ const dataObjs = [
       tags: "2d code",
       vimeoID: "",
       width: 500,
-      height: 281,
+      height: 352,
       nftURL: ""
     },
     {
@@ -1846,8 +1851,8 @@ const dataObjs = [
       title: "Shiny Celestial Dust",
       tags: "2d code",
       vimeoID: "",
-      width: 285,
-      height: 500,
+      width: 348,
+      height: 280,
       nftURL: ""
     },
     {
