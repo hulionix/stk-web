@@ -107,7 +107,7 @@ main.showcase {
       padding-right: $logo-height * $IPHI * 1;
       padding-top: 20vh;
       padding-bottom: 2em;
-      font-size: 7vw;
+      font-size: 10vw;
       border-top: 2px solid rgba($primary-color, 0.2);
       // border-bottom: 2px solid rgb(37, 37, 42);
       // border-radius: 0px 500px 500px 0px;
@@ -120,6 +120,7 @@ main.showcase {
         z-index: 111;
         transform: translateZ(1px);
     @include breakpoint(medium) {
+      font-size: 7vw;
       -webkit-text-stroke: 2px rgba($primary-color, 0.6);
     }
 
