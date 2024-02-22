@@ -799,3 +799,7 @@ svg.loader .square {
         }
     }
 }
+// Preload Images
+footer {
+    background: url("/assets/images/nav-bg.png") no-repeat -9999px -9999px;
+}

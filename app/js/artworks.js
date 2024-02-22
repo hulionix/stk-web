@@ -1818,7 +1818,7 @@ const dataObjs = [
       title: "Ultraviolet",
       tags: "2d",
       vimeoID: "",
-      width: 500,
+      width: 345,
       height: 500,
       nftURL: ""
     },
@@ -1827,14 +1827,14 @@ const dataObjs = [
       title: "Golden Gate",
       tags: "2d",
       vimeoID: "",
-      width: 324,
+      width: 362,
       height: 500,
       nftURL: ""
     },
     {
       image: "Ballz-and-Holez",
       title: "Ballz & Holez",
-      tags: "2d",
+      tags: "2d code",
       vimeoID: "",
       width: 366,
       height: 500,
