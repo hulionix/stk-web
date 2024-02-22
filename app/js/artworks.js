@@ -92,11 +92,15 @@ $( function() {
     // })();
   
     // ScrollAnimation User
-    parallax.scroll(windowScroll);
-    const parallaxDom = parallax.get(0);
+    var ticking = false;
+    function onParallaxScroll() {
+      ticking = ticking || requestAnimationFrame(windowScroll); 
+    }
+    parallax.scroll(onParallaxScroll);
 
     //window.addEventListener('scroll', throttle(windowScroll, 200));
     function windowScroll() {
+        ticking = false;
         let scroll = parallax.scrollTop();
         // scrollTranslateXYZ2(s3, -200, 500, 7000, 3, scroll);
         // scrollTranslateXYZ2(s4, 30, -300, 300, 4, scroll);
@@ -107,8 +111,11 @@ $( function() {
         //   "--scrollPage",
         //   scroll / viewHeight
         // );
-        scrollOpacity(orbitBG, 0.6, 0.0, 150, scroll);
-        scrollOpacity(topHeader, 1.0, 0.0, 150, scroll);
+        if (orbitBG.currentOpacity > 0 || scroll < 150 ) {
+            scrollOpacity(orbitBG, 0.6, 0.0, 150, scroll);
+            scrollOpacity(topHeader, 1.0, 0.0, 150, scroll);
+        }
+        
     }
     // To Utils
     function throttle(fn, wait) {
@@ -606,13 +613,12 @@ const dataObjs = [
     height: 500,
     nftURL: ""
   },
-
   {
-    image: "White-Rose",
-    title: "White Rose",
+    image: "Luna",
+    title: "Luna",
     tags: "3d",
     vimeoID: "",
-    width: 374,
+    width: 392,
     height: 500,
     nftURL: ""
   },
@@ -848,16 +854,16 @@ const dataObjs = [
   //   nftURL: ""
   // },
 
-
   {
-    image: "Luna",
-    title: "Luna",
+    image: "White-Rose",
+    title: "White Rose",
     tags: "3d",
     vimeoID: "",
-    width: 392,
+    width: 374,
     height: 500,
     nftURL: ""
   },
+
   {
     image: "Dancing-In-A-Lake-At-Night",
     title: "Dancing In A Lake At Night",
