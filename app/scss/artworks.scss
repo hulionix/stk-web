@@ -121,7 +121,7 @@ main.showcase {
         transform: translateZ(1px);
     @include breakpoint(medium) {
       font-size: 7vw;
-      -webkit-text-stroke: 2px rgba($primary-color, 0.6);
+      -webkit-text-stroke: 2px rgba($primary-color, 0.9);
     }
 
       will-change: -webkit-text-stroke-color;
@@ -1088,7 +1088,6 @@ main.showcase {
             line-height: 1.5em;
             font-weight: 500;
             color: $primary-color;
-            border-top: 1px solid rgba($primary-color, 0.4);
             padding: 0 5px;
           }
 
@@ -1447,7 +1446,7 @@ main.creator {
 }
 .parallax-layer-green {
     top: 35%;
-    left: 30%;
+    left: 25%;
     min-width: 20%;
     min-height: 30%;
     aspect-ratio: 1;
@@ -1477,7 +1476,7 @@ main.creator {
     max-width: 90vmin;
     border-radius: 100%;
     transform: rotate(-55deg) scale(3) translateZ(-2px);
-    opacity: 0.6;
+    opacity: 0.8;
     filter: hue-rotate(255deg) saturate(0.3);
     @include breakpoint(medium) {
         top: 30%;

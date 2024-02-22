@@ -112,7 +112,7 @@ $( function() {
         //   scroll / viewHeight
         // );
         if (orbitBG.currentOpacity > 0 || scroll < 150 ) {
-            scrollOpacity(orbitBG, 0.6, 0.0, 150, scroll);
+            scrollOpacity(orbitBG, 0.9, 0.0, 150, scroll);
             scrollOpacity(topHeader, 1.0, 0.0, 150, scroll);
         }
         
@@ -1841,27 +1841,27 @@ const dataObjs = [
       nftURL: ""
     },
     {
-      image: "Time-Lines",
-      title: "Time Lines",
-      tags: "2d code",
-      vimeoID: "",
-      width: 376,
-      height: 500,
-      nftURL: ""
-    },
-    {
       image: "Sonic-Curtain",
       title: "Sonic Curtain",
-      tags: "2d code",
+      tags: "code",
       vimeoID: "",
       width: 500,
       height: 352,
       nftURL: ""
     },
     {
+      image: "Time-Lines",
+      title: "Time Lines",
+      tags: "code",
+      vimeoID: "",
+      width: 376,
+      height: 500,
+      nftURL: ""
+    },
+    {
       image: "Shiny-Celestial-Dust",
       title: "Shiny Celestial Dust",
-      tags: "2d code",
+      tags: "code",
       vimeoID: "",
       width: 348,
       height: 280,
@@ -1870,7 +1870,7 @@ const dataObjs = [
     {
       image: "Data-Waves",
       title: "Data Waves",
-      tags: "2d code",
+      tags: "code",
       vimeoID: "",
       width: 500,
       height: 395,
@@ -1888,7 +1888,7 @@ const dataObjs = [
     {
       image: "Somewhere-on-Venus",
       title: "Somewhere on Venus",
-      tags: "code 2d animation",
+      tags: "code animation",
       vimeoID: "202356093",
       width: 720,
       height: 720,
@@ -1897,7 +1897,7 @@ const dataObjs = [
     {
       image: "Data-Channels",
       title: "Data Channels",
-      tags: "code 2d animation",
+      tags: "code animation",
       vimeoID: "201782970",
       width: 720,
       height: 720,
@@ -1906,7 +1906,7 @@ const dataObjs = [
     {
       image: "Drop",
       title: "Drop",
-      tags: "code 2d animation",
+      tags: "code animation",
       vimeoID: "201779758",
       width: 720,
       height: 720,
