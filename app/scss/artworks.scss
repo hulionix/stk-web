@@ -231,10 +231,12 @@ main.showcase {
         clear: both;
       }
 
-      &:hover {
-        border: 2px solid rgba($secondry-color, 0.8);
-        color: $secondry-color;
-      }
+        @media (hover: hover) {
+            &:hover {
+                border: 2px solid rgba($secondry-color, 0.8);
+                color: $secondry-color;
+            }
+        }
   
       &:active,
       &.is-checked {
@@ -296,16 +298,18 @@ main.showcase {
                     transition: background-color 0.3s ease-in-out, width 0.3s ease-in-out;
         }
 
-         &:hover {
-            &::before {
-                border-top: $height solid rgba($primary-color, 0.3);
-                border-bottom: $height solid rgba($primary-color, 0.3);
-                width: 13px;
-            }
+        @media (hover: hover) {
+             &:hover {
+                &::before {
+                    border-top: $height solid rgba($primary-color, 0.3);
+                    border-bottom: $height solid rgba($primary-color, 0.3);
+                    width: 13px;
+                }
 
-            &::after {
-                background-color: rgba($primary-color, 0.5);
-                width: 21px;
+                &::after {
+                    background-color: rgba($primary-color, 0.5);
+                    width: 21px;
+                }
             }
         }
         &:active,
@@ -527,12 +531,13 @@ main.showcase {
             letter-spacing: .15em;
           }
 
-
-          &:hover {
-            border: 2px solid rgba(255, 255, 255, 0.705);
-            border-width: 2px 0px 1px 0px;
-            color: white;
-          }
+            @media (hover: hover) {
+              &:hover {
+                border: 2px solid rgba(255, 255, 255, 0.705);
+                border-width: 2px 0px 1px 0px;
+                color: white;
+              }
+            }
 
           &:focus {
             border: 2px solid rgba(255, 255, 255, 0.705);
@@ -580,8 +585,10 @@ main.showcase {
           -moz-transition: border 0.3s ease;
           transition: border 0.3s ease;
           letter-spacing: .1em;
-          &:hover {
-            border: 2px solid rgba(255, 255, 255, 0.786);
+          @media (hover: hover) {
+              &:hover {
+                border: 2px solid rgba(255, 255, 255, 0.786);
+              }
           }
         }
       }
@@ -687,27 +694,34 @@ main.showcase {
                 transition: right 0.4s ease-out, opacity 0.4s ease-out; 
       }
 
-      &:hover {
-        // &:before {
-        //   top: 10%;
-        //   left: 10%;
-        //   opacity: 0;
-        // }
+        @media (hover: hover) {
+          &:hover {
+            // &:before {
+            //   top: 10%;
+            //   left: 10%;
+            //   opacity: 0;
+            // }
 
-        &:after {
-          //top: 10%;
-          right: 10%;
-          opacity: 0;
+            &:after {
+              //top: 10%;
+              right: 10%;
+              opacity: 0;
+            }
+          }
         }
-      }
-
-      &:hover .card .overlay,
+        @media (hover: hover) {
+          &:hover .card .overlay {
+            opacity: 1;
+          }
+        }
       &.active .card .overlay {
         opacity: 1;
       }
 
-      &:hover .card .overlay .title-container {
-        animation-play-state: running;
+      @media (hover: hover) {
+          &:hover .card .overlay .title-container {
+            animation-play-state: running;
+          }
       }
 
       .play-icon {
@@ -780,16 +794,18 @@ main.showcase {
         }
       }
 
-        &:hover {
-            .title-container {
-                -webkit-animation-play-state: running;
-                -moz-animation-play-state: running;
-                animation-play-state: running;
-            }
+        @media (hover: hover) {
+            &:hover {
+                .title-container {
+                    -webkit-animation-play-state: running;
+                    -moz-animation-play-state: running;
+                    animation-play-state: running;
+                }
 
-            .show-btn span {
-              background-size: 40%, 240%;
-              background-position: 50%, 100% 50%;
+                .show-btn span {
+                  background-size: 40%, 240%;
+                  background-position: 50%, 100% 50%;
+                }
             }
         }
     }
@@ -879,11 +895,18 @@ main.showcase {
             130deg,
             rgba($bg-page, 0.3) 0%,
             rgba($bg-page, 0.3) 50%,
-            rgba(#403484 , 1) 60%,
+            rgba(#88b , 0.7) 55%,
+            //rgba(red   , 0.6) 55%, 
+            //rgba(orange, 0.6) 65%, 
+          //rgba(yellow, 0.6) 75%, 
+          //rgba(green , 0.6) 85%, 
+            //rgba(blue  , 0.6) 95%, 
+            // rgba(indigo, 0.6) 93%, 
+            // rgba(violet, 0.6) 100%
           );
         background-repeat: no-repeat;
         background-size: 30%, 240%;
-        background-position: 50%, 0% 50%;
+        background-position: 50%, 0% 70%;
         outline: 1px solid rgba($primary-color, 0.2);
         position: relative;
         overflow: hidden;
@@ -1001,9 +1024,10 @@ main.showcase {
         @include breakpoint(medium) {
           padding-top: $logo-height * $IPHI * 6
         }
-
-        &:hover {
-          transform: none;
+        @media (hover: hover) {
+            &:hover {
+              transform: none;
+            }
         }
         .image-content, .video-content {
           align-self: center;
@@ -1131,10 +1155,11 @@ main.showcase {
         -webkit-transition: outline 0.3s ease-out;
            -moz-transition: outline 0.3s ease-out;
                 transition: outline 0.3s ease-out;
-
-        &:hover {
-          outline: 2px solid rgba($secondry-color, 1.0);
-          z-index: 2000;
+        @media (hover: hover) {
+            &:hover {
+              outline: 2px solid rgba($secondry-color, 1.0);
+              z-index: 2000;
+            }
         }
         &.disabled {
           outline: 2px solid rgba($primary-color, 0.1);

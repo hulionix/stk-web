@@ -84,9 +84,10 @@
     -webkit-transition : border-color 50ms ease-in-out;
        -moz-transition : border-color 50ms ease-in-out;
             transition : border-color 50ms ease-in-out;
-
-    &:hover {
-        border-color: transparent;
+    @media (hover: hover) {
+      &:hover {
+          border-color: transparent;
+      }
     }
 }
 

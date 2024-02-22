@@ -114,9 +114,11 @@ main.about {
             font-weight: 300;
             color: $primary-color;
             margin: -2px 5px;
-            &:hover {
-                border: 2px solid $secondry-color;
-                color: $secondry-color;
+            @media (hover: hover) {
+                &:hover {
+                    border: 2px solid $secondry-color;
+                    color: $secondry-color;
+                }
             }
             @extend .font-mid;
         }
