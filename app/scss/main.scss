@@ -5,7 +5,9 @@ main.home {
     position: relative;
     z-index: 400;
     padding-top: 0;
+    height: 100vh;
     height: 100dvh;
+    max-height: 100vh;
     max-height: 100dvh;
     display: -webkit-box;
     display: -ms-flexbox;
@@ -75,6 +77,7 @@ main.home {
         clear: both;
         position: absolute;
         //object-fit: cover;
+        height: 100vh;
         height: 100dvh;
         width: 100%;
         vertical-align: middle;

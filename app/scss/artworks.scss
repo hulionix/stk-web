@@ -62,12 +62,14 @@ $eye: 'data:image/svg+xml,<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http:/
 main.showcase {
   padding-top: 0;
   min-height: 100vh;
+  min-height: 100dvh;
   background-color: $bg-page;
 
   header.top {
     position: absolute;
     width: 100%;
     min-height: 100vh;
+    min-height: 100dvh;
     margin: 0 auto;
     padding-top: ($logo-height * $IPHI * 3) - 9;//($logo-height * $PHI) + ($logo-height / 2);
     text-align: center;
@@ -330,6 +332,7 @@ main.showcase {
     max-width: $max-width;
     margin: 0 auto 20vh;
     min-height: 100vh;
+    min-height: 100dvh;
     padding-top: 1px;
   }
 
@@ -928,6 +931,7 @@ main.showcase {
     backdrop-filter: blur(30px);
     width: 100vw;
     height: 100vh;
+    height: 100dvh;
     z-index: 2000;
     align-content: center;
     text-align: center;
@@ -942,6 +946,7 @@ main.showcase {
       overflow-x: scroll;
       width: 100vw;
       height: 100vh;
+      height: 100dvh;
       scrollbar-width: none;
       &::-webkit-scrollbar {
         display: none;
@@ -952,6 +957,7 @@ main.showcase {
       display: flex;
       min-width: 100vw;
       min-height: 100vh;
+      min-height: 100dvh;
       scroll-snap-align: center;
       //opacity: 0;
 
@@ -978,6 +984,7 @@ main.showcase {
         text-align: center;
         overflow: visible;
         height: 100vh;
+        height: 100dvh;
         max-width: 900px;
         border: 0px solid black;
         border-radius: 0px;
@@ -1201,6 +1208,7 @@ main.creator {
   width: 100vw;
   max-width: $max-width;
   max-height: 100vh;
+  max-height: 100dvh;
   justify-content: space-between;
   margin: 0 auto;
   //display: none;
