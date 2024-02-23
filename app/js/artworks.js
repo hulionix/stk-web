@@ -98,22 +98,14 @@ $( function() {
     }
     parallax.scroll(onParallaxScroll);
 
-    //window.addEventListener('scroll', throttle(windowScroll, 200));
+    let artworksTitle = $(".parallax-layer-artworks")
+    let artworksShowing = true;
     function windowScroll() {
         ticking = false;
         let scroll = parallax.scrollTop();
-        // scrollTranslateXYZ2(s3, -200, 500, 7000, 3, scroll);
-        // scrollTranslateXYZ2(s4, 30, -300, 300, 4, scroll);
-        // scrollTranslateXYZ2(chainGrid, -200, 500, 7000, 5, scroll);
-        //scrollScale(bgImage, 1, 0.0001, 450, scroll);
-        // text
-        // document.body.style.setProperty(
-        //   "--scrollPage",
-        //   scroll / viewHeight
-        // );
-        if (orbitBG.currentOpacity > 0 || scroll < 150 ) {
-            scrollOpacity(orbitBG, 0.9, 0.0, 150, scroll);
-            scrollOpacity(topHeader, 1.0, 0.0, 150, scroll);
+        if (orbitBG.currentOpacity > 0 || scroll < 250 ) {
+            scrollOpacity(orbitBG, 1, 0.0, 250, scroll);
+            scrollOpacity(topHeader, 1.0, 0.0, 250, scroll);
         }
         
     }

@@ -546,7 +546,7 @@ nav {
         justify-content: center;
         height: 100vh;
         height: 100dvh;
-        max-width: 1920px;
+        max-width: $max-width;
         margin: 0 auto;
         .image-container {
             -webkit-box-flex: 0;
@@ -653,7 +653,7 @@ svg.loader .square {
 .padded-footer, .social-links-wrapper {
     position: fixed;
     bottom: 0px;
-    max-width: 1920px;
+    max-width: $max-width;
     width: 100%;
     margin: 0 auto;
     padding: $logo-height * $IPHI * 2 $logo-height * $IPHI * 1;

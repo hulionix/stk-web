@@ -65,6 +65,31 @@ main.showcase {
   min-height: 100dvh;
   background-color: $bg-page;
 
+  .glass, .bottom-fade {
+        position: absolute;
+        left: 0; right: 0;
+        width: 100vw;
+        height: ($logo-height * $IPHI * 3) - 9px;
+        @include breakpoint(medium) {
+            height: ($logo-height * $IPHI * 4) - 4.5px;
+        }
+    }
+
+    .glass {
+        top: 0;
+        border-bottom: 2px solid rgba($primary-color, 0.2);
+        background-color: transparent;
+        -webkit-backdrop-filter: blur(30px);
+        backdrop-filter: blur(30px);
+    }
+    .bottom-fade {
+        bottom: 0;
+        background: linear-gradient(
+            180deg,
+            rgba($bg-page, 0.0) 0%,
+            rgba($bg-page, 01) 100%);
+    }
+
   header.top {
     position: absolute;
     width: 100%;
@@ -90,25 +115,26 @@ main.showcase {
     .artworks-button{
         position: relative;
       display: inline-block;
-      -webkit-text-stroke: 1px rgba($primary-color, 0.9);
-      //-webkit-text-fill: rgba(255, 255, 255, 0.2);
+      //-webkit-text-stroke: 0.02em rgba($primary-color, 1.0);
+      // text-shadow: 
+      //   0.0em 0.0em  0px rgba($primary-color, 0.9), 
+      //  0.43em 0.7em  0px  rgba($secondry-color, 0.7), 
+      //  0.86em 1.4em  0px rgba(#88c, 0.9);
       // background-image: linear-gradient(
       //                               -90deg,
-      //                               #EA3 30%,
-      //                               #A5F 50%, 
-      //                               #B5F 70%
+      //                               rgba($secondry-color, 0.6) 40%,
+      //                               rgba(#44c, 0.6) 60%
       //                             );
-      // background-color: $primary-color;
-      // background-size: 100vw;
+      background-color: transparent;
+      background-size: 100vw;
 
-      // -webkit-background-clip: text;
-      //         background-clip: text;
+      -webkit-background-clip: text;
+              background-clip: text;
       padding-left: $logo-height * $IPHI * 1;
       padding-right: $logo-height * $IPHI * 1;
       padding-top: 20vh;
       padding-bottom: 2em;
       font-size: 10vw;
-      border-top: 2px solid rgba($primary-color, 0.2);
       // border-bottom: 2px solid rgb(37, 37, 42);
       // border-radius: 0px 500px 500px 0px;
       min-width: 100vw;
@@ -116,12 +142,14 @@ main.showcase {
 
       margin-left: auto;
       margin-right: auto;
+      //max-width: $max-width;
       text-indent: -15vw;
-        z-index: 111;
         transform: translateZ(1px);
+        border-top: 2px solid rgba($primary-color, 0.2);
     @include breakpoint(medium) {
-      font-size: 7vw;
-      -webkit-text-stroke: 2px rgba($primary-color, 0.9);
+      text-indent: -20vw;
+      font-size: 6vw;
+      //-webkit-text-stroke: 0.02em rgba($primary-color, 0.9);
     }
 
       will-change: -webkit-text-stroke-color;
@@ -602,8 +630,15 @@ main.showcase {
       vertical-align: top;
       margin: 5vh 0;
       width: 100%;
+            padding: 2vw;
+            outline: 0.15em solid rgba($primary-color, 0.1);
+            background-color: transparent;
       aspect-ratio: 1.5;
+        // border-top: 2px solid #222;
+        // border-bottom: 2px solid #222;
+        border-radius: 1900px;
 
+        @extend .cursor-pointer;
       @include breakpoint(medium) {
         -webkit-transition: transform 1s ease-out;
         -moz-transition: transform 1s ease-out;
@@ -632,12 +667,16 @@ main.showcase {
           top: 0vh; 
           right: -17%;
         }
+        &:nth-child(1), &:nth-child(2) {
+            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px);
+        }
       }
       
       @media only screen and (min-width: 741px) {
         //height: 25vw;
-        margin: 5%;
-        width: 23.33%;
+        margin: 3%;
+        width: 27.333%;
         background-size: 4vw 4vw;
         // 3 Column Grid 
         &:nth-child(3n+1) { // C[0]
@@ -655,7 +694,11 @@ main.showcase {
         &:after {
           //top: -8vh;
           top: 0vh;
-          right: -28%;
+          right: -14%;
+        }
+        &:nth-child(1), &:nth-child(2), , &:nth-child(3) {
+            -webkit-backdrop-filter: blur(30px);
+            backdrop-filter: blur(30px);
         }
       }
 
@@ -735,7 +778,7 @@ main.showcase {
         top: 10px;
         left: 10px;
         &, & * {
-          @extend .cursor-zoom;
+          @extend .cursor-pointer;
         }
       }
     }
@@ -744,11 +787,9 @@ main.showcase {
     .card {
         position: relative;
         z-index:0;
-        min-height: 100%;
         border-radius: 500px;
         overflow: hidden;
-        border-top: 2px solid #222;
-        border-bottom: 2px solid #222;
+        border-radius: 5000px;
         @extend .cursor-pointer;
 
         background-image: radial-gradient(#CCC0 5%, #CCCf 7%, #CCCf 8%, #CCC0 10%);
@@ -952,7 +993,7 @@ main.showcase {
   .viewer {
     position: fixed;
     display: none;
-    background-color: rgba(29, 29, 29, 0.748);
+    background-color: rgba($bg-page, 0.748);
     -webkit-backdrop-filter: blur(30px);
     -moz-backdrop-filter: blur(30px);
     backdrop-filter: blur(30px);
@@ -1388,8 +1429,8 @@ main.creator {
     position: absolute;
     width: 100%;
     height: 100%;
+    height: 100dvh;
     max-width: 100vw;
-    max-height: 100%;
     top: 0; bottom: 0;
     left: 0; right: 0;
     padding: 0; margin: 0 auto;
@@ -1398,21 +1439,15 @@ main.creator {
     perspective: 1px;
     //max-width: $max-width + 100;
     perspective-origin: center;
-}
-
-.parallax-layer-base {
-    transform: translateZ(0);
-    z-index: 1000;
+    text-align: center;
 }
 
 .parallax-layer {
-    position: absolute;
-    background-size: cover;
+    position: absolute;  
+    background-size: contain;
     background-position: center;
-}
-
-.parallax-layer-back {
-    transform: translateZ(-1px) scale(2);
+    background-repeat: no-repeat;
+    pointer-events: none;
 }
 
 .parallax-group {
@@ -1424,13 +1459,23 @@ main.creator {
     left: 0; right: 0;
     padding: 0; margin: 0 auto;
     transform-style: preserve-3d;
+    max-width: $max-width;
+    pointer-events: none;
+}
+
+.parallax-layer-base {
+    transform: translateZ(0);
+}
+
+.parallax-layer-back {
+    transform: translateZ(-1px) scale(2);
 }
 
 .parallax-layer-white {
-    top: -40%;
+    top: -450px;
     left: -50%;
-    //width: 10%;
-    min-height: 20%;
+    width: 20vmin;
+    max-width: 200px;
     aspect-ratio: 1;
     background-image: url("/assets/images/bg-obj-white.png");
     transform: scale(3.5) translateZ(-2px) ;
@@ -1455,19 +1500,21 @@ main.creator {
 
 }
 .parallax-layer-smile {
-    top: 5%;
+    top: 10%;
     right: 10%;
-    min-width: 50%;
-    min-height: 50%;
+    width: 80%;
+    max-width: 90vh;
+    min-height: 50vh;
     aspect-ratio: 1.1311594203;
     background-image: url("/assets/images/bg-obj-smile.png");
-    transform: scale(0.8) translateZ(0.3px) ;
+    transform: scale(0.8) translateZ(0.3px);
     @include breakpoint(medium) {
         right: 20%;
     }
 }
 .parallax-layer-orbit {
-    background-image: url("/assets/content/Valley-of-the-Rising-Stellar.png");
+    background-image: url("/assets/images/Tasting-Something-New.png");
+    background-size: cover;
     top: 20%;
     left: 0; right: 0;
     margin: 0 auto;
@@ -1476,8 +1523,10 @@ main.creator {
     max-width: 90vmin;
     border-radius: 100%;
     transform: rotate(-55deg) scale(3) translateZ(-2px);
-    opacity: 0.9;
-    filter: hue-rotate(255deg) saturate(0.3);
+    opacity: 1;
+    //filter: contrast(0.6);
+    //box-shadow: 0.5em -0.5em 0px rgba($primary-color, 0.8);
+    //outline: 2px solid rgba($primary-color, 0.3);
     @include breakpoint(medium) {
         top: 30%;
     }
@@ -1485,4 +1534,41 @@ main.creator {
     -webkit-transition: opacity .3s ease-out;
        -moz-transition: opacity .3s ease-out;
             transition: opacity .3s ease-out;
+}
+.parallax-layer-artworks {
+    //-webkit-text-stroke: 0.02em rgba($primary-color, 1.0);
+    $top: 40vh;
+    font-size: 10vw;
+    min-width: 100%;
+    text-align: center;
+    text-indent: -15vw;
+    //z-index: 1000;
+    //transform: scale(0.8) translateZ(0.36px);
+    @include breakpoint(medium) {
+      text-indent: -20vw;
+      font-size: 6vw;
+      padding-left: $logo-height * $IPHI * 1;
+      padding-right: $logo-height * $IPHI * 1;
+      //-webkit-text-stroke: 0.02em rgba($primary-color, 0.9);
+    }
+    &:nth-child(2) {
+        top: calc(40vh + 3.4vw);
+        transform: scale(0.6) translateX(.64em) translateZ(0.4px);
+        color: #85d;
+    }
+    &:nth-child(3) {
+        top: calc(40vh + 1.3vw);
+        transform: scale(0.5) translateX(.32em) translateZ(0.5px);
+        color: $secondry-color;
+    }
+    &.static {
+        //position: sticky;
+        top: 40vh;
+        color:$primary-color;
+        transform: scale(0.4) translateX(0.4px) translateZ(0.6px);
+
+    -webkit-transition: opacity 1s ease-out;
+       -moz-transition: opacity 1s ease-out;
+            transition: opacity 1s ease-out;
+    }
 }
