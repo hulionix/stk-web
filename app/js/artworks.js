@@ -673,7 +673,7 @@ const dataObjs = [
 
   {
     image: "Anger-Hunger",
-    title: "Anger Hunger",
+    title: "Looking For Trouble",
     tags: "3d",
     vimeoID: "",
     width: 500,

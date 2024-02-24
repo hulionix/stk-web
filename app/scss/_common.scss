@@ -246,6 +246,11 @@ figure {
             &::before {
                 top: math.div($nav-button-height, 2) - 3;
             }
+            &.active-light {
+                svg {
+                    fill: $secondry-color;
+                }
+            }
         }
     }
     .nav-right-button.active, .nav-right-button.active * {
@@ -273,7 +278,7 @@ figure {
     }
 
     .nav-right-button.active-light svg {
-        fill: $secondry-color;
+        fill: $primary-color;
         -ms-transform: translateZ(2px) rotate(90deg + 45deg);
         -webkit-transform: translateZ(2px) rotate(90deg + 45deg);
         transform: translateZ(2px) rotate(90deg + 45deg);
