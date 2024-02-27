@@ -89,13 +89,9 @@ $( function() {
                 if (loaded == total && isFinished == false) {
                     isFinished = true;
                     var end = new Date().getTime();
-                    var time = end - start; 
-                    console.log("time " + time / 1000);
+                    var time = end - start;
                     finished(time / 1000);
                 }
-            };
-            tempImage.onerror = function(){ 
-                console.log("error");
             };
         }
     }
@@ -484,6 +480,7 @@ $( function() {
         }
 
         // Preload previous
+        // Possible bug: calling setActiveSlide(1) when closing the viewer, maybe a scroll event is triggered. nothing major happening since the viewer is resetting.
         if (hScroll === 0 && sliderData.currentSlide > 0) {
             let advance = -1;
             if (sliderData.currentSlide == sliderData.maxSlides) advance = -2;
@@ -537,9 +534,10 @@ $( function() {
           lastVideoId = '';
         }
         let slide = $slider.children().eq(id);
+        let slideId = slide.attr('id');
         let iframes = slide.find('iframe');
         if (iframes.length) {
-          lastVideoId = slide.attr('id');
+          lastVideoId = slideId;
         }
     }
     $("main.showcase .viewer").on('close', function() {
@@ -607,11 +605,29 @@ $( function() {
         }
     }
 
+    function loadImage(src, onLoad = {}, onError = {}) {
+        var tempImage = new Image();
+            tempImage.src = src;
+            tempImage.fetchPriority = "high";
+            tempImage.onload = onLoad ;
+            tempImage.onerror = onError;
+    }
+
     function getSlideFor(id) {
         if (id < 0 || id > sliderData.maxSlides) return "";
-    
+        let src = "/assets/content/" +dataObjs[id].image + ".png";
+        let onLoad = function() {
+                let slide = $(`#${id}-slide`);
+                slide.addClass('loaded');
+                let image = slide.find('.image-content');
+                if (image.length) {
+                    showTime(image[0], 0);
+                }
+        };
+        let onError = {};
+        loadImage(src, onLoad, onError);
         let obj = dataObjs[dataSources[sliderData.dataSourceId][id]];
-        let content = `<img src="/assets/content/${obj.image}.png" class="image-content"/>`;
+        let content = `<img fetchpriority="high" src="/assets/content/${obj.image}.png" class="image-content"/>`;
         if (obj.vimeoID != '') {
             content = `<iframe id="${obj.vimeoID}" class="video-content" src="https://player.vimeo.com/video/${obj.vimeoID}?dnt=1&color=b7b8b9&title=0&byline=0&portrait=0" width="${obj.width}" height="${obj.height}" frameborder="0" webkitallowfullscreen mozallowfullscreen allowfullscreen></iframe>`;
         }

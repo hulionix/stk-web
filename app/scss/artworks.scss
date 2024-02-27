@@ -1097,6 +1097,9 @@ main.showcase {
       &.active {
             @extend .loader;
         //opacity: 1;
+            .card .image-content {
+                opacity: 0.00001 !import;
+            }
       }
 
       .card {
@@ -1137,6 +1140,7 @@ main.showcase {
           z-index: 1000;
           max-width: 100%;
           max-height: 100%;
+          transform: translateZ(1px);
         }
 
         .video-content {
@@ -1145,10 +1149,12 @@ main.showcase {
 
         .image-content {
           position: relative;
-          box-shadow: 0px 20px 20px #0005;
+          //box-shadow: 0px 20px 20px #0005;
           max-width: 100%;
           height: auto;
             //object-fit: contain;
+            @include showTime(0.5s);
+
         }
         .overlay {
           top: 0;
@@ -1765,6 +1771,8 @@ $layer-show-time: 1s;
         margin-left: calc(var(--box-width) * -0.5);
         margin-top: calc(var(--box-width) * -0.5);
         opacity: 1;
+        animation-play-state: running;
+        will-change: opacity, animation-play-state;
         -webkit-transition: opacity 1s ease, animation-play-state 1s ease;
            -moz-transition: opacity 1s ease, animation-play-state 1s ease;
                 transition: opacity 1s ease, animation-play-state 1s ease;
@@ -1772,8 +1780,8 @@ $layer-show-time: 1s;
 
 
 .loaded::before, .loaded::after {
-    animation-play-state: paused;
-    opacity: 0;
+    animation-play-state: paused !important;
+    opacity: 0 !important;
 }
 
 .loader::before {
