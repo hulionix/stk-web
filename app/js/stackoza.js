@@ -227,7 +227,12 @@ $(document).ready(function() {
 });
 
 function showTime(selector, delay) {
-    setTimeout(function () { $(selector).addClass("showing"); }, delay);
+
+    setTimeout(function () { 
+        requestAnimationFrame(function() { 
+            $(selector).addClass("showing"); 
+        });
+    }, delay);
 }
 
 function toggleActive(css = "active") {

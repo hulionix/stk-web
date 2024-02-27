@@ -5,7 +5,7 @@ title: STACKOZA // ARTWORKS
 style: artworks
 ---
 {% assign cacheBust = site.time | date:'?v=%s' %}
-<main class="showcase" >
+<main class="showcase loader" data-value="loading">
 	<div class="bg-balls">
 		<!-- <div class="ball s3"></div> -->
 		<!-- <div class="ball s4"></div> -->
@@ -28,10 +28,11 @@ style: artworks
 			<a class="prev"></a>
 		</div>
 	</section>
+	<!-- <div class="loader showing"><span>loading</span></div> -->
+	<div class="parallax-layer parallax-layer-orbit"><div class="inner-orbit"></div></div>
 	<div class="parallax">
 		<!-- <div class="bg-image-2 parallax-layer-back"><img src="/assets/images/bg-2.png"/></div> -->
 		<div class="parallax-group">
-			<div class="parallax-layer parallax-layer-orbit"></div>
 			<div class="parallax-layer parallax-layer-white"></div>
 			<div class="parallax-layer parallax-layer-red"></div>
 			<div class="parallax-layer parallax-layer-green"></div>
@@ -45,12 +46,14 @@ style: artworks
 		</section>
 		<div class="parallax-group">
 			<div class="parallax-layer parallax-layer-smile"></div>
-			<div class="parallax-layer parallax-layer-artworks">artworks</div>
-			<div class="parallax-layer parallax-layer-artworks">artworks</div>
-			<div class="parallax-layer parallax-layer-artworks static">artworks</div>
+
 		</div>
 	</div>
-
+	<div class="parallax-layer parallax-layer-artworks">
+				<h2>artworks</h2>
+				<h2>artworks</h2>
+				<h2>artworks</h2>
+	</div>
 	<!-- <div class="glass"></div>
 	<div class="bottom-fade"></div> -->
 	<header class="top">

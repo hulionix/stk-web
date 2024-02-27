@@ -308,8 +308,13 @@ figure {
             margin: 0
         }
         svg {
+
+          -webkit-transition: fill-opacity 3s ease-in-out;
+             -moz-transition: fill-opacity 3s ease-in-out;
+                  transition: fill-opacity 3s ease-in-out;
             width: 100%;
             fill: $primary-color;
+            fill-opacity: 1;
         }
 
         &.active, &.active * {
@@ -326,6 +331,7 @@ figure {
     
         &.active-light svg * {
             fill: $primary-color;
+            fill-opacity: 0.5;
         }
         
         @extend .clearfix;
@@ -682,8 +688,8 @@ svg.loader .square {
         @include showTime(1s);
         a {
             display: block;
-            width: 23px;
-            height: 23px;
+            width: 24px;
+            height: 24px;
             margin-top: 18px;
             pointer-events: all;
             text-decoration: none;
@@ -772,7 +778,7 @@ svg.loader .square {
   }
 
 .copyright-note {
-    margin-left: -5px;
+    margin-left: -3px;
     .curved-note {
         display: block;
     }

@@ -39,7 +39,65 @@ $( function() {
         }
 
         prepareData();
-        showPage(filter);
+        loadPage(function (time) {
+            let wait = Math.max(2 - time, 0) * 1000;
+            setTimeout(function () {
+                requestAnimationFrame(function() {
+                    $('main.showcase').addClass("loaded");
+                });
+                setTimeout(function () { 
+                    $('main.showcase').removeClass("loader");
+                    $('main.showcase').removeClass("loaded");
+                    showPage(filter); 
+                }, 1000);
+            }, wait); 
+        });
+        
+    }
+
+    function loadPage(finished) {
+        var start = new Date().getTime();
+        let list = [
+            "/assets/images/bg-obj-white.png",
+            "/assets/images/bg-obj-red.png",
+            "/assets/images/bg-obj-green.png",
+            "/assets/images/bg-obj-smile.png",
+            "/assets/content/Twisted-Dream-2.png"
+        ];
+        for (let i = 0, l = dataObjs.length; i < Math.min(l, 3); i++) {
+            list.push("/assets/content/" + dataObjs[i].image + "-mini.png");
+        }
+
+        let loaded = 0;
+        let total = list.length;
+        let isFinished = false;
+
+        setTimeout(function () {
+            if (loaded != total && isFinished == false) {
+                isFinished = true;
+                finished(20);
+
+            }
+        }, 20000);
+
+        for (let i = 0; i < list.length; i++) {
+
+            var tempImage = new Image();
+            tempImage.src = list[i];
+            tempImage.onload = function(){
+                loaded += 1;
+                if (loaded == total && isFinished == false) {
+                    isFinished = true;
+                    var end = new Date().getTime();
+                    var time = end - start; 
+                    console.log("time " + time / 1000);
+                    finished(time / 1000);
+                }
+            };
+            tempImage.onerror = function(){ 
+                console.log("error");
+            };
+        }
     }
 
     // Prepare gallery data
@@ -71,6 +129,8 @@ $( function() {
         $(elem).css({transform: `translate(${targetX}px, ${targetY}px) translateZ(${z}px)`});
     }
     // To ScrollAnimation
+    //scrollOpacity(orbitBG, 1, 0.0, 250, scroll);
+    //scrollOpacity(topHeader, 1.0, 0.0, 250, scroll);
     function scrollOpacity( elem, opacityInitial, opacityTarget, targetScroll, scroll ) {
         const scrollRatio = Math.min(targetScroll, scroll) / targetScroll;
         const opacity = opacityInitial + ((opacityTarget - opacityInitial) * scrollRatio);
@@ -86,26 +146,39 @@ $( function() {
     }
 
 
-    // (function(){
-    //   scrollOpacity(title, 0.0, 100, window.scrollY);
-    //   setTimeout(arguments.callee, 1000);
-    // })();
-  
-    // ScrollAnimation User
     var ticking = false;
     function onParallaxScroll() {
       ticking = ticking || requestAnimationFrame(windowScroll); 
     }
     parallax.scroll(onParallaxScroll);
 
-    let artworksTitle = $(".parallax-layer-artworks")
+    let artworksTitle = $(".parallax-layer-artworks h2")
     let artworksShowing = true;
+    let orbitBGShowing = true;
     function windowScroll() {
         ticking = false;
         let scroll = parallax.scrollTop();
-        if (orbitBG.currentOpacity > 0 || scroll < 250 ) {
-            scrollOpacity(orbitBG, 1, 0.0, 250, scroll);
-            scrollOpacity(topHeader, 1.0, 0.0, 250, scroll);
+        if (orbitBGShowing == false && scroll < 200 ) {
+            orbitBGShowing = true;
+            $(topHeader).addClass("showing");
+            $(orbitBG).addClass("showing");
+        }
+
+        if (orbitBGShowing == true && scroll > 0 ) {
+            orbitBGShowing = false;
+            $(topHeader).removeClass("showing");
+            $(orbitBG).removeClass("showing");
+        }
+        // ----------------------------------------------------
+        if (artworksShowing == false && scroll < 150 ) {
+            artworksShowing = true;
+            $(artworksTitle).addClass("showing");
+        }
+
+        if (artworksShowing == true && scroll > 0 ) {
+            artworksShowing = false;
+            $(artworksTitle).removeClass("showing");
+
         }
         
     }
@@ -122,10 +195,18 @@ $( function() {
       
     // Page intro animation
     function showPage(filter) {
-        showTime('header.top', 2000);
+        //return;
+        showTime('.parallax-layer-smile', 600);
+        showTime('.parallax-layer-artworks h2', 2300);
+        showTime('.parallax-layer-white', 600);
+        showTime('.parallax-layer-orbit', 1800);
+        showTime('.parallax-layer-green', 1000);
+        showTime('.parallax-layer-red', 2500);
+
+        showTime('header.top', 1000);
         showTime('.filter-buttons', 2500);
         showTime('.end', 1500);
-        setTimeout(function () { showFilter(filter); }, 1000);
+        setTimeout(function () { showFilter(filter); }, 500);
         parallax.animate({ scrollTop: 0 }, 500, function() {
           windowScroll();
         });
@@ -1837,8 +1918,8 @@ const dataObjs = [
       title: "Sonic Curtain",
       tags: "code",
       vimeoID: "",
-      width: 500,
-      height: 352,
+      width: 374,
+      height: 500,
       nftURL: ""
     },
     {
@@ -1855,8 +1936,17 @@ const dataObjs = [
       title: "Shiny Celestial Dust",
       tags: "code",
       vimeoID: "",
-      width: 348,
-      height: 280,
+      width: 374,
+      height: 500,
+      nftURL: ""
+    },
+    {
+      image: "Night-At-The-Pyramids",
+      title: "Night At The Pyramids",
+      tags: "code",
+      vimeoID: "",
+      width: 374,
+      height: 500,
       nftURL: ""
     },
     {
@@ -1864,8 +1954,8 @@ const dataObjs = [
       title: "Data Waves",
       tags: "code",
       vimeoID: "",
-      width: 500,
-      height: 395,
+      width: 374,
+      height: 500,
       nftURL: ""
     },
     // {

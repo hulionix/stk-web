@@ -94,9 +94,9 @@
 @mixin showTime($time) {
   opacity: 0;
 
-  -webkit-transition: opacity ($time) ease-in-out;
-  -moz-transition: opacity ($time) ease-in-out;
-  transition: opacity ($time) ease-in-out;
+  -webkit-transition: opacity ($time) ease;
+  -moz-transition: opacity ($time) ease;
+  transition: opacity ($time) ease;
 
   &.showing {
   opacity: 1;
@@ -106,11 +106,9 @@
 
 @mixin showTimeY($time, $yPos) {
   opacity: 0;
-  transform: translateY($yPos);
-
   -webkit-transition: opacity ($time) ease-in, transform $time ease-out;
-  -moz-transition: opacity ($time) ease-in, transform $time ease-out;
-  transition: opacity ($time) ease-in, transform $time ease-out;
+     -moz-transition: opacity ($time) ease-in, transform $time ease-out;
+          transition: opacity ($time) ease-in, transform $time ease-out;
 
   &.showing {
   opacity: 1;
