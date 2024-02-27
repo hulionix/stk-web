@@ -675,7 +675,7 @@ main.showcase {
                 outline: $outline solid rgba($primary-color, 0.2);
                 background-color: rgba($primary-color, 0.03);
                 .card {
-                    outline: $outline solid rgba($primary-color, 0.1);
+                    outline: ($outline * 0.6) solid rgba($primary-color, 0.1);
                     //border-bottom: $outline solid #333;
                 }
               }
@@ -708,8 +708,8 @@ main.showcase {
                 $item-width-ratio: math.div($item-width, 100);
                 --grid-item-width: min(#{$item-width}vw, #{$max-width * $item-width-ratio});
                 --grid-column-width: min(#{$column-width}vw, #{$max-width * $column-width-ratio});
-                --grid-cross-width: calc(var(--grid-column-width) * 0.1);
-                --grid-cross-half-width: calc(var(--grid-column-width) * 0.05);
+                --grid-cross-width: calc(var(--grid-column-width) * 0.08);
+                --grid-cross-half-width: calc(var(--grid-column-width) * 0.04);
                 $grid-cross-offset: #{math.div($h-margin, $item-width) * 100} + 0%;
                 --grid-cross-h-offset: calc(-#{$grid-cross-offset} - var(--grid-cross-half-width));
                 &:before, &:after {
@@ -767,7 +767,7 @@ main.showcase {
                 //height: 25vw;
                 margin: 3%;
                 @include grid-item-width(3, 3);
-                padding: calc(var(--grid-item-width) * 0.1);
+                padding: calc(var(--grid-item-width) * 0.13);
                 outline: $outline solid rgba($primary-color, 0.1);
                 background-color: transparent;
 
@@ -1778,8 +1778,9 @@ main.showcase {
 
     &.loader:before {
         border-radius: 500px;
-        outline: .15em solid rgba($primary-color, 0.2);
-        border: 0.4em solid $bg-page;
+        box-shadow: 0 0 calc(var(--box-width) * 0.2) rgba(#ae92ff, 0.8) inset;
+        //outline: .2em solid rgba($primary-color, 0.3);
+        //border: 0.4em solid $bg-page;
         background-image: radial-gradient(
             rgba(#55f, 1) 10%,
             rgba(#44f, 0) 45%,
@@ -1800,22 +1801,38 @@ main.showcase {
             rgba($secondry-color, 0.8) 75%,
             rgba(#54a, 1) 100%
         );
+        $colorA: rgba(#54a, 1);
+        $colorB: rgba($bg-page, 1);
+        background-image: 
+        radial-gradient(#44f 10%, rgba(#44f, 0) 55%), 
+        radial-gradient($secondry-color 10%, rgba($secondry-color, 0) 45%), 
+        radial-gradient(#e0b9fa 10%, rgba(#e0b9fa, 0) 45%), 
+        radial-gradient(#9ec0f1 10%, rgba(#9ec0f1, 0) 45%), 
+        radial-gradient(#0eca52 10%, rgba(#0eca52, 0) 45%),
+        linear-gradient(
+            180deg,
+            $colorB  0%, $colorB 5%,
+            $colorA 20%, $colorA 30%,
+            $colorB 45%, $colorB 55%,
+            $colorA 70%, $colorA 80%,
+            $colorB 95%, $colorB 100%);
         background-repeat: no-repeat;
         background-size: 
-        80% 80%, 
-        80% 80%, 
-        80% 80%,  
+        80% 80%,
+        80% 80%,
+        80% 80%,
+        80% 80%,
         80% 80%,
         100% 200%;
         background-position: 
-        50% 50%, 
-        50% 50%, 
-        50% 50%, 
-        50% 50%, 
-        center 0%;
+        50% 50%,
+        50% 50%,
+        50% 50%,
+        50% 50%,
+        50% 50%,
+        center top;
         z-index: 2;
 
-        box-shadow: 0 0 calc(var(--box-width) * 0.3) rgba(#3b00d6, 1) inset;
         
         animation: loader-grad 1.5s linear forwards 0s infinite;
     }
@@ -1824,37 +1841,40 @@ main.showcase {
         0% {
             transform: rotate(0deg);
             background-position: 
-            150% -160%,
+            300% 250%,
             50% 200%,
-            100% -200%,
+            180% bottom,
             -150% 160%,
-            top center;
+            -50% -160%,
+            center top;
         }
 
         50% {
             transform: rotate(180deg);
             background-position: 
-            150% 120%,
-            -250% 160%,
-            -100% 200%,
+            -200% 250%,
+            -150% 160%,
+            180% top,
             -150% -120%,
-            center center;
+            50% -120%,
+            center 50%;
         }
         100% {
             transform: rotate(360deg);
             background-position:
-            150% -160%,
+            300% 250%,
             50% 200%,
-            100% -200%,
+            180% bottom,
             -150% 160%,
-            bottom center;
+            -50% -160%,
+            center bottom;
         }
     }
 
 
     &.loader::after {
-        outline: .1em solid transparent;
-        border: 0.4em solid transparent;
+        //outline: .1em solid transparent;
+        //border: 0.4em solid transparent;
         display: block;
         line-height: var(--box-width);
         font-size: calc(var(--box-width) * 0.25);
