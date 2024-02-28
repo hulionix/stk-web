@@ -309,9 +309,9 @@ figure {
         }
         svg {
 
-          -webkit-transition: fill-opacity 3s ease-in-out;
-             -moz-transition: fill-opacity 3s ease-in-out;
-                  transition: fill-opacity 3s ease-in-out;
+          -webkit-transition: fill-opacity 2s ease;
+             -moz-transition: fill-opacity 2s ease;
+                  transition: fill-opacity 2s ease;
             width: 100%;
             fill: $primary-color;
             fill-opacity: 1;
@@ -329,9 +329,9 @@ figure {
             fill: $master-color;
         }
     
-        &.active-light svg * {
+        &.active-light svg {
             fill: $primary-color;
-            fill-opacity: 0.5;
+            fill-opacity: 0.3;
         }
         
         @extend .clearfix;
@@ -750,32 +750,38 @@ svg.loader .square {
     }
  }
 
- body.active-light {
+body.active {
+    .copyright-note textPath, .copyright-note tspan {
+        pointer-events: none;
+        fill: rgba($master-color, 0.6);
+    }
+    .copyright-name {
+        fill: rgba($master-color, 0.7);
+    }
+}
+
+body.active-light {
     .social-links a {
         display: none;
     }
- }
 
- body.active {
-      .copyright-note textPath, .copyright-note tspan {
-        pointer-events: none;
-        fill: rgba($master-color, 0.6);
-      }
-      .copyright-name {
-        fill: rgba($master-color, 0.7);
+    .copyright-note textPath, .copyright-note tspan {
+        fill: $primary-color;
+        fill-opacity: 0.3;
     }
- }
+}
 
-  main.four-o-four {
-      text-align: center;
-      min-height: 100vh;
-      min-height: 100dvh;
-      .artworks-button {
-          margin: 30vh auto 0;
-          font-size: 6em;
-          display: inline-block;
-      }
-  }
+main.four-o-four {
+    text-align: center;
+    min-height: 100vh;
+    min-height: 100dvh;
+    
+    .artworks-button {
+        margin: 30vh auto 0;
+        font-size: 6em;
+        display: inline-block;
+    }
+}
 
 .copyright-note {
     margin-left: -3px;

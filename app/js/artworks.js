@@ -1,8 +1,8 @@
 $( function() {
     let $grid = $('.grid');
+    let $end = $(".end");
     let firstRun = true;
     let collectLink = $(".collect-link");
-    let $end = $(".end");
     let title = document.querySelector('.artworks-button');
     //let bgImage = document.querySelector('.bg-image-2');
     let s1 = document.querySelector('.bg-balls .s1');
@@ -20,6 +20,16 @@ $( function() {
     let currentFilter = '';
     let dataSources = {'all': [], 'nft': [], '2d': [], '3d': [], 'code': [], 'animation': [], 'procreate': []};
     let sliderIsOn = false;
+    let pages = {
+        totalPages: 1,
+        totalItems: 1,
+        itemsPerPage: (3*2 /* Grid Cols */) * 2, // change last to get full rows in 2/3 col grid
+        currentPage: 1
+    }
+    let pageObserver = new IntersectionObserver(observedPageItem, { 
+        root: document.querySelector('main.showcase'),
+        threshold: 0
+    });
     main();
 
     function main() {
@@ -39,8 +49,8 @@ $( function() {
         }
 
         prepareData();
-        loadPage(function (time) {
-            let wait = Math.max(2 - time, 0) * 1000;
+        preLoadPage(function (loadingTime) {
+            let wait = Math.max(3 - loadingTime, 0) * 1000;
             setTimeout(function () {
                 requestAnimationFrame(function() {
                     $('main.showcase').addClass("loaded");
@@ -55,7 +65,19 @@ $( function() {
         
     }
 
-    function loadPage(finished) {
+    // Prepare gallery data
+    function prepareData() {
+      for (let i = 0; i < dataObjs.length; i++) {
+          let data = dataObjs[i];
+          let tags = data['tags'].split(" ");
+          for (const tag of tags) { 
+              dataSources[tag].push(i);
+          }
+          dataSources["all"].push(i);
+      }
+    }
+
+    function preLoadPage(finished) {
         var start = new Date().getTime();
         let list = [
             "/assets/images/bg-obj-white.png",
@@ -72,19 +94,15 @@ $( function() {
         let total = list.length;
         let isFinished = false;
 
-        setTimeout(function () {
+        setTimeout(function () { // show page anyway after 20s, too slow connection 🤷
             if (loaded != total && isFinished == false) {
                 isFinished = true;
                 finished(20);
-
             }
         }, 20000);
 
         for (let i = 0; i < list.length; i++) {
-
-            var tempImage = new Image();
-            tempImage.src = list[i];
-            tempImage.onload = function(){
+            let onLoad = function(){
                 loaded += 1;
                 if (loaded == total && isFinished == false) {
                     isFinished = true;
@@ -93,107 +111,69 @@ $( function() {
                     finished(time / 1000);
                 }
             };
+
+            loadImage(list[i], onLoad);
         }
     }
 
-    // Prepare gallery data
-    function prepareData() {
+    // Pagination - start
+    function addGridItems(startIndex, endIndex) {
+        let all = dataSources[currentFilter].length;
+        if (startIndex >= all || startIndex < 0 || 
+            endIndex   >= all || endIndex < 0) {
+            return;
+        }
 
-      for (let i = 0; i < dataObjs.length; i++) {
-          let data = dataObjs[i];
-          let tags = data['tags'].split(" ");
-          for (const tag of tags) { 
-              dataSources[tag].push(i);
-          }
-          dataSources["all"].push(i);
+        let items = "";
+        for (let i = startIndex; i <= endIndex; i++) {
+            let itemId = dataSources[currentFilter][i];
+            let data = dataObjs[itemId];
+            items += getGridItemFor(data, i);
+        }
+
+        $grid.append(items);
+        $(window).trigger("resize");
+        const last = $(".grid article").last().get(0);
+        pageObserver.observe(last);
+    }
+
+    function pageEnd() {
+        if (pages.totalPages == pages.currentPage) { // nothing to do
+            return;
+        }
+        //display new items
+        let start = pages.itemsPerPage * (pages.currentPage);
+        let remaining = pages.totalItems - start;
+        let itemsPerPage = Math.min(pages.itemsPerPage, remaining);
+        let end = start + itemsPerPage - 1;
+
+        addGridItems(start, end);
+
+        pages.currentPage += 1;
+        if (pages.totalPages == pages.currentPage) { // prepare last page
+            // replace loader with end
+
+            return;
+        }
+    }
+
+    function observedPageItem(entries) {
+      if (entries.length) {
+        let entry = entries[0];
+        if (entry.isIntersecting == true) {
+            pageObserver.unobserve(entry.target);
+            pageEnd();
+        } 
       }
-
-  }
-
-  
-
-    // To ScrollAnimation
-    function scrollTranslateXYZ( elem, targetXMax, targetYMax, targetScroll, z, scroll ) {
-        const targetY = (targetYMax / targetScroll) * (scroll);
-        const targetX = (targetXMax / targetScroll) * (scroll);
-        elem.style.transform = `translate(${targetX}px, ${targetY}px) translateZ(${z}px)`;
     }
-    function scrollTranslateXYZ2( elem, targetXMax, targetYMax, targetScroll, z, scroll ) {
-        const targetY = (targetYMax / targetScroll) * (scroll);
-        const targetX = (targetXMax / targetScroll) * (scroll);
+    // Pagination - End
 
-        $(elem).css({transform: `translate(${targetX}px, ${targetY}px) translateZ(${z}px)`});
-    }
-    // To ScrollAnimation
-    //scrollOpacity(orbitBG, 1, 0.0, 250, scroll);
-    //scrollOpacity(topHeader, 1.0, 0.0, 250, scroll);
-    function scrollOpacity( elem, opacityInitial, opacityTarget, targetScroll, scroll ) {
-        const scrollRatio = Math.min(targetScroll, scroll) / targetScroll;
-        const opacity = opacityInitial + ((opacityTarget - opacityInitial) * scrollRatio);
-
-        elem.currentOpacity = opacity;
-        elem.style.opacity = `${elem.currentOpacity}`;
-    }
-
-    function scrollScale( elem, scaleInitial, scaleTarget, targetScroll, scroll ) {
-        const scrollRatio = Math.min(targetScroll, scroll) / targetScroll;
-        const targetScale = scaleInitial + ((scaleTarget - scaleInitial) * scrollRatio);
-        $(elem).css({transform: `scale(${targetScale}) translateZ(3px)`});
-    }
-
-
-    var ticking = false;
-    function onParallaxScroll() {
-      ticking = ticking || requestAnimationFrame(windowScroll); 
-    }
-    parallax.scroll(onParallaxScroll);
-
-    let artworksTitle = $(".parallax-layer-artworks h2")
-    let artworksShowing = true;
-    let orbitBGShowing = true;
-    function windowScroll() {
-        ticking = false;
-        let scroll = parallax.scrollTop();
-        if (orbitBGShowing == false && scroll < 200 ) {
-            orbitBGShowing = true;
-            $(topHeader).addClass("showing");
-            $(orbitBG).addClass("showing");
-        }
-
-        if (orbitBGShowing == true && scroll > 0 ) {
-            orbitBGShowing = false;
-            $(topHeader).removeClass("showing");
-            $(orbitBG).removeClass("showing");
-        }
-        // ----------------------------------------------------
-        if (artworksShowing == false && scroll < 150 ) {
-            artworksShowing = true;
-            $(artworksTitle).addClass("showing");
-        }
-
-        if (artworksShowing == true && scroll > 0 ) {
-            artworksShowing = false;
-            $(artworksTitle).removeClass("showing");
-
-        }
-        
-    }
-    // To Utils
-    function throttle(fn, wait) {
-        var time = Date.now();
-        return function() {
-          if ((time + wait - Date.now()) < 0) {
-            fn();
-            time = Date.now();
-          }
-        }
-      }
-      
-    // Page intro animation
+   // Page intro animation
     function showPage(filter) {
         //return;
         showTime('.parallax-layer-smile', 600);
         showTime('.parallax-layer-artworks h2', 2300);
+        setTimeout( function () { parallax.removeClass("no-scroll")}, 2310);
         showTime('.parallax-layer-white', 600);
         showTime('.parallax-layer-orbit', 1800);
         showTime('.parallax-layer-green', 1000);
@@ -203,23 +183,10 @@ $( function() {
         showTime('.filter-buttons', 2500);
         showTime('.end', 1500);
         setTimeout(function () { showFilter(filter); }, 500);
-        parallax.animate({ scrollTop: 0 }, 500, function() {
-          windowScroll();
-        });
-        visuals();
+        // parallax.animate({ scrollTop: 0 }, 500, function() {
+        //   windowScroll();
+        // });
     }
-  
-
-    // Handle special same page click on collect
-    collectLink.on('click', function () {
-        toggleActive();
-        $('.overlay-nav').fadeToggle(400, function (){
-            parallax.animate({ scrollTop: 0 }, 500, function() {
-              windowScroll();
-            });
-            showFilter("nft");
-        });
-    });
 
     // Show filtered gallery
     function showFilter(filter, delay = 500) {
@@ -248,12 +215,13 @@ $( function() {
         }
         firstRun = false;
         setTimeout(function () {
-            currentFilter = filter
-            $grid.children().remove();
+            currentFilter = filter;
+            pages.currentPage = 1;
+            pages.totalItems = dataSources[currentFilter].length;
+            pages.totalPages = Math.ceil(pages.totalItems / pages.itemsPerPage);
             
-            let added = 0;
-    
-            if (!dataSources.hasOwnProperty(filter)) {
+            $grid.children().remove();
+            if (!dataSources.hasOwnProperty(filter) && dataSources[filter].length > 0) {
                 let message = `<div class="message"><span class="text" style="margin-left: 0">This page isn't blank in some parallel universe.</span></div>`;
                 $grid.append(message);
                 $end.addClass('showing');
@@ -261,93 +229,83 @@ $( function() {
                 return;
             }
             let items = "";
-            dataSources[filter].forEach( i => {
-                let data = dataObjs[i];
-                items += getGridItemFor(data, i);
-                added += 1;
-            });
+            let start = 0;
+            let end = Math.min(dataSources[currentFilter].length, pages.itemsPerPage) - 1;
 
-            $grid.prepend(items);
-    
-            if (added === 0) {
-                $grid.append(getCryptoMessage());
-                $end.addClass('showing');
-                $grid.addClass('showing');
-                return;
-            }
-            $(window).trigger("resize");
-            // document.querySelectorAll(".grid article").forEach((elem) => {
-            //     if (elem) { observer.observe(elem); }
-            // });
+            addGridItems(start, end);
             $end.addClass('showing');
             $grid.addClass('showing');
           }, delay);
     }
 
-    // let observer = new IntersectionObserver(function(entries) {
-    //   for (let i = 0; i< entries.length; i++) {
-    //     let entry = entries[i];
-    //     if (entry.isIntersecting == true) {
-    //       entry.target.style.transform = `translateY(0px)`;
-    //     } else {
-    //       if (entry.boundingClientRect.top < 10) {
-    //         entry.target.style.transform = `translateY(-250px)`;
-  
-    //       } else {
-    //         entry.target.style.transform = `translateY(250px)`;
-    //       }
-    //     }
-    //   }
-      
-    // }, { threshold: [0.01] });
-
-    function getCryptoMessage() {
-      return `
-      <div class="message">
-        <img src="/assets/images/Metaverse.png" width="1500" height="2793 " />
-        <!--span class="text">FIRST DROP<span><img class="spinner-cw" src="/assets/images/soon-hollow.svg"/></span></span-->
-        <div class="drops">
-          <form action="https://icloud.us5.list-manage.com/subscribe/post?u=2907ec70735bb82d8366cf6b5&amp;id=aba3770b55" class="validate" target="_blank">
-            <h2 class="title">KNOW<br/>WHEN</h2>
-            <span class="small-title">plus more on future drops</span><span class="small-title">when you subscribe to</span><span class="small-title">the newsletter</span>
-            <div>
-              <label for="mce-EMAIL">Email Address</label>
-              <input type="email" name="EMAIL" id="mce-EMAIL" title="The domain part is invalid." placeholder="Email" required>
-            </div>
-              <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_2907ec70735bb82d8366cf6b5_aba3770b55" tabindex="-1" value=""></div>
-              <div class="mc-status"></div>
-              <div><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
-          </form>
-          <script type='text/javascript' src='/assets/js/validate.js'></script>
-        </div>
-      </div>
-      
-      `
+    // Utils
+    function loadImage(src, onLoad = {}, onError = {}) {
+        var tempImage = new Image();
+            tempImage.src = src;
+            tempImage.fetchPriority = "high";
+            tempImage.onload = onLoad ;
+            tempImage.onerror = onError;
     }
 
-    function visuals() {
-      var postImage = new Image();
-      postImage.src = "/assets/content/Luna.png"
-      postImage.onload = function(){
-        //$(".bg-image img").attr("src", postImage.src).addClass("showing");
-        
-      };
-    }
-
-    // To Utils, helper to get gallery image sizes
-    function imageSizes() {
-        let loaded = 0;
-        let total = dataObjs.length;
-        for (let i = 0; i < dataObjs.length; i++) {
-            var postImage = new Image();
-            postImage.src = "/assets/content/" + dataObjs[i].image + "-mini.png"
-            postImage.onload = function(){
-                dataObjs[i].width = this.width;
-                dataObjs[i].height = this.height;
-                loaded += 1;
-            };
+    function throttle(fn, wait) {
+        var time = Date.now();
+        return function() {
+          if ((time + wait - Date.now()) < 0) {
+            fn();
+            time = Date.now();
+          }
         }
     }
+
+    // window scrolling effects
+    var ticking = false;
+    function onParallaxScroll() {
+      ticking = ticking || requestAnimationFrame(windowScroll); 
+    }
+    parallax.scroll(onParallaxScroll);
+
+    let artworksTitle = $(".parallax-layer-artworks h2");
+    let artworksShowing = true;
+    let orbitBGShowing = true;
+    function windowScroll() {
+        ticking = false;
+        let scroll = parallax.scrollTop();
+
+        if (orbitBGShowing == false && scroll < 200 ) {
+            orbitBGShowing = true;
+            $(topHeader).addClass("showing");
+            $(orbitBG).addClass("showing");
+        }
+
+        if (orbitBGShowing == true && scroll > 0 ) {
+            orbitBGShowing = false;
+            $(topHeader).removeClass("showing");
+            $(orbitBG).removeClass("showing");
+        }
+        // ----------------------------------------------------
+        if (artworksShowing == false && scroll < 150 ) {
+            artworksShowing = true;
+            $(artworksTitle).addClass("showing");
+        }
+
+        if (artworksShowing == true && scroll > 0 ) {
+            artworksShowing = false;
+            $(artworksTitle).removeClass("showing");
+
+        }
+    }
+  
+
+    // Handle special same page click on collect
+    collectLink.on('click', function () {
+        toggleActive();
+        $('.overlay-nav').fadeToggle(400, function (){
+            parallax.animate({ scrollTop: 0 }, 500, function() {
+              windowScroll();
+            });
+            showFilter("nft");
+        });
+    });
     
     // filter buttons
     $('.filters-button-group').on( 'click', 'button', function() {
@@ -371,7 +329,6 @@ $( function() {
     });
 
     $('.viewer a.next').click(nextSlide);
-
     $('.viewer a.prev').click(prevSlide);
 
     function nextSlide() {
@@ -605,24 +562,12 @@ $( function() {
         }
     }
 
-    function loadImage(src, onLoad = {}, onError = {}) {
-        var tempImage = new Image();
-            tempImage.src = src;
-            tempImage.fetchPriority = "high";
-            tempImage.onload = onLoad ;
-            tempImage.onerror = onError;
-    }
-
     function getSlideFor(id) {
         if (id < 0 || id > sliderData.maxSlides) return "";
         let src = "/assets/content/" +dataObjs[id].image + ".png";
         let onLoad = function() {
                 let slide = $(`#${id}-slide`);
                 slide.addClass('loaded');
-                let image = slide.find('.image-content');
-                if (image.length) {
-                    showTime(image[0], 0);
-                }
         };
         let onError = {};
         loadImage(src, onLoad, onError);
@@ -657,9 +602,7 @@ $( function() {
         if (obj.vimeoID != '') {
             playIcon = `<span class="play-icon"><svg width="100%" height="100%" viewBox="0 0 73 73"><path d="M72.886,36.189l-72.886,36.189l0,-72.378l72.886,36.189Z" style="fill:#000;"/></svg></span>`;
         }
-        //let xPos = randomPositiveOrNegative(-5, 5);
-        //  let yPos = randomPositiveOrNegative(-3, 3);
-        //let transform = makePrefixed('transform', `translate(${xPos}vh, ${yPos}vw)`);
+
         return `<article data-id="${id}" class="${obj.tags}">
                     ${playIcon}
                     <div class="card">
@@ -677,19 +620,29 @@ $( function() {
                 </article>`;
     }
 
-    function makePrefixed(property, value) {
-        return `-webkit-${property}: ${value};`+
-        `-moz-${property}: ${value};`+
-        `${property}: ${value};`;
+    function getCryptoMessage() {
+        return `
+        <div class="message">
+            <img src="/assets/images/Metaverse.png" width="1500" height="2793 " />
+            <!--span class="text">FIRST DROP<span><img class="spinner-cw" src="/assets/images/soon-hollow.svg"/></span></span-->
+            <div class="drops">
+              <form action="https://icloud.us5.list-manage.com/subscribe/post?u=2907ec70735bb82d8366cf6b5&amp;id=aba3770b55" class="validate" target="_blank">
+                <h2 class="title">KNOW<br/>WHEN</h2>
+                <span class="small-title">plus more on future drops</span><span class="small-title">when you subscribe to</span><span class="small-title">the newsletter</span>
+                <div>
+                  <label for="mce-EMAIL">Email Address</label>
+                  <input type="email" name="EMAIL" id="mce-EMAIL" title="The domain part is invalid." placeholder="Email" required>
+                </div>
+                  <div style="position: absolute; left: -5000px;" aria-hidden="true"><input type="text" name="b_2907ec70735bb82d8366cf6b5_aba3770b55" tabindex="-1" value=""></div>
+                  <div class="mc-status"></div>
+                  <div><input type="submit" value="Subscribe" name="subscribe" id="mc-embedded-subscribe" class="button"></div>
+              </form>
+              <script type='text/javascript' src='/assets/js/validate.js'></script>
+            </div>
+        </div>
+
+        `;
     }
-
-    function random (min, max) {
-        return Math.floor(Math.random() * (max - min + 1)) + min;
-      }
-
-      function randomPositiveOrNegative (min, max) {
-        return random(min, max) * (Math.random() > 0.5 ? 1 : -1)
-      }
 });
 
 const dataObjs = [

@@ -1088,151 +1088,162 @@ main.showcase {
       scroll-snap-align: center;
       //opacity: 0;
 
-      -webkit-transition: left 0.5s ease, opacity 0.5s ease-in-out;
-         -moz-transition: left 0.5s ease, opacity 0.5s ease-in-out;
-              transition: left 0.5s ease, opacity 0.5s ease-in-out;
-    transform: translateZ(1px);
-    will-change: left;
+      -webkit-transition: left 0.5s ease, opacity 0.5s ease;
+         -moz-transition: left 0.5s ease, opacity 0.5s ease;
+              transition: left 0.5s ease, opacity 0.5s ease;
+        transform: translateZ(1px);
+        will-change: left;
 
-      &.active {
-            @extend .loader;
-        //opacity: 1;
-            .card .image-content {
-                opacity: 0.00001 !import;
-            }
-      }
-
-      .card {
-        display: flex;
-        position: relative;
-        width: fit-content;
-        width: -moz-fit-content;
-        width: 100%;
-        margin: 0 auto;
-        padding: $logo-height * $IPHI * 5 0px 9em 0px;
-        -webkit-transition: none;
-        -moz-transition: none;
-        transition: none;
-        text-align: center;
-        overflow: visible;
-        height: 100vh;
-        height: 100dvh;
-        max-width: 900px;
-        border: 0px solid black;
-        border-radius: 0px;
+        .card {
+            display: flex;
+            position: relative;
+            width: fit-content;
+            width: -moz-fit-content;
+            width: 100%;
+            margin: 0 auto;
+            padding: $logo-height * $IPHI * 5 0px 9em 0px;
+            -webkit-transition: none;
+            -moz-transition: none;
+            transition: none;
+            text-align: center;
+            overflow: visible;
+            height: 100vh;
+            height: 100dvh;
+            max-width: 900px;
+            border: 0px solid black;
+            border-radius: 0px;
 
 
-        min-width: 300px;
-        min-height: 300px;
-        background: none;
-
-        @include breakpoint(medium) {
-          padding-top: $logo-height * $IPHI * 6
-        }
-        @media (hover: hover) {
-            &:hover {
-              transform: none;
-            }
-        }
-        .image-content, .video-content {
-          align-self: center;
-          margin: 0 auto;
-          z-index: 1000;
-          max-width: 100%;
-          max-height: 100%;
-          transform: translateZ(1px);
-        }
-
-        .video-content {
-          display: block;
-        }
-
-        .image-content {
-          position: relative;
-          //box-shadow: 0px 20px 20px #0005;
-          max-width: 100%;
-          height: auto;
-            //object-fit: contain;
-            @include showTime(0.5s);
-
-        }
-        .overlay {
-          top: 0;
-          left: 0;
-          width: 100%;
-          height: 100%;
-          -webkit-backdrop-filter: none;
-          backdrop-filter: none;
-          position: absolute;
-          bottom: 0;
-          @extend .cursor-close;
-        }
-        .title-container {
-            position: absolute;
-            left: 0;
-            right: 0;
-            bottom: $logo-height * $IPHI * 2.2;
-            top: auto;
-            border-top: none;
-            height: auto;
-          display: block;
-          max-width: 100%;
-          text-align: center;
-          transform: none;
-          animation: none;
-          animation-play-state: initial;
-          font-size: .8em;
-          background-color: transparent;
-          margin: 0 auto;
-          margin-top: -10em;
-          padding: 0 $logo-height * $IPHI * 2;
-          @extend .cursor-default;
-
-          @include breakpoint(medium) {
-            bottom: $logo-height * $IPHI * 2.5;
-          }
-
-          span {
-            line-height: 1.5em;
-            font-weight: 500;
-            color: $primary-color;
-            padding: 0 5px;
-          }
-
-          span::before, span::after {
-            content: '';
+            min-width: 300px;
+            min-height: 300px;
             background: none;
-            padding: 0;
-          }
+
+            @include breakpoint(medium) {
+              padding-top: $logo-height * $IPHI * 6
+            }
+            @media (hover: hover) {
+                &:hover {
+                  transform: none;
+                }
+            }
+            .image-content, .video-content {
+              align-self: center;
+              margin: 0 auto;
+              z-index: 1000;
+              max-width: 100%;
+              max-height: 100%;
+              transform: translateZ(1px);
+            }
+
+            .video-content {
+              display: block;
+            }
+
+            .image-content {
+                position: relative;
+                //box-shadow: 0px 20px 20px #0005;
+                max-width: 100%;
+                height: auto;
+                //object-fit: contain;
+                @include showTime(.5s);
+                opacity: 0.00001;
+
+            }
+
+            .overlay {
+              top: 0;
+              left: 0;
+              width: 100%;
+              height: 100%;
+              -webkit-backdrop-filter: none;
+              backdrop-filter: none;
+              position: absolute;
+              bottom: 0;
+              @extend .cursor-close;
+            }
+
+            .title-container {
+                position: absolute;
+                left: 0;
+                right: 0;
+                bottom: $logo-height * $IPHI * 2.2;
+                top: auto;
+                border-top: none;
+                height: auto;
+                display: block;
+                max-width: 100%;
+                text-align: center;
+                transform: none;
+                animation: none;
+                animation-play-state: initial;
+                font-size: .8em;
+                background-color: transparent;
+                margin: 0 auto;
+                margin-top: -10em;
+                padding: 0 $logo-height * $IPHI * 2;
+                @extend .cursor-default;
+
+                @include breakpoint(medium) {
+                    bottom: $logo-height * $IPHI * 2.5;
+                }
+
+                span {
+                    line-height: 1.5em;
+                    font-weight: 500;
+                    color: $primary-color;
+                    padding: 0 5px;
+                }
+
+                span::before, span::after {
+                    content: '';
+                    background: none;
+                    padding: 0;
+                }
+            }
+
+            .nft-url {
+                position: fixed;
+                width: 95%;
+                line-height: 3em;
+                height: 3em;
+                bottom: 25px;
+                border-radius: 50px;
+                margin: 0 auto;
+                left: 0;
+                right: 0;
+                max-width: 400px;
+                span {
+                padding: 5px 1em;
+                }
+
+                &::before {
+                    right: 0;
+                }
+
+                &::after {
+                    right: 0;
+                }
+            }
+            .overlay {
+                opacity: 1;
+            }
         }
 
-        .nft-url {
-          position: fixed;
-          width: 95%;
-          line-height: 3em;
-          height: 3em;
-          bottom: 25px;
-          border-radius: 50px;
-          margin: 0 auto;
-          left: 0;
-          right: 0;
-          max-width: 400px;
-          span {
-            padding: 5px 1em;
-          }
-
-          &::before {
-            right: 0;
-          }
-
-          &::after {
-            right: 0;
-          }
+        // loading state
+        &.active {
+            @extend .loader;
         }
-        .overlay {
-          opacity: 1;
+        &.loaded, &.active.loaded {
+            @extend .loaded;
+            .card .image-content {
+                opacity: 1;
+            }
         }
-      }
+
+        &::after {
+            opacity: 0;
+            animation-play-state: paused;
+        }
     }
 
     .controller {
@@ -1755,7 +1766,7 @@ $layer-show-time: 1s;
     overflow-y: scroll; 
 }
 
-.loader .parallax {
+.parallax.no-scroll {
     overflow-y: hidden;
 }
 .loader::before, .loader::after {
@@ -1771,7 +1782,7 @@ $layer-show-time: 1s;
         margin-left: calc(var(--box-width) * -0.5);
         margin-top: calc(var(--box-width) * -0.5);
         opacity: 1;
-        animation-play-state: running;
+        //animation-play-state: running;
         will-change: opacity, animation-play-state;
         -webkit-transition: opacity 1s ease, animation-play-state 1s ease;
            -moz-transition: opacity 1s ease, animation-play-state 1s ease;
@@ -1780,8 +1791,8 @@ $layer-show-time: 1s;
 
 
 .loaded::before, .loaded::after {
-    animation-play-state: paused !important;
-    opacity: 0 !important;
+    animation-play-state: paused;
+    opacity: 0;
 }
 
 .loader::before {
