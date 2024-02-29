@@ -50,7 +50,7 @@ $( function() {
 
         prepareData();
         preLoadPage(function (loadingTime) {
-            let wait = Math.max(3 - loadingTime, 0) * 1000;
+            let wait = Math.max(0 - loadingTime, 0) * 1000;
             setTimeout(function () {
                 requestAnimationFrame(function() {
                     $('main.showcase').addClass("loaded");
