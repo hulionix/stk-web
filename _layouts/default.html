@@ -7,7 +7,7 @@ layout: compress
 	{% include head.html %}
 	<link rel="stylesheet" href="/assets/css/{{ page.style }}.css?v={{ cacheBust }}">
 	<title>{{ page.title }}</title>
-	<body>
+	<body class="no-transitions">
 		{% include nav.html %}
 		{{ content }}
 		<!-- Last modified at: {{ site.time }} -->

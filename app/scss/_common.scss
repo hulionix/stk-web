@@ -119,6 +119,14 @@ body {
     min-width: 180px;
     min-height: 100vh;
     min-height: 100dvh;
+
+    &.no-transitions * {
+        -webkit-transition: none !important;
+      -moz-transition: none !important;
+      -ms-transition: none !important;
+      -o-transition: none !important;
+      transition: none !important;
+    }
 }
 
 
@@ -688,8 +696,8 @@ svg.loader .square {
         @include showTime(1s);
         a {
             display: block;
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             margin-top: 18px;
             pointer-events: all;
             text-decoration: none;

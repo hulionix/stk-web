@@ -99,6 +99,7 @@ void main() {
 
 `;
 
+
 $( function() {
     main();
 
@@ -140,6 +141,8 @@ $(document).ready(function() {
     var navButton = $(".nav-right-button");
     var gridItem = $(".grid article");
     var viewer = $("main.showcase .viewer");
+    
+    $("body").removeClass("no-transitions");
 
     navButton.on('click', function() {
         // Handle Viewer

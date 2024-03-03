@@ -1623,16 +1623,19 @@ $layer-show-time: 1s;
 
 }
 .parallax-layer-smile {
-    top: 10%;
-    right: 10%;
-    width: 70%;
-    min-height: 50vmin;
-    max-width: 90vh;
+    background-size: cover;
+    --height: min(80vh, min(90vw, #{$max-width * 0.9}));
+    top: 50vh;
+    right: 50%;
+    height: var(--height);
+    margin-top: calc(var(--height) * -0.55);
+    margin-right: calc(var(--height) * -0.5);
+    min-height: 300px;
     aspect-ratio: 1.1311594203;
     background-image: url("/assets/images/bg-obj-smile.png");
     transform: scale(0.8) translateY(10vh) translateZ(0.3px);
     @include breakpoint(medium) {
-        right: 20%;
+        //right: 10%;
     }
     $layer-show-time: 2s;
     will-change: opacity, transform;
@@ -1654,13 +1657,14 @@ $layer-show-time: 1s;
     margin: 0 auto;
     width: 90vmin;
     max-width: $max-width;
-    transform: scale(0) translateZ(-2px);
-    padding-top: 25vh;
+    transform: translateY(-20vh) rotateY(0) scale(0.001) translateZ(-2px);
+    transform-style: preserve-3d;
+    padding-top: 10vh;
     text-align: center;
     //filter: contrast(0.6);
     //box-shadow: 0.5em -0.5em 0px rgba($primary-color, 0.8);
     //outline: 2px solid rgba($primary-color, 0.3);
-    transform-origin: center 20%;
+    //transform-origin: center 20%;
     will-change: transform;
     -webkit-transition: transform $layer-show-time ease;
        -moz-transition: transform $layer-show-time ease;
@@ -1668,29 +1672,32 @@ $layer-show-time: 1s;
 
     .inner-orbit {
         width: 90vmin;
-        max-width: $max-width * 0.5;
+        max-width: $max-width;
         border-radius: 100%;
         aspect-ratio: 1.62083;
+        aspect-ratio: 1;
         opacity: 0;
         margin: 0 auto;
         $layer-show-time: 1.2s;
         will-change: opacity;
         @include showTime($layer-show-time);
 
-        background-image: url("/assets/content/Twisted-Dream-2.png");
-        background-size: cover;
-        transform: scale(1) rotate(-55deg) translateZ(-1px);
+        background-image: url("/assets/images/bg-circle.png");
+        background-size: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        //transform: scale(1) rotate(-55deg) translateZ(-1px);
     }
 
     &.showing {
-        transform: scale(1) translateY(0px) translateZ(-2px);
+        transform: translateY(0px) rotateY(0deg) scale(1) translateZ(-2px);
         .inner-orbit {
             opacity: 1;
         }
     }
 }
 .parallax-layer-artworks {
-    top: 40vh;
+    top: 50vh;
     left: -400%;
     right: -400%;
     width: 800%;
@@ -1698,10 +1705,15 @@ $layer-show-time: 1s;
         padding: 0;
         margin: 0 auto;
         font-size: 10vw;
-        text-indent: -40vw;
-        margin-bottom: -0.5em;
+        text-indent: -60vw;
+        margin-top: -0.5em;
         pointer-events: none;
         width: fit-content;
+        // background-color: rgba($bg-page, 0.0);
+        // line-height: 2em;
+        // -webkit-backdrop-filter: blur(10px);
+        // backdrop-filter: blur(10px);
+        // border: 0.02em solid rgba(255, 255, 255, 0.2);
 
         $new-time:0.5s;
 
@@ -1720,36 +1732,14 @@ $layer-show-time: 1s;
     //transform: scale(0.8) translateZ(0.36px);
     h2 {
         &:nth-child(1) {
-            color: transparent;
-            -webkit-text-stroke: 0.03em rgba($primary-color, .8);
-            transform: translateX(-5em);
+            // color: transparent;
+            // -webkit-text-stroke: 0.03em rgba($primary-color, .8);
+            color: rgba($primary-color, 0.8);
             transition-delay: 0s;
 
+            transform: translateX(-5em);
             &.showing {
                 transform: translateX(0em);
-            }
-            
-        }
-
-        &:nth-child(2) {
-            transform: translateX(-0.33em);
-            color: transparent;
-            -webkit-text-stroke: 0.03em rgba($primary-color, .8);
-            transition-delay: 0.1s;
-            &.showing {
-                transform: translateX(.33em);
-            }
-
-        }
-
-        &:nth-child(3) {
-            transform: translateX(-0.66em);
-            color: transparent;
-            -webkit-text-stroke: 0.03em rgba($primary-color, .8);
-            transition-delay: 0.2s;
-            //display: none;
-            &.showing {
-                transform: translateX(.66em);
             }
         }
     }
@@ -1758,7 +1748,7 @@ $layer-show-time: 1s;
         margin: 0 auto;
         //width: min(100vw, #{$max-width});
         h2 {
-            text-indent:0vw;
+            text-indent: -2em;
             font-size: 4vw;
 
             // &:nth-child(1) {
