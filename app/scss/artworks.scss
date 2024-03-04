@@ -1582,8 +1582,8 @@ $layer-show-time: 1s;
 .parallax-layer-red {
     top: 70%;
     right: 5%;
-    min-width: 15%;
-    min-height: 20%;
+    width: 15vmax;
+    max-width: $max-width * 0.15;
     aspect-ratio: 1;
     background-image: url("/assets/images/bg-obj-red.png");
     transform: scale(1.7) translateY(20vh) translateZ(-0.3px);
@@ -1596,14 +1596,15 @@ $layer-show-time: 1s;
             transition: opacity $layer-show-time ease, transform $layer-show-time ease;
 
     &.showing {
+        opacity: 0.8;
         transform: scale(1.7) translateY(0vh) translateZ(-0.3px);
     }
 
 }
 .parallax-layer-green {
     top: 35%;
-    left: 15%;
-    width: 20vmax;
+    left: 5%;
+    width: 20vmin;
     max-width: math.div($max-width, 3);
     aspect-ratio: 1;
     background-image: url("/assets/images/bg-obj-green.png");
@@ -1655,44 +1656,49 @@ $layer-show-time: 1s;
     top: 0;
     left: 0; right: 0; bottom: 0;
     margin: 0 auto;
-    width: 90vmin;
     max-width: $max-width;
-    transform: translateY(-20vh) rotateY(0) scale(0.001) translateZ(-2px);
+    max-height: 100vh;
+    max-height: 100dvh;
     transform-style: preserve-3d;
-    padding-top: 10vh;
     text-align: center;
-    //filter: contrast(0.6);
-    //box-shadow: 0.5em -0.5em 0px rgba($primary-color, 0.8);
-    //outline: 2px solid rgba($primary-color, 0.3);
-    //transform-origin: center 20%;
+    $layer-show-time: 1s;
     will-change: transform;
     -webkit-transition: transform $layer-show-time ease;
        -moz-transition: transform $layer-show-time ease;
             transition: transform $layer-show-time ease;
 
     .inner-orbit {
-        width: 90vmin;
+        position: absolute;
+        --height: min(95vh, min(95vw, #{$max-width * 0.9}));
+        height: var(--height);
+        top: 50%;
+        left: 0; right: 0;
+        margin: 0 auto;
+        margin-top: calc(var(--height) * -0.55);
         max-width: $max-width;
         border-radius: 100%;
         aspect-ratio: 1.62083;
         aspect-ratio: 1;
         opacity: 0;
-        margin: 0 auto;
-        $layer-show-time: 1.2s;
-        will-change: opacity;
+        will-change: opacity, transform;
         @include showTime($layer-show-time);
 
         background-image: url("/assets/images/bg-circle.png");
         background-size: 100%;
         background-position: center;
         background-repeat: no-repeat;
-        //transform: scale(1) rotate(-55deg) translateZ(-1px);
+        will-change: transform;
+        transform: rotate(180deg) scale(0.6);
+        -webkit-transition: opacity $layer-show-time ease, transform $layer-show-time ease;
+           -moz-transition: opacity $layer-show-time ease, transform $layer-show-time ease;
+                transition: opacity $layer-show-time ease, transform $layer-show-time ease;
     }
 
     &.showing {
-        transform: translateY(0px) rotateY(0deg) scale(1) translateZ(-2px);
+        //transform: rotate(0deg) translateZ(-2px);
         .inner-orbit {
             opacity: 1;
+            transform: rotate(0deg) scale(1);
         }
     }
 }
@@ -1737,7 +1743,7 @@ $layer-show-time: 1s;
             color: rgba($primary-color, 0.8);
             transition-delay: 0s;
 
-            transform: translateX(-5em);
+            transform: translateX(-10em);
             &.showing {
                 transform: translateX(0em);
             }

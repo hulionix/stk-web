@@ -84,7 +84,7 @@ $( function() {
             "/assets/images/bg-obj-red.png",
             "/assets/images/bg-obj-green.png",
             "/assets/images/bg-obj-smile.png",
-            "/assets/content/Twisted-Dream-2.png"
+            "/assets/images/bg-circle.png"
         ];
         for (let i = 0, l = dataObjs.length; i < Math.min(l, 3); i++) {
             list.push("/assets/content/" + dataObjs[i].image + "-mini.png");
