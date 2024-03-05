@@ -1596,36 +1596,14 @@ $layer-show-time: 1s;
             transition: opacity $layer-show-time ease, transform $layer-show-time ease;
 
     &.showing {
-        opacity: 0.8;
+        opacity: 0.9;
         transform: scale(1.7) translateY(0vh) translateZ(-0.3px);
     }
 
 }
-.parallax-layer-green {
-    top: 35%;
-    left: 5%;
-    width: 20vmin;
-    max-width: math.div($max-width, 3);
-    aspect-ratio: 1;
-    background-image: url("/assets/images/bg-obj-green.png");
-    transform: scale(1.5) translateY(-50vh) translateZ(-0.15px);
-    $layer-show-time: 3s;
-    will-change: opacity, transform;
-    @include showTime($layer-show-time);
-
-    -webkit-transition: opacity ($layer-show-time * 0.5) ease, transform $layer-show-time ease;
-       -moz-transition: opacity ($layer-show-time * 0.5) ease, transform $layer-show-time ease;
-            transition: opacity ($layer-show-time * 0.5) ease, transform $layer-show-time ease;
-
-    &.showing {
-        transform: scale(1.5) translateY(0vh) translateZ(-0.15px);
-    }
-
-
-}
 .parallax-layer-smile {
     background-size: cover;
-    --height: min(80vh, min(90vw, #{$max-width * 0.9}));
+    --height: min(80vh, min(80vw, #{$max-width * 0.8}));
     top: 50vh;
     right: 50%;
     height: var(--height);
@@ -1646,10 +1624,33 @@ $layer-show-time: 1s;
        -moz-transition: opacity $layer-show-time ease, transform $layer-show-time ease;
             transition: opacity $layer-show-time ease, transform $layer-show-time ease;
 
+    &::before {
+        position: absolute;
+        content: "";
+        width: 80%;
+        aspect-ratio: 1;
+        top: 0%;
+        left: 0%;
+        background-image: url("/assets/images/bg-obj-caustic.png");
+        background-size: cover;
+        opacity: 1;
+
+        $layer-show-time: 1s;
+        -webkit-transition: opacity $layer-show-time ease;
+           -moz-transition: opacity $layer-show-time ease;
+                transition: opacity $layer-show-time ease;
+    }
 
     &.showing {
         transform: scale(0.8) translateY(0vh) translateZ(0.3px);
     }
+
+    &.no-caustic {
+        &::before {
+            opacity: 0;
+        }
+    }
+
 
 }
 .parallax-layer-orbit {

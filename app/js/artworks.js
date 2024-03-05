@@ -176,6 +176,10 @@ $( function() {
         setTimeout( function () { parallax.removeClass("no-scroll")}, 2310);
         showTime('.parallax-layer-white', 600);
         showTime('.parallax-layer-orbit', 1800);
+        setTimeout( function () { 
+            $(".parallax-layer-smile").removeClass("no-caustic");
+        }, 1800);
+            
         showTime('.parallax-layer-green', 1000);
         showTime('.parallax-layer-red', 2500);
 
@@ -275,12 +279,14 @@ $( function() {
             orbitBGShowing = true;
             $(topHeader).addClass("showing");
             $(orbitBG).addClass("showing");
+            $(".parallax-layer-smile").removeClass("no-caustic");
         }
 
         if (orbitBGShowing == true && scroll > 0 ) {
             orbitBGShowing = false;
             $(topHeader).removeClass("showing");
             $(orbitBG).removeClass("showing");
+            $(".parallax-layer-smile").addClass("no-caustic");
         }
         // ----------------------------------------------------
         if (artworksShowing == false && scroll < 150 ) {
