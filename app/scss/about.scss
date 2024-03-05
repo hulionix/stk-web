@@ -27,7 +27,7 @@ main.about {
             max-width: $IPHI*100%;
         };
 
-        @include showTimeY(2s, -50px);
+        @include showTimeY(2s, -100px);
     }
 
     .plta {
@@ -65,7 +65,7 @@ main.about {
         //margin-top: $logo-height * $IPHI;
         @extend .clearfix;
 
-        @include showTimeY(2s, 50px);
+        @include showTimeY(2s, 100px);
         @include breakpoint(medium) {
             overflow-y: visible;
             text-align: left;

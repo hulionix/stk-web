@@ -1609,7 +1609,6 @@ $layer-show-time: 1s;
     height: var(--height);
     margin-top: calc(var(--height) * -0.55);
     margin-right: calc(var(--height) * -0.5);
-    min-height: 300px;
     aspect-ratio: 1.1311594203;
     background-image: url("/assets/images/bg-obj-smile.png");
     transform: scale(0.8) translateY(10vh) translateZ(0.3px);
@@ -1707,7 +1706,7 @@ $layer-show-time: 1s;
     top: 50vh;
     left: -400%;
     right: -400%;
-    width: 800%;
+    width: 900%;
     h2 {
         padding: 0;
         margin: 0 auto;

@@ -106,6 +106,7 @@
 
 @mixin showTimeY($time, $yPos) {
   opacity: 0;
+  transform: translateY($yPos);
   -webkit-transition: opacity ($time) ease-in, transform $time ease-out;
      -moz-transition: opacity ($time) ease-in, transform $time ease-out;
           transition: opacity ($time) ease-in, transform $time ease-out;
