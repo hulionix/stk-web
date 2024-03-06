@@ -138,12 +138,12 @@ main.home {
                 transform: rotate(20deg);
                 padding-left: 5vw;
                 textPath, tspan {
-                    font-size: 15px;
+                    font-size: 20px;
                     font-weight: 500;
-                    fill: #fff;
+                    fill: $primary-color;
 
                     tspan {
-                        fill: #fff;
+                        fill: $primary-color;
                         font-weight: 500;
                     }
 
@@ -156,8 +156,13 @@ main.home {
                 .text-line {
                     width: 80vw;
                     textPath, tspan {
+                        font-size: 18px;
                         font-weight: 300;
-                        fill: #CFCFCF;
+                        fill:$primary-color;
+                    }
+
+                    &.line-2 {
+                        padding-top: 5vh;
                     }
                 }
             } 

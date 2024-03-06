@@ -82,7 +82,7 @@ $( function() {
         let list = [
             "/assets/images/bg-obj-white.png",
             "/assets/images/bg-obj-red.png",
-            "/assets/images/bg-obj-green.png",
+            //"/assets/images/bg-obj-green.png",
             "/assets/images/bg-obj-smile.png",
             "/assets/images/bg-circle.png"
         ];
@@ -682,7 +682,7 @@ const dataObjs = [
   },
   {
     image: "Acid-Typo-2",
-    title: "Acid Typo - 2",
+    title: "It's a Typo - 2",
     tags: "3d",
     vimeoID: "",
     width: 500,
@@ -738,7 +738,7 @@ const dataObjs = [
   },
   {
     image: "Acid-Typo-1",
-    title: "Acid Typo - 1",
+    title: "It's a Typo - 1",
     tags: "3d",
     vimeoID: "",
     width: 500,
