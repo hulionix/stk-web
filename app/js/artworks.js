@@ -82,7 +82,7 @@ $( function() {
         let list = [
             "/assets/images/bg-obj-white.png",
             "/assets/images/bg-obj-red.png",
-            //"/assets/images/bg-obj-green.png",
+            // "/assets/images/bg-obj-green.png",
             "/assets/images/bg-obj-smile.png",
             "/assets/images/bg-circle.png"
         ];
@@ -128,7 +128,7 @@ $( function() {
         for (let i = startIndex; i <= endIndex; i++) {
             let itemId = dataSources[currentFilter][i];
             let data = dataObjs[itemId];
-            items += getGridItemFor(data, i);
+            items += getGridItemFor(data, itemId);
         }
 
         $grid.append(items);
