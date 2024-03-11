@@ -785,9 +785,11 @@ main.four-o-four {
     min-height: 100dvh;
     
     .artworks-button {
+
         margin: 30vh auto 0;
         font-size: 6em;
         display: inline-block;
+        color: $secondry-color;
     }
 }
 
